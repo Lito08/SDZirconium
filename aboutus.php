@@ -72,17 +72,7 @@ $(document).ready(function() {
 <h2 class="section-title">What is Zirconium?</h2>
 </header><!-- sect-heading -->
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>Welcome to Zirconium. Zirconium is a platform that make basic needs buying among people within all range of age easier. Zirconium is a commitment to producing the easiest, fastest and genuine quality basic needs on everyone why using Zirconium is the best choice</p>
 
 <a href="javascript: history.back()" class="btn btn-light"> &laquo Go back</a>
 
@@ -96,40 +86,22 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
 <header class="section-heading">
 <h2 class="section-title">Why choose Zirconium?</h2>
-<p class="lead">Life is easy why make it hard? Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+<p class="lead">Life is easy why make it hard?</p>
 </header><!-- sect-heading -->
 
 <div class="row">
 	<div class="col-md-4">
 
-	<p>Ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<p>At Zirconium, we believe that there is better way to do basic needs buying. A more valuable, less invasive way where customers are earned rather than bought. We are obssesively passionate about it, and our mission is to help people achieve it. We focus on search engine optimization.</p>
 
 	</article>
 	</div> <!-- col.// -->
 	<div class="col-md-4">
 		<p>
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		It is one of the least understood and least transparent aspects of great marketing. We see that as an opportunity. We are so excited to simplify the easy basic needs buying for everyone through our software, education and community.
 		</p>
 	</div> <!-- col.// -->
 	<div class="col-md-4">
-			<p>
-				Consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-			</p>
 	</div> <!-- col.// -->
 </div> <!-- row.// -->
 
