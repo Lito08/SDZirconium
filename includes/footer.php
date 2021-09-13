@@ -18,7 +18,7 @@
 						<li> <a href="#">About us</a></li>
 						<li> <a href="#">Career</a></li>
 						<li> <a href="#">Find a store</a></li>
-						<li> <a href="#">Rules and terms</a></li>
+						<li> <a href="#">Terms & Conditions</a></li>
 						<li> <a href="#">Sitemap</a></li>
 					</ul>
 				</aside>

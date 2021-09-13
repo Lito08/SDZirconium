@@ -64,7 +64,7 @@ $(document).ready(function() {
 		<nav class="card">
 			<ul class="menu-category">
 				<li><a href="#">Best Clothes</a></li>
-				<li><a href="#">Fresh Groceries</a></li>
+				<li><a href="supermarket.php">Fresh Groceries</a></li>
 				<li><a href="#">Health & Beauty</a></li>
 				<li><a href="#">Appliances</a></li>
 				<li><a href="#">Promotions</a></li>
