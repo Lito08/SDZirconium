@@ -1,7 +1,7 @@
 <?php
 session_start();
 error_reporting(0);
-include('includes/config.php');
+include('includes/connection.php');
 if(strlen($_SESSION['alogin'])==0)
 	{
 header('location:index.php');
@@ -60,7 +60,7 @@ else{
 											<div class="panel-body bk-dark text-light">
 												<div class="stat-panel text-center">
 <?php
-$sql ="SELECT id from tblusers ";
+$sql ="SELECT id from users ";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);

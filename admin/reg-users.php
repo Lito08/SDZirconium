@@ -1,7 +1,7 @@
 <?php
 session_start();
 error_reporting(0);
-include('includes/config.php');
+include('includes/connection.php');
 if(strlen($_SESSION['alogin'])==0)
 	{
 header('location:index.php');
@@ -76,11 +76,11 @@ $msg="Page data updated  successfully";
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12">
-						<h2 class="page-title">Registered Users</h2>
+						<h2 class="page-title">Registration Users</h2>
 
 						<!-- Zero Configuration Table -->
 						<div class="panel panel-default">
-							<div class="panel-heading">Reg Users</div>
+							<div class="panel-heading">List of users</div>
 							<div class="panel-body">
 							<?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php }
 				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
@@ -88,34 +88,33 @@ $msg="Page data updated  successfully";
 									<thead>
 										<tr>
 										<th>#</th>
-												<th> Name</th>
+												<th> Username</th>
 											<th>Email </th>
-											<th>Contact no</th>
-										<th>DOB</th>
-										<th>Address</th>
+											<th>Full Name</th>
+										<th>country</th>
 										<th>City</th>
-										<th>Country</th>
-										<th>Reg Date</th>
+										<th>Gender</th>
+										<th>date</th>
 
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
 										<th>#</th>
-											<th> Name</th>
+										<th> Username</th>
 											<th>Email </th>
-											<th>Contact no</th>
-										<th>DOB</th>
-										<th>Address</th>
+											<th>Full Name</th>
+										<th>country</th>
 										<th>City</th>
-										<th>Country</th>
-										<th>Reg Date</th>
+										<th>Gender</th>
+										<th>date</th>
+
 										</tr>
 										</tr>
 									</tfoot>
 									<tbody>
 
-									<?php $sql = "SELECT * from  tblusers ";
+									<?php $sql = "SELECT * from  users ";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -126,14 +125,14 @@ foreach($results as $result)
 {				?>
 										<tr>
 											<td><?php echo htmlentities($cnt);?></td>
-											<td><?php echo htmlentities($result->FullName);?></td>
-											<td><?php echo htmlentities($result->EmailId);?></td>
-											<td><?php echo htmlentities($result->ContactNo);?></td>
-	<td><?php echo htmlentities($result->dob);?></td>
-											<td><?php echo htmlentities($result->Address);?></td>
-											<td><?php echo htmlentities($result->City);?></td>
-											<td><?php echo htmlentities($result->Country);?></td>
-											<td><?php echo htmlentities($result->RegDate);?></td>
+											<td><?php echo htmlentities($result->user_name);?></td>
+											<td><?php echo htmlentities($result->email);?></td>
+											<td><?php echo htmlentities($result->full_name);?></td>
+	
+											<td><?php echo htmlentities($result->country);?></td>
+											<td><?php echo htmlentities($result->city);?></td>
+											<td><?php echo htmlentities($result->gender);?></td>
+											<td><?php echo htmlentities($result->date);?></td>
 										</tr>
 										<?php $cnt=$cnt+1; }} ?>
 									</tbody>
