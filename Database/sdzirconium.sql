@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 12, 2021 at 07:36 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.4.13
+-- Generation Time: Sep 13, 2021 at 07:22 AM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -86,14 +86,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_id`, `user_name`, `email`, `password`, `date`, `full_name`, `country`, `city`, `gender`) VALUES
-(1, 41803431668, 'Lito08', '', 'Dy081201', '2021-09-08 06:20:02', '', '', '', ''),
-(2, 6246852455, 'danielyusoff08', '', 'Dy081201', '2021-09-08 06:21:34', '', '', '', ''),
-(3, 7145409035, 'shaheen', '', 'Dy081201', '2021-09-08 07:06:07', '', '', '', ''),
 (8, 714356712141, 'mhmnal', 'hondsturm@gmail.com', 'asas', '2021-09-11 06:16:56', 'abdul ', 'Malaysia', 'teluk intan', 'male'),
 (9, 4786, 'mhmnal', 'hondsturm@gmail.com', 'asas', '2021-09-11 06:18:38', 'abdul muhaimin bin abdul rahman', 'Malaysia', 'teluk intan', 'male'),
 (10, 4366481086090, 'danielyusoff08', 'danielyusoff08@gmail.com', 'Dy081201', '2021-09-12 06:15:21', 'Daniel Yusoff', 'Malaysia', 'Kuala Lumpur', 'male'),
 (11, 88281811861, 'lit0', 'danielyusoff081201@gmail.com', 'Dy081201', '2021-09-12 07:30:43', 'Daniel Yusoff', 'Malaysia', 'Kuala Lumpur', 'male'),
-(12, 50567253012, 'fareesnazmi', 'fareesnazmi2@gmail.com', 'olive3881', '2021-09-12 17:17:37', 'FAREES NAZMI', 'Malaysia', 'SHAH ALAM', 'male');
+(12, 50567253012, 'fareesnazmi', 'fareesnazmi2@gmail.com', 'olive3881', '2021-09-12 17:17:37', 'FAREES NAZMI', 'Malaysia', 'SHAH ALAM', 'male'),
+(13, 9223372036854775807, 'yeens', 'ultrashaheen@gmail.com', 'kosong1234', '2021-09-13 05:13:27', 'ahmad shaheen yazid', 'Indoneisa', 'muar', 'female');
 
 --
 -- Indexes for dumped tables
@@ -145,7 +143,7 @@ ALTER TABLE `frozen`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
