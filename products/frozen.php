@@ -59,7 +59,7 @@ $(document).ready(function() {
 <!-- ========================= SECTION PAGETOP ========================= -->
 <section class="section-pagetop bg">
 <div class="container">
-	<h2 class="title-page">Category products</h2>
+	<h2 class="title-page">Frozen</h2>
 	<nav>
 	<ol class="breadcrumb text-white">
 	    <li class="breadcrumb-item"><a href="../index.php">Home</a></li>

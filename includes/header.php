@@ -79,7 +79,7 @@
           <a class="nav-link" href="memberships.php">Memberships</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Promotions</a>
+          <a class="nav-link" href="promotions.php">Promotions</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="../supermarket.php">Supermarket</a>
@@ -93,13 +93,13 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> More</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Health & Beauty</a>
-            <a class="dropdown-item" href="#">Electronics</a>
-            <a class="dropdown-item" href="#">Sports & Lifestyle</a>
-            <a class="dropdown-item" href="#">Babies & Toys</a>
-            <a class="dropdown-item" href="#">Books</a>
-            <a class="dropdown-item" href="#">Appliances</a>
-            <a class="dropdown-item" href="#">Automotive & Motocycles</a>
+            <a class="dropdown-item" href="products/hab.php">Health & Beauty</a>
+            <a class="dropdown-item" href="products/electronics.php">Electronics</a>
+            <a class="dropdown-item" href="products/sports.php">Sports & Lifestyle</a>
+            <a class="dropdown-item" href="products/babies.php">Babies & Toys</a>
+            <a class="dropdown-item" href="products/books.php">Books</a>
+            <a class="dropdown-item" href="products/appliances.php">Appliances</a>
+            <a class="dropdown-item" href="products/automotive.php">Automotive & Motocycles</a>
           </div>
         </li>
       </ul>

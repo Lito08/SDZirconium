@@ -1,8 +1,8 @@
 <?php 
 session_start();
 
-    include("../connection.php");
-    include("../functions.php");
+    include("connection.php");
+    include("functions.php");
 
     $user_data = check_login($con);
 ?>
@@ -15,7 +15,7 @@ session_start();
 <meta http-equiv="cache-control" content="max-age=604800" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>Zirconium - Fresh Products</title>
+<title>Zirconium - Promotions</title>
 
 <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
@@ -58,12 +58,11 @@ $(document).ready(function() {
 <!-- ========================= SECTION PAGETOP ========================= -->
 <section class="section-pagetop bg">
 <div class="container">
-	<h2 class="title-page">Fresh products</h2>
+	<h2 class="title-page">Promotions</h2>
 	<nav>
 	<ol class="breadcrumb text-white">
 	    <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-	    <li class="breadcrumb-item"><a href="supermarket.php">Supermarket</a></li>
-	    <li class="breadcrumb-item active" aria-current="page">Fresh products</li>
+	    <li class="breadcrumb-item active" aria-current="page">Promotions</li>
 	</ol>  
 	</nav>
 </div> <!-- container //  -->

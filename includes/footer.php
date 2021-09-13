@@ -56,12 +56,11 @@
 
 		<section class="footer-bottom border-top row">
 			<div class="col-md-2">
-				<p class="text-muted"> &copy 2019 Company name </p>
+				<p class="text-muted"> &copy 2021 Zirconium </p>
 			</div>
 			<div class="col-md-8 text-md-center">
-				<span  class="px-2">info@pixsellz.io</span>
-				<span  class="px-2">+879-332-9375</span>
-				<span  class="px-2">Street name 123, Avanue abc</span>
+				<span  class="px-2">zirconium@gmail.com</span>
+				<span  class="px-2">+60 13-317-4100</span>
 			</div>
 			<div class="col-md-2 text-md-right text-muted">
 				<i class="fab fa-lg fa-cc-visa"></i>

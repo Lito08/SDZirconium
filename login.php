@@ -56,7 +56,7 @@ session_start();
 
 <title>Zirconium - Login</title>
 
-<link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<link href="images/logos/Logo.png" rel="shortcut icon" type="image/x-icon">
 
 <!-- jQuery -->
 <script src="js/jquery-2.0.0.min.js" type="text/javascript"></script>
@@ -95,8 +95,8 @@ $(document).ready(function() {
 	<div class="container">
 <div class="row align-items-center">
 	<div class="col-lg-2 col-4">
-		<a href="http://bootstrap-ecommerce.com" class="brand-wrap">
-			<img class="logo" src="images/logo.png">
+		<a href="images/logos/Logo.png" class="brand-wrap">
+			<img class="logo" src="images/logos/Logo.png">
 		</a> <!-- brand-wrap.// -->
 	</div>
 	<div class="col-lg-6 col-sm-12">

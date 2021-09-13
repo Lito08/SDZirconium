@@ -112,13 +112,13 @@ else
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> More</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Health & Beauty</a>
-            <a class="dropdown-item" href="#">Electronics</a>
-            <a class="dropdown-item" href="#">Sports & Lifestyle</a>
-            <a class="dropdown-item" href="#">Babies & Toys</a>
-            <a class="dropdown-item" href="#">Books</a>
-            <a class="dropdown-item" href="#">Appliances</a>
-            <a class="dropdown-item" href="#">Automotive & Motocycles</a>
+            <a class="dropdown-item" href="hab.php">Health & Beauty</a>
+            <a class="dropdown-item" href="electronics.php">Electronics</a>
+            <a class="dropdown-item" href="sports.php">Sports & Lifestyle</a>
+            <a class="dropdown-item" href="babies.php">Babies & Toys</a>
+            <a class="dropdown-item" href="books.php">Books</a>
+            <a class="dropdown-item" href="appliances.php">Appliances</a>
+            <a class="dropdown-item" href="automotive.php">Automotive & Motocycles</a>
           </div>
         </li>
       </ul>

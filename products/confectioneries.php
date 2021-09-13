@@ -15,7 +15,7 @@ session_start();
 <meta http-equiv="cache-control" content="max-age=604800" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>Website title - bootstrap html template</title>
+<title>Zirconium - Confectioneries</title>
 
 <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
@@ -58,12 +58,12 @@ $(document).ready(function() {
 <!-- ========================= SECTION PAGETOP ========================= -->
 <section class="section-pagetop bg">
 <div class="container">
-	<h2 class="title-page">Category products</h2>
+	<h2 class="title-page">Confectioneries</h2>
 	<nav>
 	<ol class="breadcrumb text-white">
 	    <li class="breadcrumb-item"><a href="index.php">Home</a></li>
 	    <li class="breadcrumb-item"><a href="supermarket.php">Supermarket</a></li>
-	    <li class="breadcrumb-item active" aria-current="page">All Groceries</li>
+	    <li class="breadcrumb-item active" aria-current="page">Confectioneries</li>
 	</ol>  
 	</nav>
 </div> <!-- container //  -->
