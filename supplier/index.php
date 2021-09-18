@@ -34,7 +34,7 @@ echo "<script type='text/javascript'> document.location = 'dashboard.php'; </scr
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title>Zirconium Admin</title>
+	<title>Zirconium Supplier</title>
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
@@ -52,12 +52,12 @@ echo "<script type='text/javascript'> document.location = 'dashboard.php'; </scr
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6 col-md-offset-3">
-						<a><h1 class="text-center text-bold text-4x text-babyblue mt-4x">ADMIN LOGIN</h1></a>
+						<a><h1 class="text-center text-bold text-4x text-babyblue mt-4x">SUPPLIER LOGIN</h1></a>
 						<div class="well row pt-2x pb-3x bk-light">
 							<div class="col-md-8 col-md-offset-2">
 								<form method="post">
 
-									<label for="" class="text-uppercase text-sm">Your Username </label>
+									<label for="" class="text-uppercase text-sm">Company's Username </label>
 									<input type="text" placeholder="Username" name="username" class="form-control mb">
 
 									<label for="" class="text-uppercase text-sm">Password</label>
@@ -66,6 +66,8 @@ echo "<script type='text/javascript'> document.location = 'dashboard.php'; </scr
 
 
 									<button class="btn btn-primary btn-block" name="login" type="submit">LOGIN</button>
+									<p></p>
+									<p class="text-center mt-4">Don't have supplier account? <a href="register.php">Sign up</a></p>
 									<br>
                   <a href="../index.php">Back to Main Page</a>
 
