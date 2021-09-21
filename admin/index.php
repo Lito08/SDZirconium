@@ -1,30 +1,50 @@
-<?php
+<?php 
+
 session_start();
-include('includes/connection.php');
-if(isset($_POST['login']))
-{
-$email=$_POST['username'];
-$password=md5($_POST['password']);
-$sql ="SELECT UserName,Password FROM admin WHERE UserName=:email and Password=:password";
-$query= $dbh -> prepare($sql);
-$query-> bindParam(':email', $email, PDO::PARAM_STR);
-$query-> bindParam(':password', $password, PDO::PARAM_STR);
-$query-> execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-if($query->rowCount() > 0)
-{
-$_SESSION['alogin']=$_POST['username'];
-echo "<script type='text/javascript'> document.location = 'dashboard.php'; </script>";
-} else{
 
-  echo "<script>alert('Invalid Details');</script>";
+	include("connection.php");
+	include("functions.php");
 
-}
 
-}
+	if($_SERVER['REQUEST_METHOD'] == "POST")
+	{
+		//something was posted
+		$user_name = $_POST['user_name'];
+		$password = $_POST['password'];
 
+		if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
+		{
+
+			//read from database
+			$query = "select * from supplier where user_name = '$user_name' limit 1";
+			$result = mysqli_query($con, $query);
+
+			if($result)
+			{
+				if($result && mysqli_num_rows($result) > 0)
+				{
+
+					$user_data = mysqli_fetch_assoc($result);
+					
+					if($user_data['password'] === $password)
+					{
+
+						$_SESSION['user_id'] = $user_data['user_id'];
+						header("Location: dashboard.php");
+						die;
+					}
+				}
+			}
+			
+			echo "wrong username or password!";
+		}else
+		{
+			echo "wrong username or password!";
+		}
+	}
 ?>
-<!doctype html>
+
+<!DOCTYPE HTML>
 <html lang="en" class="no-js">
 
 <head>
@@ -58,7 +78,7 @@ echo "<script type='text/javascript'> document.location = 'dashboard.php'; </scr
 								<form method="post">
 
 									<label for="" class="text-uppercase text-sm">Company's Username </label>
-									<input type="text" placeholder="Username" name="username" class="form-control mb">
+									<input type="text" placeholder="Username" name="user_name" class="form-control mb">
 
 									<label for="" class="text-uppercase text-sm">Password</label>
 									<input type="password" placeholder="Password" name="password" class="form-control mb">

@@ -1,14 +1,14 @@
-<?php
+<?php 
 session_start();
-error_reporting(0);
-include('includes/connection.php');
-if(strlen($_SESSION['alogin'])==0)
-	{
-header('location:index.php');
-}
-else{
-	?>
-<!doctype html>
+
+    include("connection.php");
+    include("functions.php");
+
+    $user_data = check_login($con);
+
+?>
+
+<!DOCTYPE HTML>
 <html lang="en" class="no-js">
 
 <head>
@@ -61,7 +61,7 @@ else{
 												<div class="stat-panel text-center">
 <?php
 $sql ="SELECT id from users ";
-$query = $dbh -> prepare($sql);
+$query = $con -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 $regusers=$query->rowCount();
@@ -79,7 +79,7 @@ $regusers=$query->rowCount();
 												<div class="stat-panel text-center">
 												<?php
 $sql6 ="SELECT id from tblcontactusquery ";
-$query6 = $dbh -> prepare($sql6);;
+$query6 = $con -> prepare($sql6);;
 $query6->execute();
 $results6=$query6->fetchAll(PDO::FETCH_OBJ);
 $query=$query6->rowCount();
@@ -136,4 +136,3 @@ $query=$query6->rowCount();
 	</script>
 </body>
 </html>
-<?php } ?>
