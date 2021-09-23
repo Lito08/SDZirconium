@@ -238,7 +238,7 @@ $(document).ready(function() {
 <article class="card card-product-list">
 	<div class="row no-gutters">
 		<aside class="col-md-3">
-			<a href="#" class="img-wrap">
+			<a href="frozen/salmon.php" class="img-wrap">
 				<span class="badge badge-danger"> NEW </span>
 				<img src="images/items/frozen/salmon.jpg">
 			</a>
