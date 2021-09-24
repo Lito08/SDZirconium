@@ -3,14 +3,14 @@ session_start();
 error_reporting(0);
 include('includes/connection.php');
 if(strlen($_SESSION['alogin'])==0)
-	{
-header('location:index.php');
+{
+header('location:dashboard.php');
 }
 else{
 if(isset($_GET['del']))
 {
 $id=$_GET['del'];
-$sql = "delete from users  WHERE id=:id";
+$sql = "delete from users WHERE id=:id";
 $query = $dbh->prepare($sql);
 $query -> bindParam(':id',$id, PDO::PARAM_STR);
 $query -> execute();
@@ -29,7 +29,7 @@ $msg="Page data updated  successfully";
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
 
-	<title>Zirconium Registered Users</title>
+	<title>Zirconium Manage Products</title>
 
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -76,11 +76,11 @@ $msg="Page data updated  successfully";
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12">
-						<h2 class="page-title">Registration Users</h2>
+						<h2 class="page-title">Manage Products</h2>
 
 						<!-- Zero Configuration Table -->
 						<div class="panel panel-default">
-							<div class="panel-heading">List of users</div>
+							<div class="panel-heading">List of products</div>
 							<div class="panel-body">
 							<?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php }
 				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
@@ -88,36 +88,24 @@ $msg="Page data updated  successfully";
 									<thead>
 										<tr>
 										<th>#</th>
-												<th> Username</th>
-											<th>Email </th>
-											<th>Full Name</th>
-										<th>Country</th>
-										<th>City</th>
-										<th>Gender</th>
+										<th>Type</th>
+										<th>Product Name</th>
+										<th>Price (RM)</th>
+										<th>Quantity</th>
+										<th>Brand</th>
+										<th>Ribbon</th>
 										<th>Date</th>
 										<th>Action</th>
-
 										</tr>
 									</thead>
 									<tfoot>
-										<tr>
-										<th>#</th>
-										<th> Username</th>
-											<th>Email </th>
-											<th>Full Name</th>
-										<th>Country</th>
-										<th>City</th>
-										<th>Gender</th>
-										<th>Date</th>
-										<th>Action</th>
-
-										</tr>
-										</tr>
+										
+									</tr>
 									</tfoot>
 									<tbody>
 
 <?php 
-$sql = "SELECT * from  users ";
+$sql = "SELECT * from products ";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -128,13 +116,13 @@ foreach($results as $result)
 {				?>
 										<tr>
 											<td><?php echo htmlentities($cnt);?></td>
-											<td><?php echo htmlentities($result->user_name);?></td>
-											<td><?php echo htmlentities($result->email);?></td>
-											<td><?php echo htmlentities($result->full_name);?></td>
+											<td><?php echo htmlentities($result->ptype);?></td>
+											<td><?php echo htmlentities($result->title);?></td>
+											<td><?php echo htmlentities($result->price);?></td>
 	
-											<td><?php echo htmlentities($result->country);?></td>
-											<td><?php echo htmlentities($result->city);?></td>
-											<td><?php echo htmlentities($result->gender);?></td>
+											<td><?php echo htmlentities($result->quantity);?></td>
+											<td><?php echo htmlentities($result->brand);?></td>
+											<td><?php echo htmlentities($result->ribbon);?></td>
 											<td><?php echo htmlentities($result->date);?></td>
 <td><a href="edit-users.php?id=<?php echo $result->id;?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
 <a href="reg-users.php?del=<?php echo $result->id;?>" onclick="return confirm('Do you want to delete');"><i class="fa fa-close"></i></a></td>

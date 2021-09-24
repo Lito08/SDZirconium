@@ -29,7 +29,7 @@ $msg="Page data updated  successfully";
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
 
-	<title>Zirconium Super Admin</title>
+	<title>Zirconium Registered Users</title>
 
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="css/font-awesome.min.css">

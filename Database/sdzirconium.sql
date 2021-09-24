@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2021 at 02:08 PM
+-- Generation Time: Sep 23, 2021 at 04:03 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -44,22 +44,24 @@ INSERT INTO `admin` (`id`, `UserName`, `Password`, `updationDate`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `frozen`
+-- Table structure for table `products`
 --
 
-CREATE TABLE `frozen` (
-  `pid` bigint(20) NOT NULL,
+CREATE TABLE `products` (
+  `id` bigint(20) NOT NULL,
+  `ptype` varchar(120) NOT NULL,
   `title` varchar(120) NOT NULL,
   `price` decimal(10,3) NOT NULL,
   `quantity` int(120) NOT NULL,
-  `type` varchar(120) NOT NULL,
   `brand` varchar(120) NOT NULL,
   `description` varchar(255) NOT NULL,
+  `ribbon` varchar(120) NOT NULL,
   `img1` varchar(120) NOT NULL,
   `img2` varchar(120) NOT NULL,
   `img3` varchar(120) NOT NULL,
   `delivery` varchar(120) NOT NULL,
-  `order` int(120) NOT NULL
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `pid` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -127,10 +129,10 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `frozen`
+-- Indexes for table `products`
 --
-ALTER TABLE `frozen`
-  ADD PRIMARY KEY (`pid`);
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `supplier`
@@ -163,10 +165,10 @@ ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `frozen`
+-- AUTO_INCREMENT for table `products`
 --
-ALTER TABLE `frozen`
-  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `products`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `supplier`

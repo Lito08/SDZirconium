@@ -7,17 +7,14 @@ if(strlen($_SESSION['alogin'])==0)
 header('location:index.php');
 }
 else{
-if(isset($_REQUEST['eid']))
-	{
-$eid=intval($_GET['eid']);
-$status=1;
-$sql = "UPDATE tblcontactusquery SET status=:status WHERE  id=:eid";
+if(isset($_GET['del']))
+{
+$id=$_GET['del'];
+$sql = "delete from users  WHERE id=:id";
 $query = $dbh->prepare($sql);
-$query -> bindParam(':status',$status, PDO::PARAM_STR);
-$query-> bindParam(':eid',$eid, PDO::PARAM_STR);
+$query -> bindParam(':id',$id, PDO::PARAM_STR);
 $query -> execute();
-
-$msg="Testimonial Successfully Inacrive";
+$msg="Page data updated  successfully";
 }
  ?>
 
@@ -32,7 +29,7 @@ $msg="Testimonial Successfully Inacrive";
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
 
-	<title>Zirconium Admin</title>
+	<title>Zirconium Registered Users</title>
 
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -68,7 +65,6 @@ $msg="Testimonial Successfully Inacrive";
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 }
 		</style>
-
 </head>
 
 <body>
@@ -78,14 +74,13 @@ $msg="Testimonial Successfully Inacrive";
 		<?php include('includes/leftbar.php');?>
 		<div class="content-wrapper">
 			<div class="container-fluid">
-
 				<div class="row">
 					<div class="col-md-12">
-						<h2 class="page-title">Manage Contact Us Queries</h2>
+						<h2 class="page-title">Registration Users</h2>
 
 						<!-- Zero Configuration Table -->
 						<div class="panel panel-default">
-							<div class="panel-heading">User queries</div>
+							<div class="panel-heading">List of users</div>
 							<div class="panel-body">
 							<?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php }
 				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
@@ -93,29 +88,36 @@ $msg="Testimonial Successfully Inacrive";
 									<thead>
 										<tr>
 										<th>#</th>
-											<th>Name</th>
-											<th>Email</th>
-											<th>Contact No</th>
-											<th>Message</th>
-											<th>Posting date</th>
-											<th>Action</th>
+												<th> Username</th>
+											<th>Email </th>
+											<th>Full Name</th>
+										<th>Country</th>
+										<th>City</th>
+										<th>Gender</th>
+										<th>Date</th>
+										<th>Action</th>
+
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
 										<th>#</th>
-											<th>Name</th>
-											<th>Email</th>
-											<th>Contact No</th>
-											<th>Message</th>
-											<th>Posting date</th>
-											<th>Action</th>
+										<th> Username</th>
+											<th>Email </th>
+											<th>Full Name</th>
+										<th>Country</th>
+										<th>City</th>
+										<th>Gender</th>
+										<th>Date</th>
+										<th>Action</th>
+
 										</tr>
 										</tr>
 									</tfoot>
 									<tbody>
 
-									<?php $sql = "SELECT * from  tblcontactusquery ";
+<?php 
+$sql = "SELECT * from  users ";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -126,24 +128,21 @@ foreach($results as $result)
 {				?>
 										<tr>
 											<td><?php echo htmlentities($cnt);?></td>
-											<td><?php echo htmlentities($result->name);?></td>
-											<td><?php echo htmlentities($result->EmailId);?></td>
-											<td><?php echo htmlentities($result->ContactNumber);?></td>
-											<td><?php echo htmlentities($result->Message);?></td>
-											<td><?php echo htmlentities($result->PostingDate);?></td>
-																<?php if($result->status==1)
-{
-	?><td>Read</td>
-<?php } else {?>
-
-<td><a href="manage-conactusquery.php?eid=<?php echo htmlentities($result->id);?>" onclick="return confirm('Do you really want to read')" >Pending</a>
-</td>
-<?php } ?>
+											<td><?php echo htmlentities($result->user_name);?></td>
+											<td><?php echo htmlentities($result->email);?></td>
+											<td><?php echo htmlentities($result->full_name);?></td>
+	
+											<td><?php echo htmlentities($result->country);?></td>
+											<td><?php echo htmlentities($result->city);?></td>
+											<td><?php echo htmlentities($result->gender);?></td>
+											<td><?php echo htmlentities($result->date);?></td>
+<td><a href="edit-users.php?id=<?php echo $result->id;?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+<a href="reg-users.php?del=<?php echo $result->id;?>" onclick="return confirm('Do you want to delete');"><i class="fa fa-close"></i></a></td>
 										</tr>
 										<?php $cnt=$cnt+1; }} ?>
-
 									</tbody>
 								</table>
+
 							</div>
 						</div>
 					</div>
@@ -151,7 +150,6 @@ foreach($results as $result)
 			</div>
 		</div>
 	</div>
-
 	<!-- Loading Scripts -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap-select.min.js"></script>
