@@ -14,8 +14,7 @@ session_start();
 		$description = $_POST['description'];
 		$ribbon = $_POST['ribbon'];
         $img1 = $_POST['img1'];
-        $img2 = $_POST['img2'];
-        $img3 = $_POST['img3'];
+        
         $delivery = $_POST['delivery'];
 
 
@@ -23,8 +22,8 @@ session_start();
         if(!empty($title) && !empty($price) && !is_numeric($title) )
         {
             //save to database
-            $pid = random_num(20);
-            $query = "insert into products (pid,product_type,title,price,quantity,brand,description,ribbon,img1,img2,img3,delivery) values ('$pid','$ptype','$title','$price','$quantity','$brand','$description','$ribbon','$img1','$img2','$img3','$delivery',)";
+            
+            $query = "insert into products (product_type,title,price,quantity,brand,description,ribbon,img1,delivery) values ('$ptype','$title','$price','$quantity','$brand','$description','$ribbon','$img1','$delivery',)";
 
             mysqli_query($dbh, $query);
 
@@ -105,7 +104,7 @@ session_start();
 		<form method="post">
 				<div class="form-row">
 					<label>Product Type</label>
-					<select id="inputState" class="form-control" name="brand" >
+					<select id="inputState" class="form-control" name="product_type" >
 						<option> Choose...</option>
                         <option>Groceries</option>
 					    <option>Frozen</option>
@@ -137,6 +136,10 @@ session_start();
                 <div class="form-group">
 					<label>Ribbon</label>
 					<input id="text" type="text" class="form-control" placeholder="New Arrivals/On Sale.." name="ribbon">
+				</div> <!-- form-group end.// -->
+				<div class="form-group">
+					<label>Description</label>
+					<input id="text" type="text" class="form-control" placeholder="Item's Description" name="description">
 				</div> <!-- form-group end.// -->
 				<div class="form-group">
 					<label class="custom-control custom-radio custom-control-inline">

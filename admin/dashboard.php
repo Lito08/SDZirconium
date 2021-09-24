@@ -8,7 +8,7 @@ session_start();
 
 ?>
 
-<!DOCTYPE HTML>
+<!doctype html>
 <html lang="en" class="no-js">
 
 <head>
@@ -19,7 +19,7 @@ session_start();
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
 
-	<title>Zirconium Dashboard</title>
+	<title>Zirconium Supplier Dashboard</title>
 
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -40,20 +40,47 @@ session_start();
 </head>
 
 <body>
-<?php include('includes/header.php');?>
+	<?php include('includes/header.php');?>
 
-<div class="ts-main-content">
-<?php include('includes/leftbar.php');?>
-	<div class="content-wrapper">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-12">
-					<h2 class="page-title">Dashboard</h2>
-	</div>
+	<div class="ts-main-content">
+		<?php include('includes/leftbar.php');?>
+		<div class="content-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<h2 class="page-title">Dashboard</h2>
+
+						<!-- Zero Configuration Table -->
+						<div class="row">
+							<div class="col-md-12">
+								<div class="row">
+									<div class="col-md-3">
+										<div class="panel panel-default">
+											<div class="panel-body bk-dark text-light">
+												<div class="stat-panel text-center">
+													
+<?php												
+$sql6 ="SELECT id from tblcontactusquery ";
+$query6 = $dbh -> prepare($sql6);;
+$query6->execute();
+$results6=$query6->fetchAll(PDO::FETCH_OBJ);
+$query=$query6->rowCount();
+?>
+													<div class="stat-panel-number h1 "><?php echo htmlentities($query);?></div>
+													<div class="stat-panel-title text-uppercase">Queries</div>
+												</div>
+											</div>
+											<a href="manage-contactusquery.php" class="block-anchor panel-footer text-center">Full Detail &nbsp; <i class="fa fa-arrow-right"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-			</div>
-			</div>
-
+	</div>
 
 	<!-- Loading Scripts -->
 	<script src="js/jquery.min.js"></script>
