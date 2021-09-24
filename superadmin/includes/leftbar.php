@@ -19,6 +19,8 @@
 					<ul>
 						<li><a href="manage_products.php">Manage Products</a></li>
 						<li><a href="add_products.php">Add Products</a></li>
+						<li><a href="add_type.php">Add Products Type</a></li>
+						<li><a href="manage_type.php">Manage Products Type</a></li>
 					</ul>
 </li>
 

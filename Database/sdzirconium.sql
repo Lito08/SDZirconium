@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2021 at 04:03 PM
+-- Generation Time: Sep 24, 2021 at 11:44 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -56,13 +56,20 @@ CREATE TABLE `products` (
   `brand` varchar(120) NOT NULL,
   `description` varchar(255) NOT NULL,
   `ribbon` varchar(120) NOT NULL,
-  `img1` varchar(120) NOT NULL,
-  `img2` varchar(120) NOT NULL,
-  `img3` varchar(120) NOT NULL,
+  `Vimage1` varchar(120) DEFAULT NULL,
+  `Vimage2` varchar(120) DEFAULT NULL,
+  `Vimage3` varchar(120) DEFAULT NULL,
   `delivery` varchar(120) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `pid` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `ptype`, `title`, `price`, `quantity`, `brand`, `description`, `ribbon`, `Vimage1`, `Vimage2`, `Vimage3`, `delivery`, `date`, `pid`) VALUES
+(1, '1', 'Salmon King', '140.000', 0, '', 'The best salmon is New Zealand', '', 'salmon.jpg', 'salmon1.jpg', 'salmon2.jpg', '', '2021-09-24 09:42:28', 0);
 
 -- --------------------------------------------------------
 
@@ -86,6 +93,37 @@ CREATE TABLE `supplier` (
 
 INSERT INTO `supplier` (`id`, `user_id`, `full_name`, `user_name`, `email`, `password`, `date`) VALUES
 (1, 9223372036854775807, 'Arca Creation', 'arca', 'arcacreation08@gmail.com', 'Dy081201', '2021-09-21 12:03:54');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `type`
+--
+
+CREATE TABLE `type` (
+  `id` int(20) NOT NULL,
+  `typename` varchar(120) NOT NULL,
+  `CreationDate` timestamp NULL DEFAULT current_timestamp(),
+  `UpdationDate` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `type`
+--
+
+INSERT INTO `type` (`id`, `typename`, `CreationDate`, `UpdationDate`) VALUES
+(1, 'Frozen', '2021-09-24 09:18:20', NULL),
+(2, 'Groceries', '2021-09-24 09:27:07', NULL),
+(3, 'Fresh Groceries', '2021-09-24 09:27:27', NULL),
+(4, 'Fresh Products', '2021-09-24 09:27:40', NULL),
+(5, 'Confectioneries', '2021-09-24 09:27:48', NULL),
+(6, 'Health & Beauty', '2021-09-24 09:29:56', NULL),
+(7, 'Electronics', '2021-09-24 09:30:11', NULL),
+(8, 'Sports & Lifestyle', '2021-09-24 09:30:19', NULL),
+(9, 'Babies & Toys', '2021-09-24 09:30:28', NULL),
+(10, 'Books', '2021-09-24 09:30:32', NULL),
+(11, 'Appliances', '2021-09-24 09:30:38', NULL),
+(12, 'Automotive & Motorcycles', '2021-09-24 09:30:47', NULL);
 
 -- --------------------------------------------------------
 
@@ -141,6 +179,12 @@ ALTER TABLE `supplier`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `type`
+--
+ALTER TABLE `type`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -168,13 +212,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `type`
+--
+ALTER TABLE `type`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`

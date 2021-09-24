@@ -7,31 +7,14 @@ if(strlen($_SESSION['alogin'])==0)
 header('location:index.php');
 }
 else{
-if(isset($_REQUEST['eid']))
-	{
-$eid=intval($_GET['eid']);
-$status="2";
-$sql = "UPDATE tblbooking SET Status=:status WHERE  id=:eid";
+if(isset($_GET['del']))
+{
+$id=$_GET['del'];
+$sql = "delete from type  WHERE id=:id";
 $query = $dbh->prepare($sql);
-$query -> bindParam(':status',$status, PDO::PARAM_STR);
-$query-> bindParam(':eid',$eid, PDO::PARAM_STR);
+$query -> bindParam(':id',$id, PDO::PARAM_STR);
 $query -> execute();
-
-$msg="Booking Successfully Cancelled";
-}
-
-if(isset($_REQUEST['aeid']))
-	{
-$aeid=intval($_GET['aeid']);
-$status=1;
-
-$sql = "UPDATE tblbooking SET Status=:status WHERE  id=:aeid";
-$query = $dbh->prepare($sql);
-$query -> bindParam(':status',$status, PDO::PARAM_STR);
-$query-> bindParam(':aeid',$aeid, PDO::PARAM_STR);
-$query -> execute();
-
-$msg="Booking Successfully Confirmed";
+$msg="Page data updated  successfully";
 }
  ?>
 
@@ -46,7 +29,7 @@ $msg="Booking Successfully Confirmed";
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
 
-	<title>Zirconium Admin</title>
+	<title>Zirconium - Manage Product Type</title>
 
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -82,6 +65,7 @@ $msg="Booking Successfully Confirmed";
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 }
 		</style>
+
 </head>
 
 <body>
@@ -94,11 +78,11 @@ $msg="Booking Successfully Confirmed";
 
 				<div class="row">
 					<div class="col-md-12">
-						<h2 class="page-title">Manage Product</h2>
 
+						<h2 class="page-title">Manage Product Type</h2>
 						<!-- Zero Configuration Table -->
 						<div class="panel panel-default">
-							<div class="panel-heading">Product Info</div>
+							<div class="panel-heading">Listed Types</div>
 							<div class="panel-body">
 							<?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php }
 				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
@@ -106,32 +90,26 @@ $msg="Booking Successfully Confirmed";
 									<thead>
 										<tr>
 										<th>#</th>
-											<th>Name</th>
-											<th>Membership</th>
-											<th>From Date</th>
-											<th>To Date</th>
-											<th>Message</th>
-											<th>Status</th>
-											<th>Booking Date</th>
+												<th>Type</th>
+											<th>Creation Date</th>
+											<th>Updation date</th>
+
 											<th>Action</th>
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
 										<th>#</th>
-										<th>Name</th>
-											<th>Membership</th>
-											<th>From Date</th>
-											<th>To Date</th>
-											<th>Message</th>
-											<th>Status</th>
-											<th>Booking Date</th>
+											<th>Type</th>
+											<th>Creation Date</th>
+											<th>Updation date</th>
 											<th>Action</th>
+										</tr>
 										</tr>
 									</tfoot>
 									<tbody>
 
-									<?php $sql = "SELECT tblusers.FullName,tblbrands.BrandName,tblmemberships.VehiclesTitle,tblbooking.FromDate,tblbooking.ToDate,tblbooking.message,tblbooking.VehicleId as vid,tblbooking.Status,tblbooking.PostingDate,tblbooking.id  from tblbooking join tblmemberships on tblmemberships.id=tblbooking.VehicleId join tblusers on tblusers.EmailId=tblbooking.userEmail join tblbrands on tblmemberships.VehiclesBrand=tblbrands.id  ";
+									<?php $sql = "SELECT * from  type ";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -142,34 +120,17 @@ foreach($results as $result)
 {				?>
 										<tr>
 											<td><?php echo htmlentities($cnt);?></td>
-											<td><?php echo htmlentities($result->FullName);?></td>
-											<td><a href="edit-vehicle.php?id=<?php echo htmlentities($result->vid);?>"><?php echo htmlentities($result->BrandName);?> , <?php echo htmlentities($result->VehiclesTitle);?></td>
-											<td><?php echo htmlentities($result->FromDate);?></td>
-											<td><?php echo htmlentities($result->ToDate);?></td>
-											<td><?php echo htmlentities($result->message);?></td>
-											<td><?php
-if($result->Status==0)
-{
-echo htmlentities('Not Confirmed yet');
-} else if ($result->Status==1) {
-echo htmlentities('Confirmed');
-}
- else{
- 	echo htmlentities('Cancelled');
- }
-										?></td>
-											<td><?php echo htmlentities($result->PostingDate);?></td>
-										<td><a href="manage-bookings.php?aeid=<?php echo htmlentities($result->id);?>" onclick="return confirm('Do you really want to Confirm this booking')"> Confirm</a> /
-
-
-<a href="manage-bookings.php?eid=<?php echo htmlentities($result->id);?>" onclick="return confirm('Do you really want to Cancel this Booking')"> Cancel</a>
-</td>
-
+											<td><?php echo htmlentities($result->typename);?></td>
+											<td><?php echo htmlentities($result->CreationDate);?></td>
+											<td><?php echo htmlentities($result->UpdationDate);?></td>
+                                            <td><a href="edit-brand.php?id=<?php echo $result->id;?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+                                                <a href="manage-brands.php?del=<?php echo $result->id;?>" onclick="return confirm('Do you want to delete?');"><i class="fa fa-close"></i></a></td>
 										</tr>
 										<?php $cnt=$cnt+1; }} ?>
 
 									</tbody>
 								</table>
+
 							</div>
 						</div>
 					</div>

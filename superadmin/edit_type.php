@@ -1,25 +1,28 @@
 <?php
 session_start();
 error_reporting(0);
-include('includes/connection.php');
+include('includes/config.php');
 if(strlen($_SESSION['alogin'])==0)
-	{
+	{	
 header('location:index.php');
 }
 else{
-if(isset($_REQUEST['eid']))
-	{
-$eid=intval($_GET['eid']);
-$status=1;
-$sql = "UPDATE tblcontactusquery SET status=:status WHERE  id=:eid";
+// Code for change password	
+if(isset($_POST['submit']))
+{
+$brand=$_POST['brand'];
+$id=$_GET['id'];
+$sql="update  tblbrands set BrandName=:brand where id=:id";
 $query = $dbh->prepare($sql);
-$query -> bindParam(':status',$status, PDO::PARAM_STR);
-$query-> bindParam(':eid',$eid, PDO::PARAM_STR);
-$query -> execute();
+$query->bindParam(':brand',$brand,PDO::PARAM_STR);
+$query->bindParam(':id',$id,PDO::PARAM_STR);
+$query->execute();
+$lastInsertId = $dbh->lastInsertId();
 
-$msg="Testimonial Successfully Inacrive";
+$msg="Brand updted successfully";
+
 }
- ?>
+?>
 
 <!doctype html>
 <html lang="en" class="no-js">
@@ -31,8 +34,8 @@ $msg="Testimonial Successfully Inacrive";
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
-
-	<title>Zirconium Admin</title>
+	
+	<title>Car Rental Portal | Admin Create Brand</title>
 
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -69,85 +72,78 @@ $msg="Testimonial Successfully Inacrive";
 }
 		</style>
 
+
 </head>
 
 <body>
 	<?php include('includes/header.php');?>
-
 	<div class="ts-main-content">
-		<?php include('includes/leftbar.php');?>
+	<?php include('includes/leftbar.php');?>
 		<div class="content-wrapper">
 			<div class="container-fluid">
 
 				<div class="row">
 					<div class="col-md-12">
-						<h2 class="page-title">Manage Contact Us Queries</h2>
+					
+						<h2 class="page-title">Create Brand</h2>
 
-						<!-- Zero Configuration Table -->
-						<div class="panel panel-default">
-							<div class="panel-heading">User queries</div>
-							<div class="panel-body">
-							<?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php }
+						<div class="row">
+							<div class="col-md-10">
+								<div class="panel panel-default">
+									<div class="panel-heading">Form fields</div>
+									<div class="panel-body">
+										<form method="post" name="chngpwd" class="form-horizontal" onSubmit="return valid();">
+										
+											
+  	        	  <?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } 
 				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
-								<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
-									<thead>
-										<tr>
-										<th>#</th>
-											<th>Name</th>
-											<th>Email</th>
-											<th>Contact No</th>
-											<th>Message</th>
-											<th>Posting date</th>
-											<th>Action</th>
-										</tr>
-									</thead>
-									<tfoot>
-										<tr>
-										<th>#</th>
-											<th>Name</th>
-											<th>Email</th>
-											<th>Contact No</th>
-											<th>Message</th>
-											<th>Posting date</th>
-											<th>Action</th>
-										</tr>
-										</tr>
-									</tfoot>
-									<tbody>
 
-									<?php $sql = "SELECT * from  tblcontactusquery ";
-$query = $dbh -> prepare($sql);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
+<?php	
+$id=$_GET['id'];
+$ret="select * from tblbrands where id=:id";
+$query= $dbh -> prepare($ret);
+$query->bindParam(':id',$id, PDO::PARAM_STR);
+$query-> execute();
+$results = $query -> fetchAll(PDO::FETCH_OBJ);
 $cnt=1;
-if($query->rowCount() > 0)
+if($query -> rowCount() > 0)
 {
 foreach($results as $result)
-{				?>
-										<tr>
-											<td><?php echo htmlentities($cnt);?></td>
-											<td><?php echo htmlentities($result->name);?></td>
-											<td><?php echo htmlentities($result->EmailId);?></td>
-											<td><?php echo htmlentities($result->ContactNumber);?></td>
-											<td><?php echo htmlentities($result->Message);?></td>
-											<td><?php echo htmlentities($result->PostingDate);?></td>
-																<?php if($result->status==1)
 {
-	?><td>Read</td>
-<?php } else {?>
+?>
 
-<td><a href="manage-conactusquery.php?eid=<?php echo htmlentities($result->id);?>" onclick="return confirm('Do you really want to read')" >Pending</a>
-</td>
-<?php } ?>
-										</tr>
-										<?php $cnt=$cnt+1; }} ?>
+											<div class="form-group">
+												<label class="col-sm-4 control-label">Brand Name</label>
+												<div class="col-sm-8">
+													<input type="text" class="form-control" value="<?php echo htmlentities($result->BrandName);?>" name="brand" id="brand" required>
+												</div>
+											</div>
+											<div class="hr-dashed"></div>
+											
+										<?php }} ?>
+								
+											
+											<div class="form-group">
+												<div class="col-sm-8 col-sm-offset-4">
+								
+													<button class="btn btn-primary" name="submit" type="submit">Submit</button>
+												</div>
+											</div>
 
-									</tbody>
-								</table>
+										</form>
+
+									</div>
+								</div>
 							</div>
+							
 						</div>
+						
+					
+
 					</div>
 				</div>
+				
+			
 			</div>
 		</div>
 	</div>
@@ -162,6 +158,8 @@ foreach($results as $result)
 	<script src="js/fileinput.js"></script>
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
+
 </body>
+
 </html>
 <?php } ?>

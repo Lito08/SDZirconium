@@ -1,175 +1,101 @@
 <?php 
+$connect = mysqli_connect("localhost", "root", "", "sdzirconium");
 session_start();
 
-    include("connection.php");
-    include("functions.php");
-
-    if($_SERVER['REQUEST_METHOD'] == "POST")
-    {
-        //something was posted
-        $user_name = $_POST['user_name'];
-        $password = $_POST['password'];
-		$full_name = $_POST['full_name'];
-		$email = $_POST['email'];
-
-
-
-        if(!empty($user_name) && !empty($password) && !is_numeric($user_name) )
-        {
-            //save to database
-            $user_id = random_num(20);
-            $query = "insert into supplier (user_id,user_name,password,full_name,email) values ('$user_id','$user_name','$password','$full_name','$email')";
-
-            mysqli_query($con, $query);
-
-            header("Location: index.php");
-            die;
-        }else
-		{
-            echo "Please enter valid details!";
-        }
-
-    }
+    if(isset($_POST["register"]))  
+    {  
+         if(empty($_POST["username"]) && empty($_POST["password"]) && empty($_POST["fullname"]) && empty($_POST["email"]))  
+         {  
+              echo '<script>alert("Please fill in all the details")</script>';  
+         }  
+         else  
+         {  
+            $fullname = mysqli_real_escape_string($connect, $_POST["fullname"]);
+            $email = mysqli_real_escape_string($connect, $_POST["email"]);
+            $username = mysqli_real_escape_string($connect, $_POST["username"]);
+            $password = mysqli_real_escape_string($connect, $_POST["password"]);
+            $password = md5($password);  
+            $query = "INSERT INTO supplier (user_id,full_name, user_name, email, password) VALUES ('$user_id','$fullname','$username','$email','$password')";  
+            if(mysqli_query($connect, $query))  
+            {  
+                echo '<script>alert("Registration Done")</script>';  
+            }  
+         }  
+    }  
 
 ?>
 
-<!DOCTYPE HTML>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="pragma" content="no-cache" />
-<meta http-equiv="cache-control" content="max-age=604800" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-<title>Zirconium - Supplier Sign Up</title>
-
-<link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
-
-<!-- jQuery -->
-<script src="js/jquery-2.0.0.min.js" type="text/javascript"></script>
-
-<!-- Bootstrap4 files-->
-<script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
-
-<!-- Font awesome 5 -->
-<link href="fonts/fontawesome/css/all.min.css" type="text/css" rel="stylesheet">
-
-<!-- custom style -->
-<link href="css/ui.css" rel="stylesheet" type="text/css"/>
-<link href="css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
-
-<!-- custom javascript -->
-<script src="js/script.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-/// some script
-
-// jquery ready start
-$(document).ready(function() {
-	// jQuery code
-
-}); 
-// jquery end
-</script>
-
+	<title>Zirconium - Supplier Registeration</title>
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-social.css">
+	<link rel="stylesheet" href="css/bootstrap-select.css">
+	<link rel="stylesheet" href="css/fileinput.min.css">
+	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
+	<link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
+	<div class="login-page bk-img" style="background-image: url(img/background.png);">
+		<div class="form-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3">
+						<a><h4 class="text-center text-bold text-4x text-babyblue mt-5x">Supplier Registeration</h4></a>
+						<div class="well row pt-2x pb-3x bk-light">
+							<div class="col-md-8 col-md-offset-2">
+								<form method="post">
 
-<header class="section-header">
-<section class="header-main border-bottom">
-	<div class="container">
-<div class="row align-items-center">
-	<div class="col-lg-2 col-4">
-		<a href="http://bootstrap-ecommerce.com" class="brand-wrap">
-			<img class="logo" src="images/logo.png">
-		</a> <!-- brand-wrap.// -->
-	</div>
-			    </div>
-		    </div>
-	</div> <!-- col.// -->
-	<div class="col-lg-4 col-sm-6 col-12">
+                                    <label for="" class="text-uppercase text-sm">Company's Name</label>
+									<input type="text" placeholder="Company's Full Name" name="fullname" class="form-control mb">
+
+                                    <label for="" class="text-uppercase text-sm">Company's Email </label>
+									<input type="email" placeholder="Email" name="email" class="form-control mb">
+
+									<label for="" class="text-uppercase text-sm">Username </label>
+									<input type="text" placeholder="Username" name="username" class="form-control mb">
+
+									<label for="" class="text-uppercase text-sm">Password</label>
+									<input type="password" placeholder="Password" name="password" class="form-control mb">
+
+									<button class="btn btn-primary btn-block" name="register" type="submit">Register</button>
+									<br>
+									<a href="index.php">Already have an account? Log In!</a>
+									<br><br>
+                  					<a href="../index.php">Back to Main Page</a>
+
+								</form>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
 
-		</div> <!-- widgets-wrap.// -->
-	</div> <!-- col.// -->
-</div> <!-- row.// -->
-	</div> <!-- container.// -->
-</section> <!-- header-main .// -->
-</header> <!-- section-header.// -->
-
-
-
-<!-- ========================= SECTION CONTENT ========================= -->
-<section class="section-content padding-y">
-
-<!-- ============================ COMPONENT REGISTER   ================================= -->
-	<div class="card mx-auto" style="max-width:520px; margin-top:40px;">
-      <article class="card-body">
-		<header class="mb-4"><h4 class="card-title">Sign up</h4></header>
-		<form method="post">
-				<div class="form-row">
-					<div class="col form-group">
-						<label>Company's Name</label>
-					  	<input type="text" class="form-control" placeholder="Company's Name" name="full_name" >
-					</div> <!-- form-group end.// -->
-					
-				</div> <!-- form-row end.// -->
-                <div class="form-group">
-					<label>Username</label>
-					<input id="text" type="text" class="form-control" placeholder="Username" name="user_name" >
-					<small class="form-text text-muted">Please enter your username.</small>
-				</div> <!-- form-group end.// -->
-				<div class="form-group">
-					<label>Email</label>
-					<input id="text" type="email" class="form-control" placeholder="Email Address" name="email">
-					<small class="form-text text-muted">We'll never share your email with anyone else.</small>
-				</div> <!-- form-group end.// -->
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label>Create password</label>
-					    <input class="form-control" type="password" name="password" id="text" placeholder="Password">
-					</div> <!-- form-group end.// --> 
-					<div class="form-group col-md-6">
-						<label>Repeat password</label>
-					    <input class="form-control" type="password" name="confirm_password" id="text" placeholder="Confirm Password" required>
-					</div> <!-- form-group end.// -->  
-				</div>
-			    <div class="form-group">
-			        <button id="button" type="submit" value="Signup" class="btn btn-primary btn-block"> Register  </button>
-			    </div> <!-- form-group// -->      
-			    <div class="form-group"> 
-		            <label class="custom-control custom-checkbox"> <input type="checkbox" class="custom-control-input" checked=""> <div class="custom-control-label"> I am agree with <a href="#">terms and contitions</a>  </div> </label>
-		        </div> <!-- form-group end.// -->           
-			</form>
-		</article><!-- card-body.// -->
-    </div> <!-- card .// -->
-    <p class="text-center mt-4">Have an account? <a href="index.php">Log In</a></p>
-    <br><br>
-<!-- ============================ COMPONENT REGISTER  END.// ================================= -->
-
-
-</section>
-<!-- ========================= SECTION CONTENT END// ========================= -->
-
-
-<!-- ========================= FOOTER ========================= -->
-<footer class="section-footer border-top padding-y">
-	<div class="container">
-		<p class="float-md-right"> 
-			&copy Copyright 2019 All rights reserved
-		</p>
-		<p>
-			<a href="#">Terms and conditions</a>
-		</p>
-	</div><!-- //container -->
-</footer>
-<!-- ========================= FOOTER END // ========================= -->
-
-
+	<!-- Loading Scripts -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap-select.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.dataTables.min.js"></script>
+	<script src="js/dataTables.bootstrap.min.js"></script>
+	<script src="js/Chart.min.js"></script>
+	<script src="js/fileinput.js"></script>
+	<script src="js/chartData.js"></script>
+	<script src="js/main.js"></script>
 
 </body>
+
 </html>

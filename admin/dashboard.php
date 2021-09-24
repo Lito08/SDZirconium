@@ -1,13 +1,13 @@
-<?php 
+<?php
 session_start();
-
-    include("connection.php");
-    include("functions.php");
-
-    $user_data = check_login($con);
-
-?>
-
+error_reporting(0);
+include('includes/connection.php');
+if(strlen($_SESSION['alogin'])==0)
+	{
+header('location:index.php');
+}
+else{
+	?>
 <!doctype html>
 <html lang="en" class="no-js">
 
@@ -48,7 +48,7 @@ session_start();
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12">
-						<h2 class="page-title">Dashboard</h2>
+						<h1 class="page-title">Dashboard</h1>
 
 						<!-- Zero Configuration Table -->
 						<div class="row">
@@ -58,19 +58,36 @@ session_start();
 										<div class="panel panel-default">
 											<div class="panel-body bk-dark text-light">
 												<div class="stat-panel text-center">
-													
-<?php												
-$sql6 ="SELECT id from tblcontactusquery ";
-$query6 = $dbh -> prepare($sql6);;
-$query6->execute();
-$results6=$query6->fetchAll(PDO::FETCH_OBJ);
-$query=$query6->rowCount();
+<?php
+$sql ="SELECT id from products ";
+$query = $dbh -> prepare($sql);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$regusers=$query->rowCount();
 ?>
-													<div class="stat-panel-number h1 "><?php echo htmlentities($query);?></div>
-													<div class="stat-panel-title text-uppercase">Queries</div>
+													<div class="stat-panel-number h1 "><?php echo htmlentities($regusers);?></div>
+													<div class="stat-panel-title text-uppercase">Total Products</div>
 												</div>
 											</div>
-											<a href="manage-contactusquery.php" class="block-anchor panel-footer text-center">Full Detail &nbsp; <i class="fa fa-arrow-right"></i></a>
+											<a href="manage_products.php" class="block-anchor panel-footer text-center">Full Detail <i class="fa fa-arrow-right"></i></a>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="panel panel-default">
+											<div class="panel-body bk-dark text-light">
+												<div class="stat-panel text-center">
+<?php
+$sql ="SELECT id from supplier ";
+$query = $dbh -> prepare($sql);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$regusers=$query->rowCount();
+?>
+													<div class="stat-panel-number h1 "><?php echo htmlentities($regusers);?></div>
+													<div class="stat-panel-title text-uppercase">Total Orders</div>
+												</div>
+											</div>
+											<a href="reg-suppliers.php" class="block-anchor panel-footer text-center">Full Detail <i class="fa fa-arrow-right"></i></a>
 										</div>
 									</div>
 								</div>
@@ -118,3 +135,4 @@ $query=$query6->rowCount();
 	</script>
 </body>
 </html>
+<?php } ?>

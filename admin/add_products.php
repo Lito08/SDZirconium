@@ -1,41 +1,46 @@
-<?php 
+<?php
 session_start();
+error_reporting(0);
+include('includes/connection.php');
+if(strlen($_SESSION['alogin'])==0)
+	{
+header('location:index.php');
+}
+else{
 
-    include('includes/connection.php');
+if(isset($_POST['submit']))
+  {
+$title=$_POST['title'];
+$producttype=$_POST['Producttype'];
+$description=$_POST['description'];
+$price=$_POST['price'];
+$vimage1=$_FILES["img1"]["name"];
+$vimage2=$_FILES["img2"]["name"];
+$vimage3=$_FILES["img3"]["name"];
+move_uploaded_file($_FILES["img1"]["tmp_name"],"img/vehicleimages/".$_FILES["img1"]["name"]);
+move_uploaded_file($_FILES["img2"]["tmp_name"],"img/vehicleimages/".$_FILES["img2"]["name"]);
+move_uploaded_file($_FILES["img3"]["tmp_name"],"img/vehicleimages/".$_FILES["img3"]["name"]);
 
-    if($_SERVER['REQUEST_METHOD'] == "POST")
-    {
-        //something was posted
-        $ptype = $_POST['product_type'];
-        $title = $_POST['title'];
-		$price = $_POST['price'];
-		$quantity = $_POST['quantity'];
-		$brand = $_POST['brand'];
-		$description = $_POST['description'];
-		$ribbon = $_POST['ribbon'];
-        $img1 = $_POST['img1'];
-        
-        $delivery = $_POST['delivery'];
-
-
-
-        if(!empty($title) && !empty($price) && !is_numeric($title) )
-        {
-            //save to database
-            
-            $query = "insert into products (product_type,title,price,quantity,brand,description,ribbon,img1,delivery) values ('$ptype','$title','$price','$quantity','$brand','$description','$ribbon','$img1','$delivery',)";
-
-            mysqli_query($dbh, $query);
-
-            header("Location: dashboard.php");
-            die;
-        }else
-		{
-            echo "Please enter valid details!";
-        }
-
-    }
-
+$sql="INSERT INTO products(title,ptype,description,price,Vimage1,Vimage2,Vimage3) VALUES(:title,:producttype,:description,:price,:vimage1,:vimage2,:vimage3)";
+$query = $dbh->prepare($sql);
+$query->bindParam(':title',$title,PDO::PARAM_STR);
+$query->bindParam(':producttype',$producttype,PDO::PARAM_STR);
+$query->bindParam(':description',$description,PDO::PARAM_STR);
+$query->bindParam(':price',$price,PDO::PARAM_STR);
+$query->bindParam(':vimage1',$vimage1,PDO::PARAM_STR);
+$query->bindParam(':vimage2',$vimage2,PDO::PARAM_STR);
+$query->bindParam(':vimage3',$vimage3,PDO::PARAM_STR);
+$query->execute();
+$lastInsertId = $dbh->lastInsertId();
+if($lastInsertId)
+{
+$msg="Product posted successfully";
+}
+else
+{
+$error="Something went wrong. Please try again";
+}
+}
 ?>
 
 <!DOCTYPE HTML>
@@ -49,7 +54,7 @@ session_start();
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
 
-	<title>Zirconium Registered Users</title>
+	<title>Zirconium Add Products</title>
 
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -67,8 +72,8 @@ session_start();
 	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
 	<!-- Admin Stye -->
 	<link rel="stylesheet" href="css/style.css">
-  <style>
-		.errorWrap {
+<style>
+	.errorWrap {
     padding: 10px;
     margin: 0 0 20px 0;
     background: #fff;
@@ -84,7 +89,7 @@ session_start();
     -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 }
-		</style>
+</style>
 </head>
 
 <body>
@@ -98,95 +103,113 @@ session_start();
     <div class="content-wrapper">
 		<div class="container-fluid">
 <!-- ============================ COMPONENT REGISTER   ================================= -->
-	<div class="row">
-      <article class="col-md-12">
-		<header class="mb-4"><h1 class="card-title">Add Products</h1></header>
-		<form method="post">
-				<div class="form-row">
-					<label>Product Type</label>
-					<select id="inputState" class="form-control" name="product_type" >
-						<option> Choose...</option>
-                        <option>Groceries</option>
-					    <option>Frozen</option>
-                        <option>Fresh products</option>
-                        <option>Confectioneries</option>
-                        <option>Health & Beauty</option>
-					    <option>Electronics</option>
-					    <option>Sports & Lifestyle</option>
-					    <option>Babies & Toys</option>
-                        <option>Books</option>
-						<option>Appliances</option>
-						<option>Automotive & Motorcycles</option>
-					</select>
-				</div> <!-- form-group end.// -->
-				<div class="form-group">
-					<div class="col form-group">
-						<label>Title</label>
-					  	<input type="text" class="form-control" placeholder="Title" name="title" required="required">
-					</div> <!-- form-group end.// -->
-				</div> <!-- form-row end.// -->
-                <div class="form-group">
-					<label>Price</label>
-					<input id="text" type="number" class="form-control" min="1" step="any" placeholder="Price" name="price" required="required">   
-				</div> <!-- form-group end.// -->
-				<div class="form-group">
-					<label>Quantity</label>
-					<input id="text" type="number" class="form-control" placeholder="Quantity" name="quantity" required="required">
-				</div> <!-- form-group end.// -->
-                <div class="form-group">
-					<label>Ribbon</label>
-					<input id="text" type="text" class="form-control" placeholder="New Arrivals/On Sale.." name="ribbon">
-				</div> <!-- form-group end.// -->
-				<div class="form-group">
-					<label>Description</label>
-					<input id="text" type="text" class="form-control" placeholder="Item's Description" name="description">
-				</div> <!-- form-group end.// -->
-				<div class="form-group">
-					<label class="custom-control custom-radio custom-control-inline">
-					  <input class="custom-control-input"  type="radio" name="discount" value="discount">
-					  <span class="custom-control-label">Discount</span>
-					</label>
-				</div> <!-- form-group end.// -->
-				<div class="form-row">
-					<div class="form-group col-md-6">
-					  <label>Delivery</label>
-					  <input type="text" class="form-control" name="delivery" placeholder="Store Walk-Ins/Shipped Worldwide">
-					</div> <!-- form-group end.// -->
-					<div class="form-group col-md-6">
-					  <label>Brand</label>
-					  <select id="inputState" class="form-control" name="brand" >
-					    <option> Choose...</option>
-                          <option>Padini</option>
-					      <option>Uniqlo</option>
-                          <option>Louis Vuitton</option>
-                          <option>Gucci</option>
-                          <option>Prada</option>
-					      <option>Armani Exchange</option>
-					      <option selected="">Asadi</option>
-					      <option>Salvatore Ferragamo</option>
-                          <option>Burberry</option>
-						  <option>No Brand</option>
-					  </select>
-					</div> <!-- form-group end.// -->
-				</div> <!-- form-row.// -->
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label>Images</label>
-					    <input class="form-control" type="file" name="img1"  placeholder="Images">
-                        <input type="submit" name="uploadimg1" value="upload">
-					</div> <!-- form-group end.// -->  
-				</div>
-			    <div class="form-group">
-			        <button id="button" type="submit" value="Signup" class="btn btn-primary btn-block"> Add Product  </button>
-			    </div> <!-- form-group// -->              
-			</form>
-		</article><!-- card-body.// -->
-    </div> <!-- card .// -->
-<!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="page-title">Post a product</h2>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="panel panel-default">
+									<div class="panel-heading">Basic Info</div>
+									<?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php }
+									else if($msg)
+									{?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
 
+			<div class="panel-body">
+				<form method="post" class="form-horizontal" enctype="multipart/form-data">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Product Title<span style="color:red">*</span></label>
+						<div class="col-sm-4">
+							<input type="text" name="title" class="form-control" required>
+						</div>
+
+						<div class="hr-dashed"></div>
+						<div class="hr-dashed"></div>
+						<div class="hr-dashed"></div>
+
+						<label class="col-sm-2 control-label">Select type<span style="color:red">*</span></label>
+						<div class="col-sm-2">
+						<select class="selectpicker" name="Producttype" required>
+						<option value=""> Select </option>
+						<?php $ret="select id,typename from type";
+						$query= $dbh -> prepare($ret);
+						//$query->bindParam(':id',$id, PDO::PARAM_STR);
+						$query-> execute();
+						$results = $query -> fetchAll(PDO::FETCH_OBJ);
+						if($query -> rowCount() > 0)
+						{
+						foreach($results as $result)
+						{
+						?>
+						<option value="<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->typename);?></option>
+						<?php }} ?>
+
+						</select>
+						</div>
+					</div>
+
+						<div class="hr-dashed"></div>
+						
+						<div class="form-group">
+						<label class="col-sm-2 control-label">Description<span style="color:red">*</span></label>
+							<div class="col-sm-10">
+							<textarea class="form-control" name="description" rows="3" required></textarea>
+							</div>
+						</div>
+
+						<div class="hr-dashed"></div>
+
+						<div class="form-group">
+						<label class="col-sm-2 control-label">Price in (RM)<span style="color:red">*</span></label>
+							<div class="col-sm-4">
+							<input type="text" name="price" class="form-control" required>
+							</div>
+						</div>
+
+						<div class="hr-dashed"></div>
+
+						<div class="form-group">
+							<div class="col-sm-12">
+							<h4><b>Upload Images</b></h4>
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<div class="col-sm-4">
+							Image 1 <span style="color:red">*</span><input type="file" name="img1" required>
+							</div>
+							<div class="col-sm-4">
+							Image 2<span style="color:red">*</span><input type="file" name="img2" required>
+							</div>
+							<div class="col-sm-4">
+							Image 3<span style="color:red">*</span><input type="file" name="img3" required>
+							</div>
+						</div>
+						
+						<div class="hr-dashed"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-sm-8 col-sm-offset-2">
+			<button class="btn btn-default" type="reset">Cancel</button>
+			<button class="btn btn-primary" name="submit" type="submit">Save changes</button>
+			</div>
+		</div>
+
+				</form>
+											
+			</div>
+			</div>
+		</div>
+	</div>
+<!-- ============================ COMPONENT REGISTER  END.// ================================= -->
 
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
+
 <!-- Loading Scripts -->
 <script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap-select.min.js"></script>
@@ -200,3 +223,4 @@ session_start();
 
 </body>
 </html>
+<?php } ?>

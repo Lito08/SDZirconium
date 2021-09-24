@@ -3,14 +3,14 @@ session_start();
 error_reporting(0);
 include('includes/connection.php');
 if(strlen($_SESSION['alogin'])==0)
-{
-header('location:dashboard.php');
+	{
+header('location:index.php');
 }
 else{
 if(isset($_GET['del']))
 {
 $id=$_GET['del'];
-$sql = "delete from users WHERE id=:id";
+$sql = "delete from type  WHERE id=:id";
 $query = $dbh->prepare($sql);
 $query -> bindParam(':id',$id, PDO::PARAM_STR);
 $query -> execute();
@@ -29,7 +29,7 @@ $msg="Page data updated  successfully";
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
 
-	<title>Zirconium Manage Products</title>
+	<title>Zirconium - Manage Product Type</title>
 
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -65,6 +65,7 @@ $msg="Page data updated  successfully";
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 }
 		</style>
+
 </head>
 
 <body>
@@ -74,13 +75,14 @@ $msg="Page data updated  successfully";
 		<?php include('includes/leftbar.php');?>
 		<div class="content-wrapper">
 			<div class="container-fluid">
+
 				<div class="row">
 					<div class="col-md-12">
-						<h2 class="page-title">Manage Products</h2>
 
+						<h2 class="page-title">Manage Product Type</h2>
 						<!-- Zero Configuration Table -->
 						<div class="panel panel-default">
-							<div class="panel-heading">List of products</div>
+							<div class="panel-heading">Listed Types</div>
 							<div class="panel-body">
 							<?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php }
 				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
@@ -88,24 +90,26 @@ $msg="Page data updated  successfully";
 									<thead>
 										<tr>
 										<th>#</th>
-										<th>Type</th>
-										<th>Product Name</th>
-										<th>Price (RM)</th>
-										<th>Quantity</th>
-										<th>Brand</th>
-										<th>Ribbon</th>
-										<th>Date</th>
-										<th>Action</th>
+												<th>Type</th>
+											<th>Creation Date</th>
+											<th>Updation date</th>
+
+											<th>Action</th>
 										</tr>
 									</thead>
 									<tfoot>
-										
-									</tr>
+										<tr>
+										<th>#</th>
+											<th>Type</th>
+											<th>Creation Date</th>
+											<th>Updation date</th>
+											<th>Action</th>
+										</tr>
+										</tr>
 									</tfoot>
 									<tbody>
 
-<?php 
-$sql = "SELECT * from products ";
+									<?php $sql = "SELECT * from  type ";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -116,18 +120,14 @@ foreach($results as $result)
 {				?>
 										<tr>
 											<td><?php echo htmlentities($cnt);?></td>
-											<td><?php echo htmlentities($result->ptype);?></td>
-											<td><?php echo htmlentities($result->title);?></td>
-											<td><?php echo htmlentities($result->price);?></td>
-	
-											<td><?php echo htmlentities($result->quantity);?></td>
-											<td><?php echo htmlentities($result->brand);?></td>
-											<td><?php echo htmlentities($result->ribbon);?></td>
-											<td><?php echo htmlentities($result->date);?></td>
-<td><a href="edit-users.php?id=<?php echo $result->id;?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
-<a href="reg-users.php?del=<?php echo $result->id;?>" onclick="return confirm('Do you want to delete');"><i class="fa fa-close"></i></a></td>
+											<td><?php echo htmlentities($result->typename);?></td>
+											<td><?php echo htmlentities($result->CreationDate);?></td>
+											<td><?php echo htmlentities($result->UpdationDate);?></td>
+                                            <td><a href="edit-brand.php?id=<?php echo $result->id;?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+                                                <a href="manage-brands.php?del=<?php echo $result->id;?>" onclick="return confirm('Do you want to delete?');"><i class="fa fa-close"></i></a></td>
 										</tr>
 										<?php $cnt=$cnt+1; }} ?>
+
 									</tbody>
 								</table>
 
@@ -138,6 +138,7 @@ foreach($results as $result)
 			</div>
 		</div>
 	</div>
+
 	<!-- Loading Scripts -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap-select.min.js"></script>
