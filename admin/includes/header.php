@@ -1,5 +1,5 @@
 <div class="brand clearfix">
-	<a href="dashboard.php" style="color: #fff;padding-left:500px; font-size: 38px;">Zirconium Super Admin </a>  
+	<a href="dashboard.php" style="color: #fff;padding-left:800px; font-size: 38px;">Zirconium Supplier</a>  
 		<span class="menu-btn"><i class="fa fa-bars"></i></span>
 		<ul class="ts-profile-nav">
 			
