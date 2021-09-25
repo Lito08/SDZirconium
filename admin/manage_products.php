@@ -10,11 +10,11 @@ else{
 if(isset($_GET['del']))
 {
 $id=$_GET['del'];
-$sql = "delete from users WHERE id=:id";
+$sql = "DELETE from users WHERE id=:id";
 $query = $dbh->prepare($sql);
 $query -> bindParam(':id',$id, PDO::PARAM_STR);
 $query -> execute();
-$msg="Page data updated  successfully";
+$msg="Page data updated successfully";
 }
  ?>
 
@@ -124,8 +124,8 @@ foreach($results as $result)
 											<td><?php echo htmlentities($result->brand);?></td>
 											<td><?php echo htmlentities($result->ribbon);?></td>
 											<td><?php echo htmlentities($result->date);?></td>
-<td><a href="edit-users.php?id=<?php echo $result->id;?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
-<a href="reg-users.php?del=<?php echo $result->id;?>" onclick="return confirm('Do you want to delete');"><i class="fa fa-close"></i></a></td>
+<td><a href="edit_products.php?id=<?php echo $result->id;?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+<a href="manage_products.php?del=<?php echo $result->id;?>" onclick="return confirm('Do you want to delete');"><i class="fa fa-close"></i></a></td>
 										</tr>
 										<?php $cnt=$cnt+1; }} ?>
 									</tbody>
