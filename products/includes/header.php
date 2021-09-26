@@ -46,13 +46,13 @@ else
 	<div class="col-lg-4 col-sm-6 col-12">
 		<div class="widgets-wrap float-md-right">
 			<div class="widget-header  mr-3">
-				<a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></a>
+				<a href="../shoppingcart.php" class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></a>
 				<span class="badge badge-pill badge-danger notify">0</span>
 			</div>
 			<div class="widget-header icontext">
       <?php
         if (isset($_SESSION["user_id"])) {
-				echo "<a href='../../profile.php' class='icon icon-sm rounded-circle border'><i class='fa fa-user'> </i></a>";
+				echo "<a href='../profile.php' class='icon icon-sm rounded-circle border'><i class='fa fa-user'> </i></a>";
       }else{
       }
         ?>
@@ -62,10 +62,10 @@ else
           <?php
             if (isset($_SESSION["user_id"])) {
              
-              echo "<p class='text' style='font-family: Noto Sans JP '><a href='../../logout.php'> Log Out</p></a>";
+              echo "<p class='text' style='font-family: Noto Sans JP '><a href='../logout.php'> Log Out</p></a>";
             }else{
-              echo "<p style='font-family: Noto Sans JP '><a href='../../login.php'> Sign in</p>";
-              echo "<p style='font-family: Noto Sans JP '><a href='../../signup.php'> Register</p>";
+              echo "<p style='font-family: Noto Sans JP '><a href='../login.php'> Sign in</p>";
+              echo "<p style='font-family: Noto Sans JP '><a href='../signup.php'> Register</p>";
             }
         ?>
 					</div>

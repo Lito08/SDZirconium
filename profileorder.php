@@ -90,7 +90,7 @@ $(document).ready(function() {
 <!-- ========================= SECTION PAGETOP ========================= -->
 <section class="section-pagetop bg-primary">
 <div class="container" >
-	<h2 class="title-page text-white" style="font-family:Roboto; text-transform: uppercase">my profile</h2>
+	<h2 class="title-page text-white" style="font-family:Roboto; text-transform: uppercase">MY orders</h2>
 </div> <!-- container //  -->
 </section>
 <!-- ========================= SECTION INTRO END// ========================= -->
@@ -104,75 +104,17 @@ $(document).ready(function() {
 <div class="row">
 	<aside class="col-md-3">
 		<ul class="list-group">
-			<a class="list-group-item active" href="profile.php"> Account overview  </a>
-			<a class="list-group-item" href="profileorder.php"> My Orders </a>
+			<a class="list-group-item" href="profile.php"> Account overview  </a>
+			<a class="list-group-item active" href="#"> My Orders </a>
 			<a class="list-group-item" href="shoppingcart.php"> My wishlist </a>
 			<a class="list-group-item" href="#"> Return and refunds </a>
 		</ul>
 	</aside> <!-- col.// -->
 	<main class="col-md-9">
 
-		<article class="card mb-3" style="background-color:#eaf0fd">
-			<div class="card-body">				
-				<figure class="icontext">
-						<div class="text" style="font-family:Noto Sans JP" >
-						<h1 style="text-transform: capitalize; font-size:25px" ><strong><?php echo $row['full_name'];?></strong><br></h1>
-
-						<p style="font-size:17px"><?php echo $row['user_name'];?> 
-						<br>  
-						<?php echo $row['gender'];?> <br> 
-						</p>	
-						</div>
-
-				</figure>
-				<hr>
-				<p style="font-family:Noto Sans JP; text-transform: capitalize;font-size:17px">
-					<strong>Location:</strong> 
-					 <br>
-					 <?php echo $row['country'];?>  
-					 <br>
-					 <?php echo $row['city'];?> 
-					 <br> 
-
-					<a href="#" class="btn-link"> Edit</a>
-				</p>
-
-				
-
-				<article class="card-group" >
-					<figure class="card bg" style="background-color:#eaf0fd">
-						<div class="p-3">
-							 <h5 class="card-title" >38</h5>
-							<span>Orders</span>
-						</div>
-					</figure>
-					<figure class="card bg" style="background-color:#eaf0fd">
-						<div class="p-3">
-							 <h5 class="card-title">5</h5>
-							<span>Wishlists</span>
-						</div>
-					</figure>
-					<figure class="card bg" style="background-color:#eaf0fd">
-						<div class="p-3">
-							 <h5 class="card-title">12</h5>
-							<span>Awaiting delivery</span>
-						</div>
-					</figure>
-					<figure class="card bg" style="background-color:#eaf0fd">
-						<div class="p-3">
-							 <h5 class="card-title">50</h5>
-							<span>Delivered items</span>
-						</div>
-					</figure>
-				</article>
-				
-
-			</div> <!-- card-body .// -->
-		</article> <!-- card.// -->
-
 		<article class="card  mb-3">
 			<div class="card-body">
-				<h5 class="card-title mb-4">Recent orders </h5>	
+				<h5 class="card-title mb-4">List of Orders </h5>	
 
 				<div class="row">
 				<div class="col-md-6">
@@ -207,7 +149,7 @@ $(document).ready(function() {
 				</div> <!-- col.// -->
 			</div> <!-- row.// -->
 
-			<a href="profileorder.php" class="btn btn-outline-primary"> See all orders  </a>
+
 			</div> <!-- card-body .// -->
 		</article> <!-- card.// -->
 
