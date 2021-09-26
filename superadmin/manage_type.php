@@ -123,8 +123,8 @@ foreach($results as $result)
 											<td><?php echo htmlentities($result->typename);?></td>
 											<td><?php echo htmlentities($result->CreationDate);?></td>
 											<td><?php echo htmlentities($result->UpdationDate);?></td>
-                                            <td><a href="edit-brand.php?id=<?php echo $result->id;?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
-                                                <a href="manage-brands.php?del=<?php echo $result->id;?>" onclick="return confirm('Do you want to delete?');"><i class="fa fa-close"></i></a></td>
+                                            <td><a href="edit_type.php?id=<?php echo $result->id;?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+                                                <a href="manage_type.php?del=<?php echo $result->id;?>" onclick="return confirm('Do you want to delete?');"><i class="fa fa-close"></i></a></td>
 										</tr>
 										<?php $cnt=$cnt+1; }} ?>
 

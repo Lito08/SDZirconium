@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2021 at 11:44 AM
+-- Generation Time: Sep 26, 2021 at 10:40 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -40,6 +40,35 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `UserName`, `Password`, `updationDate`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '2020-03-31 07:55:07');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contactusquery`
+--
+
+CREATE TABLE `contactusquery` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(120) DEFAULT NULL,
+  `EmailId` varchar(120) DEFAULT NULL,
+  `ContactNumber` char(11) DEFAULT NULL,
+  `Message` longtext DEFAULT NULL,
+  `PostingDate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `membership`
+--
+
+CREATE TABLE `membership` (
+  `id` bigint(20) NOT NULL,
+  `MembershipName` varchar(120) NOT NULL,
+  `CreationDate` timestamp NULL DEFAULT current_timestamp(),
+  `UpdationDate` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -92,7 +121,10 @@ CREATE TABLE `supplier` (
 --
 
 INSERT INTO `supplier` (`id`, `user_id`, `full_name`, `user_name`, `email`, `password`, `date`) VALUES
-(1, 9223372036854775807, 'Arca Creation', 'arca', 'arcacreation08@gmail.com', 'Dy081201', '2021-09-21 12:03:54');
+(1, 9223372036854775807, 'Arca Creation', 'arca', 'arcacreation08@gmail.com', 'Dy081201', '2021-09-21 12:03:54'),
+(2, 299040, 'Arca Creation', 'arcacreation', 'arcacreation08@gmail.com', 'Dy081201', '2021-09-24 11:32:53'),
+(3, 947281033177, 'Arca Creation', 'arcacreation', 'arcacreation08@gmail.com', 'Dy081201', '2021-09-24 11:33:37'),
+(4, 0, 'Lito', 'lito08', 'danielyusoff08@gmail.com', 'e7ef31af97f4c58006e4a917bffbefd4', '2021-09-24 12:17:48');
 
 -- --------------------------------------------------------
 
@@ -167,6 +199,18 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `contactusquery`
+--
+ALTER TABLE `contactusquery`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `membership`
+--
+ALTER TABLE `membership`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -209,6 +253,18 @@ ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `contactusquery`
+--
+ALTER TABLE `contactusquery`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `membership`
+--
+ALTER TABLE `membership`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
@@ -218,7 +274,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `type`

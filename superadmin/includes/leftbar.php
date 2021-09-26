@@ -24,10 +24,10 @@
 					</ul>
 </li>
 
-<li><a href="manage_products.php"><i class="fa fa-sitemap"></i>Memberships</a>
+<li><a href="manage_membership.php"><i class="fa fa-sitemap"></i>Memberships</a>
 					<ul>
-						<li><a href="manage_products.php">Manage Memberships</a></li>
-						<li><a href="reg-suppliers.php">Add Membership</a></li>
+						<li><a href="manage_membership.php">Manage Memberships</a></li>
+						<li><a href="add_membership.php">Add Membership</a></li>
 					</ul>
 </li>
 <li><a href="manage_products.php"><i class="fa fa-sitemap"></i>Courier</a>
