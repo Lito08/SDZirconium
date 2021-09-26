@@ -6,38 +6,31 @@ if(strlen($_SESSION['alogin'])==0)
 	{	
 header('location:index.php');
 }
-else{
+else{ 
 
 if(isset($_POST['submit']))
-{
-    $title=$_POST['title'];
-    $producttype=$_POST['producttype'];
-    $description=$_POST['description'];
-    $price=$_POST['price'];
-    $vimage1=$_FILES["img1"]["name"];
-    $vimage2=$_FILES["img2"]["name"];
-    $vimage3=$_FILES["img3"]["name"];
-    move_uploaded_file($_FILES["img1"]["tmp_name"],"img/vehicleimages/".$_FILES["img1"]["name"]);
-    move_uploaded_file($_FILES["img2"]["tmp_name"],"img/vehicleimages/".$_FILES["img2"]["name"]);
-    move_uploaded_file($_FILES["img3"]["tmp_name"],"img/vehicleimages/".$_FILES["img3"]["name"]);
-$sql="update products set title=:title, ptype=:producttype, description=:description, price=:price, vimage1=:vimage1, vimage2=:vimage2, vimage3=:vimage3 where id=:id";
+  {
+$title=$_POST['title'];
+$type=$_POST['Type'];
+$description=$_POST['description'];
+$price=$_POST['price'];
+$id=intval($_GET['id']);
+
+$sql="update products set title=:title,ptype=:Type,description=:description,price=:price where id=:id ";
 $query = $dbh->prepare($sql);
 $query->bindParam(':title',$title,PDO::PARAM_STR);
-$query->bindParam(':producttype',$producttype,PDO::PARAM_STR);
+$query->bindParam(':Type',$type,PDO::PARAM_STR);
 $query->bindParam(':description',$description,PDO::PARAM_STR);
 $query->bindParam(':price',$price,PDO::PARAM_STR);
-$query->bindParam(':vimage1',$vimage1,PDO::PARAM_STR);
-$query->bindParam(':vimage2',$vimage2,PDO::PARAM_STR);
-$query->bindParam(':vimage3',$vimage3,PDO::PARAM_STR);
+$query->bindParam(':id',$id,PDO::PARAM_STR);
 $query->execute();
-$lastInsertId = $dbh->lastInsertId();
 
-$msg="Products succesfully updated!!";
+$msg="Data updated successfully";
 
 }
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
 
 <head>
@@ -48,6 +41,8 @@ $msg="Products succesfully updated!!";
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
 	
+	<title>Zirconium - Edit Products</title>
+
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<!-- Sandstone Bootstrap CSS -->
@@ -64,7 +59,7 @@ $msg="Products succesfully updated!!";
 	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
 	<!-- Admin Stye -->
 	<link rel="stylesheet" href="css/style.css">
-  <style>
+	<style>
 		.errorWrap {
     padding: 10px;
     margin: 0 0 20px 0;
@@ -81,9 +76,7 @@ $msg="Products succesfully updated!!";
     -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 }
-		</style>
-
-
+</style>
 </head>
 
 <body>
@@ -96,136 +89,113 @@ $msg="Products succesfully updated!!";
 				<div class="row">
 					<div class="col-md-12">
 					
-						<h2 class="page-title">Edit Products</h2>
+						<h2 class="page-title">Edit Product</h2>
 
 						<div class="row">
-							<div class="col-md-10">
+							<div class="col-md-12">
 								<div class="panel panel-default">
-									<div class="panel-heading">Form fields</div>
+									<div class="panel-heading">Basic Info</div>
 									<div class="panel-body">
-										<form method="post" name="chngpwd" class="form-horizontal" onSubmit="return valid();">
-										
-											
-  	        	  <?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } 
-				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
-
-<?php	
-$id=$_GET['id'];
-$ret="select * from products where id=:id";
-$query= $dbh -> prepare($ret);
-$query->bindParam(':id',$id, PDO::PARAM_STR);
-$query-> execute();
-$results = $query -> fetchAll(PDO::FETCH_OBJ);
+<?php if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php } ?>
+<?php 
+$id=intval($_GET['id']);
+$sql ="SELECT products.*,type.typename,type.id as bid from products join type on type.id=products.ptype where products.id=:id";
+$query = $dbh -> prepare($sql);
+$query-> bindParam(':id', $id, PDO::PARAM_STR);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
 $cnt=1;
-if($query -> rowCount() > 0)
+if($query->rowCount() > 0)
 {
 foreach($results as $result)
+{	?>
+
+<form method="post" class="form-horizontal" enctype="multipart/form-data">
+<div class="form-group">
+<label class="col-sm-2 control-label">Product Title<span style="color:red">*</span></label>
+<div class="col-sm-4">
+<input type="text" name="title" class="form-control" value="<?php echo htmlentities($result->title)?>" required>
+</div>
+<label class="col-sm-2 control-label">Select Type<span style="color:red">*</span></label>
+<div class="col-sm-4">
+<select class="selectpicker" name="Type" required>
+<option value="<?php echo htmlentities($result->bid);?>"><?php echo htmlentities($bdname=$result->typename); ?> </option>
+<?php $ret="select id,typename from type";
+$query= $dbh -> prepare($ret);
+//$query->bindParam(':id',$id, PDO::PARAM_STR);
+$query-> execute();
+$resultss = $query -> fetchAll(PDO::FETCH_OBJ);
+if($query -> rowCount() > 0)
 {
+foreach($resultss as $results)
+{
+if($results->typename==$bdname)
+{
+continue;
+} else{
 ?>
+<option value="<?php echo htmlentities($results->id);?>"><?php echo htmlentities($results->typename);?></option>
+<?php }}} ?>
 
-<div class="panel-body">
-				<form method="GET" class="form-horizontal" enctype="multipart/form-data">
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Product Title<span style="color:red">*</span></label>
-						<div class="col-sm-4">
-							<input type="text" name="title" class="form-control" required>
-						</div>
-
-						<div class="hr-dashed"></div>
-						<div class="hr-dashed"></div>
-						<div class="hr-dashed"></div>
-
-						<label class="col-sm-2 control-label">Select type<span style="color:red">*</span></label>
-						<div class="col-sm-2">
-						<select class="selectpicker" name="producttype" required>
-						<option value=""> Select </option>
-						<?php $ret="select id,typename from type";
-						$query= $dbh -> prepare($ret);
-						//$query->bindParam(':id',$id, PDO::PARAM_STR);
-						$query-> execute();
-						$results = $query -> fetchAll(PDO::FETCH_OBJ);
-						if($query -> rowCount() > 0)
-						{
-						foreach($results as $result)
-						{
-						?>
-						<option value="<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->typename);?></option>
-						<?php }} ?>
-
-						</select>
-						</div>
-					</div>
-
-						<div class="hr-dashed"></div>
-						
-						<div class="form-group">
-						<label class="col-sm-2 control-label">Description<span style="color:red">*</span></label>
-							<div class="col-sm-10">
-							<textarea class="form-control" name="description" rows="3" required></textarea>
-							</div>
-						</div>
-
-						<div class="hr-dashed"></div>
-
-						<div class="form-group">
-						<label class="col-sm-2 control-label">Price in (RM)<span style="color:red">*</span></label>
-							<div class="col-sm-4">
-							<input type="text" name="price" class="form-control" required>
-							</div>
-						</div>
-
-						<div class="hr-dashed"></div>
-
-						<div class="form-group">
-							<div class="col-sm-12">
-							<h4><b>Upload Images</b></h4>
-							</div>
-						</div>
-
-
-						<div class="form-group">
-							<div class="col-sm-4">
-							Image 1 <span style="color:red">*</span><input type="file" name="img1" required>
-							</div>
-							<div class="col-sm-4">
-							Image 2<span style="color:red">*</span><input type="file" name="img2" required>
-							</div>
-							<div class="col-sm-4">
-							Image 3<span style="color:red">*</span><input type="file" name="img3" required>
-							</div>
-						</div>
-											<div class="hr-dashed"></div>
+</select>
+</div>
+</div>
 											
-											
-										<?php }} ?>
-								
-											
-											<div class="form-group">
-												<div class="col-sm-8 col-sm-offset-4">
-								
-													<button class="btn btn-primary" name="submit" type="submit">Submit</button>
-													<a href="../admin/manage_products.php">Back</a>
-													</form>
-												</div>
-											</div>
+<div class="hr-dashed"></div>
+<div class="form-group">
+<label class="col-sm-2 control-label">Description<span style="color:red">*</span></label>
+<div class="col-sm-10">
+<textarea class="form-control" name="description" rows="3" required><?php echo htmlentities($result->description);?></textarea>
+</div>
+</div>
 
-										</form>
+<div class="form-group">
+    <label class="col-sm-2 control-label">Price in (RM)<span style="color:red">*</span></label>
+    <div class="col-sm-4">
+    <input type="text" name="price" class="form-control" value="<?php echo htmlentities($result->price);?>" required>
+    </div>
+</div>
 
-									</div>
-								</div>
-							</div>
-							
-						</div>
-						
-					
+<div class="hr-dashed"></div>								
+<div class="form-group">
+    <div class="col-sm-12">
+    <h4><b>Product Images</b></h4>
+    </div>
+</div>
 
-					</div>
-				</div>
-				
-			
+
+<div class="form-group">
+    <div class="col-sm-4">
+        Image 1 <img src="../products/images/items/<?php echo htmlentities($result->Vimage1);?>" width="300" height="200" style="border:solid 1px #000">
+        <a href="changeimage1.php?imgid=<?php echo htmlentities($result->id)?>">Change Image 1</a>
+    </div>
+    <div class="col-sm-4">
+        Image 2<img src="../products/images/items/<?php echo htmlentities($result->Vimage2);?>" width="300" height="200" style="border:solid 1px #000">
+        <a href="changeimage2.php?imgid=<?php echo htmlentities($result->id)?>">Change Image 2</a>
+    </div>
+    <div class="col-sm-4">
+        Image 3<img src="../products/images/items/<?php echo htmlentities($result->Vimage3);?>" width="300" height="200" style="border:solid 1px #000">
+        <a href="changeimage3.php?imgid=<?php echo htmlentities($result->id)?>">Change Image 3</a>
+    </div>
+</div>
+
+<div class="hr-dashed"></div>									
+        </div>
+    </div>
+</div>
+</div>
+
+	<div class="form-group">
+		<div class="col-sm-8 col-sm-offset-2" >		
+		<button class="btn btn-primary" name="submit" type="submit" style="margin-top:4%">Save changes</button>
+		</div>
+	</div>
+
+</form>
 			</div>
 		</div>
 	</div>
+</div>
 
 	<!-- Loading Scripts -->
 	<script src="js/jquery.min.js"></script>
@@ -237,8 +207,8 @@ foreach($results as $result)
 	<script src="js/fileinput.js"></script>
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
-
 </body>
-
 </html>
+<?php } ?>
+<?php } ?>
 <?php } ?>
