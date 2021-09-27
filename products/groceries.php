@@ -18,7 +18,7 @@ session_start();
 <meta http-equiv="cache-control" content="max-age=604800" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>Zirconium - Fresh Products</title>
+<title>Zirconium - Groceries</title>
 
 <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
@@ -61,12 +61,12 @@ $(document).ready(function() {
 <!-- ========================= SECTION PAGETOP ========================= -->
 <section class="section-pagetop bg">
 <div class="container">
-	<h2 class="title-page">Fresh Products</h2>
+	<h2 class="title-page">Groceries</h2>
 	<nav>
 	<ol class="breadcrumb text-white">
 	    <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
 	    <li class="breadcrumb-item"><a href="../supermarket.php">Supermarket</a></li>
-	    <li class="breadcrumb-item active" aria-current="page">Fresh Products</li>
+	    <li class="breadcrumb-item active" aria-current="page">Groceries</li>
 	</ol>  
 	</nav>
 </div> <!-- container //  -->
@@ -232,7 +232,7 @@ $(document).ready(function() {
 		</div>
 </header><!-- sect-heading -->
 
-<?php $sql = "SELECT products.title,type.typename,type.id,products.price,products.id,products.description,products.Vimage1 from products join type on type.id=products.ptype WHERE type.id='4'";
+<?php $sql = "SELECT products.title,type.typename,type.id,products.price,products.id,products.description,products.Vimage1 from products join type on type.id=products.ptype WHERE type.id='2'";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);

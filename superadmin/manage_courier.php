@@ -7,27 +7,18 @@ if(strlen($_SESSION['alogin'])==0)
 header('location:index.php');
 }
 else{
-// Code for change password
-if(isset($_POST['submit']))
+if(isset($_GET['del']))
 {
-$membership=$_POST['membership'];
-$sql="INSERT INTO  membership(MembershipName) VALUES(:membership)";
+$id=$_GET['del'];
+$sql = "delete from courier  WHERE id=:id";
 $query = $dbh->prepare($sql);
-$query->bindParam(':membership',$membership,PDO::PARAM_STR);
-$query->execute();
-$lastInsertId = $dbh->lastInsertId();
-if($lastInsertId)
-{
-$msg="Membership created successfully";
-}
-else
-{
-$error="Something went wrong. Please try again";
-}
+$query -> bindParam(':id',$id, PDO::PARAM_STR);
+$query -> execute();
+$msg="Page data updated  successfully";
 }
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
 
 <head>
@@ -38,7 +29,7 @@ $error="Something went wrong. Please try again";
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
 
-	<title>Zirconium - Add Membership Type</title>
+	<title>Zirconium - Manage Courier</title>
 
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -74,46 +65,72 @@ $error="Something went wrong. Please try again";
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 }
 		</style>
+
 </head>
 
 <body>
 	<?php include('includes/header.php');?>
+
 	<div class="ts-main-content">
-	<?php include('includes/leftbar.php');?>
+		<?php include('includes/leftbar.php');?>
 		<div class="content-wrapper">
 			<div class="container-fluid">
 
 				<div class="row">
 					<div class="col-md-12">
 
-						<h2 class="page-title">Create Membership Type</h2>
-
-						<div class="row">
-							<div class="col-md-10">
-								<div class="panel panel-default">
-									<div class="panel-heading">Form fields</div>
-									<div class="panel-body">
-										<form method="post" name="chngpwd" class="form-horizontal" onSubmit="return valid();">
-
-  	        	  <?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php }
+						<h2 class="page-title">Manage Courier</h2>
+						<!-- Zero Configuration Table -->
+						<div class="panel panel-default">
+							<div class="panel-heading">Listed Couriers</div>
+							<div class="panel-body">
+							<?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php }
 				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
-											<div class="form-group">
-												<label class="col-sm-4 control-label">Membership Type Name</label>
-												<div class="col-sm-8">
-													<input type="text" class="form-control" name="membership" id="membership" required>
-												</div>
-											</div>
-											<div class="hr-dashed"></div>
+								<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+									<thead>
+										<tr>
+										<th>#</th>
+												<th>Courier Name</th>
+											<th>Creation Date</th>
+											<th>Updation date</th>
 
-											<div class="form-group">
-												<div class="col-sm-8 col-sm-offset-4">
-													<button class="btn btn-primary" name="submit" type="submit">Submit</button>
-												</div>
-											</div>
-										</form>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+										<th>#</th>
+											<th>Courier Name</th>
+											<th>Creation Date</th>
+											<th>Updation date</th>
+											<th>Action</th>
+										</tr>
+										</tr>
+									</tfoot>
+									<tbody>
 
-									</div>
-								</div>
+									<?php $sql = "SELECT * from courier ";
+$query = $dbh -> prepare($sql);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$cnt=1;
+if($query->rowCount() > 0)
+{
+foreach($results as $result)
+{				?>
+										<tr>
+											<td><?php echo htmlentities($cnt);?></td>
+											<td><?php echo htmlentities($result->name);?></td>
+											<td><?php echo htmlentities($result->CreationDate);?></td>
+											<td><?php echo htmlentities($result->UpdationDate);?></td>
+                                            <td><a href="edit_courier.php?id=<?php echo $result->id;?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+                                                <a href="manage_courier.php?del=<?php echo $result->id;?>" onclick="return confirm('Do you want to delete?');"><i class="fa fa-close"></i></a></td>
+										</tr>
+										<?php $cnt=$cnt+1; }} ?>
+
+									</tbody>
+								</table>
+
 							</div>
 						</div>
 					</div>
@@ -132,7 +149,6 @@ $error="Something went wrong. Please try again";
 	<script src="js/fileinput.js"></script>
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
-
 </body>
 </html>
 <?php } ?>

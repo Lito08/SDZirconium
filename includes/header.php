@@ -84,7 +84,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="../supermarket.php">Supermarket</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="supermarket.php">All Groceries</a>
+            <a class="dropdown-item" href="products/groceries.php">Groceries</a>
             <a class="dropdown-item" href="products/frozen.php">Frozen</a>
             <a class="dropdown-item" href="products/freshproducts.php">Fresh Products</a>
             <a class="dropdown-item" href="products/confectioneries.php">Confectioneries</a>

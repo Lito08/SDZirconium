@@ -3,27 +3,24 @@ session_start();
 error_reporting(0);
 include('includes/connection.php');
 if(strlen($_SESSION['alogin'])==0)
-	{
+	{	
 header('location:index.php');
 }
 else{
-// Code for change password
+// Code for change password	
 if(isset($_POST['submit']))
 {
-$membership=$_POST['membership'];
-$sql="INSERT INTO  membership(MembershipName) VALUES(:membership)";
+$courier=$_POST['courier'];
+$id=$_GET['id'];
+$sql="update courier set name=:courier where id=:id";
 $query = $dbh->prepare($sql);
-$query->bindParam(':membership',$membership,PDO::PARAM_STR);
+$query->bindParam(':courier',$courier,PDO::PARAM_STR);
+$query->bindParam(':id',$id,PDO::PARAM_STR);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
-if($lastInsertId)
-{
-$msg="Membership created successfully";
-}
-else
-{
-$error="Something went wrong. Please try again";
-}
+
+$msg="Courier type updated successfully";
+
 }
 ?>
 
@@ -37,8 +34,8 @@ $error="Something went wrong. Please try again";
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
-
-	<title>Zirconium - Add Membership Type</title>
+	
+	<title>Zirconium - Edit Courier</title>
 
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -74,6 +71,8 @@ $error="Something went wrong. Please try again";
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 }
 		</style>
+
+
 </head>
 
 <body>
@@ -85,8 +84,8 @@ $error="Something went wrong. Please try again";
 
 				<div class="row">
 					<div class="col-md-12">
-
-						<h2 class="page-title">Create Membership Type</h2>
+					
+						<h2 class="page-title">Edit Courier</h2>
 
 						<div class="row">
 							<div class="col-md-10">
@@ -94,30 +93,57 @@ $error="Something went wrong. Please try again";
 									<div class="panel-heading">Form fields</div>
 									<div class="panel-body">
 										<form method="post" name="chngpwd" class="form-horizontal" onSubmit="return valid();">
-
-  	        	  <?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php }
+										
+											
+  	        	  <?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } 
 				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
+
+<?php	
+$id=$_GET['id'];
+$ret="select * from courier where id=:id";
+$query= $dbh -> prepare($ret);
+$query->bindParam(':id',$id, PDO::PARAM_STR);
+$query-> execute();
+$results = $query -> fetchAll(PDO::FETCH_OBJ);
+$cnt=1;
+if($query -> rowCount() > 0)
+{
+foreach($results as $result)
+{
+?>
+
 											<div class="form-group">
-												<label class="col-sm-4 control-label">Membership Type Name</label>
+												<label class="col-sm-4 control-label">Courier Name</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control" name="membership" id="membership" required>
+													<input type="text" class="form-control" value="<?php echo htmlentities($result->MembershipName);?>" name="courier" id="courier" required>
 												</div>
 											</div>
 											<div class="hr-dashed"></div>
-
+											
+										<?php }} ?>
+								
+											
 											<div class="form-group">
 												<div class="col-sm-8 col-sm-offset-4">
+								
 													<button class="btn btn-primary" name="submit" type="submit">Submit</button>
 												</div>
 											</div>
+
 										</form>
 
 									</div>
 								</div>
 							</div>
+							
 						</div>
+						
+					
+
 					</div>
 				</div>
+				
+			
 			</div>
 		</div>
 	</div>
@@ -134,5 +160,6 @@ $error="Something went wrong. Please try again";
 	<script src="js/main.js"></script>
 
 </body>
+
 </html>
 <?php } ?>

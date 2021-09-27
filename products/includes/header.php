@@ -1,21 +1,5 @@
   
-<?php
-$user_id = $_SESSION['user_id'];
-$sql = "SELECT *FROM users WHERE user_id = '$user_id'; ";
-$result = mysqli_query($con, $sql);
-if(mysqli_num_rows($result) > 0)
-{
-	foreach($result as $row)
-	{
-		
-	}
-}
-else
-{
-	echo "no record found";
-}
 
-?>
 
 <header class="section-header">
 
@@ -103,7 +87,7 @@ else
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="../supermarket.php">Supermarket</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="../supermarket.php">All Groceries</a>
+            <a class="dropdown-item" href="groceries.php">Groceries</a>
             <a class="dropdown-item" href="frozen.php">Frozen</a>
             <a class="dropdown-item" href="freshproducts.php">Fresh Products</a>
             <a class="dropdown-item" href="confectioneries.php">Confectioneries</a>

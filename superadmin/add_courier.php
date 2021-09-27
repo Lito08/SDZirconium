@@ -10,15 +10,15 @@ else{
 // Code for change password
 if(isset($_POST['submit']))
 {
-$membership=$_POST['membership'];
-$sql="INSERT INTO  membership(MembershipName) VALUES(:membership)";
+$courier=$_POST['courier'];
+$sql="INSERT INTO  courier(name) VALUES(:courier)";
 $query = $dbh->prepare($sql);
-$query->bindParam(':membership',$membership,PDO::PARAM_STR);
+$query->bindParam(':courier',$courier,PDO::PARAM_STR);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)
 {
-$msg="Membership created successfully";
+$msg="Courier created successfully";
 }
 else
 {
@@ -38,7 +38,7 @@ $error="Something went wrong. Please try again";
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
 
-	<title>Zirconium - Add Membership Type</title>
+	<title>Zirconium - Add Courier</title>
 
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -86,7 +86,7 @@ $error="Something went wrong. Please try again";
 				<div class="row">
 					<div class="col-md-12">
 
-						<h2 class="page-title">Create Membership Type</h2>
+						<h2 class="page-title">Create Courier</h2>
 
 						<div class="row">
 							<div class="col-md-10">
@@ -98,9 +98,9 @@ $error="Something went wrong. Please try again";
   	        	  <?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php }
 				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
 											<div class="form-group">
-												<label class="col-sm-4 control-label">Membership Type Name</label>
+												<label class="col-sm-4 control-label">Courier Name</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control" name="membership" id="membership" required>
+													<input type="text" class="form-control" name="courier" id="courier" required>
 												</div>
 											</div>
 											<div class="hr-dashed"></div>

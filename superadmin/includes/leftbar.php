@@ -32,8 +32,8 @@
 </li>
 <li><a href="manage_products.php"><i class="fa fa-sitemap"></i>Courier</a>
 					<ul>
-						<li><a href="manage_products.php">Manage Courier</a></li>
-						<li><a href="reg-suppliers.php">Add Courier</a></li>
+						<li><a href="manage_courier.php">Manage Courier</a></li>
+						<li><a href="add_courier.php">Add Courier</a></li>
 					</ul>
 </li>
 

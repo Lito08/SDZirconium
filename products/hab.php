@@ -1,8 +1,11 @@
 <?php 
 session_start();
 
-    include("../connection.php");
+    include("includes/config.php");
     include("../functions.php");
+	include("../connection.php");
+
+	
 
 ?>
 
@@ -15,7 +18,7 @@ session_start();
 <meta http-equiv="cache-control" content="max-age=604800" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>Zirconium - Health & Beauty</title>
+<title>Zirconium - Frozen</title>
 
 <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
@@ -58,11 +61,12 @@ $(document).ready(function() {
 <!-- ========================= SECTION PAGETOP ========================= -->
 <section class="section-pagetop bg">
 <div class="container">
-	<h2 class="title-page">Health & Beauty</h2>
+	<h2 class="title-page">Frozen</h2>
 	<nav>
 	<ol class="breadcrumb text-white">
 	    <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
-	    <li class="breadcrumb-item active" aria-current="page">Health & Beauty</li>
+	    <li class="breadcrumb-item"><a href="../supermarket.php">Supermarket</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">Frozen</li>
 	</ol>  
 	</nav>
 </div> <!-- container //  -->
@@ -96,12 +100,8 @@ $(document).ready(function() {
 				</form>
 				
 				<ul class="list-menu">
-				<li><a href="#">Fish  </a></li>
-				<li><a href="#">Crab </a></li>
-				<li><a href="#">Lobster  </a></li>
-				<li><a href="#">Octopus  </a></li>
-				<li><a href="#">Abalone </a></li>
-				<li><a href="#">Oyster</a></li>
+				<li><a href="#">Snacks</a></li>
+				<li><a href="#">Drinks</a></li>
 				</ul>
 
 			</div> <!-- card-body.// -->
@@ -232,18 +232,28 @@ $(document).ready(function() {
 		</div>
 </header><!-- sect-heading -->
 
+<?php $sql = "SELECT products.title,type.typename,type.id,products.price,products.id,products.description,products.Vimage1 from products join type on type.id=products.ptype WHERE type.id='6'";
+$query = $dbh -> prepare($sql);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$cnt=1;
+if($query->rowCount() > 0)
+{
+foreach($results as $result)
+{
+?>
 
 <article class="card card-product-list">
 	<div class="row no-gutters">
 		<aside class="col-md-3">
-			<a href="#" class="img-wrap">
+			<a href="product_details.php?vhid=<?php echo htmlentities($result->id);?>" class="img-wrap">
 				<span class="badge badge-danger"> NEW </span>
-				<img src="images/items/frozen/salmon.jpg">
+				<img src="../superadmin/img/<?php echo htmlentities($result->Vimage1);?>">
 			</a>
 		</aside> <!-- col.// -->
 		<div class="col-md-6">
 			<div class="info-main">
-				<a href="frozen/salmon.php" class="h5 title"> Salmon King </a>
+				<a href="product_details.php?vhid=<?php echo htmlentities($result->id);?>" class="h5 title"><?php echo htmlentities($result->typename);?> , <?php echo htmlentities($result->title);?></a>
 				<div class="rating-wrap mb-3">
 					<ul class="rating-stars">
 						<li style="width:100%" class="stars-active"> 
@@ -260,19 +270,19 @@ $(document).ready(function() {
 					<div class="label-rating">10/10</div>
 				</div> <!-- rating-wrap.// -->
 				
-				<p> Many consider it to be the best salmon you can buy. High in fat, rich, and large in size, King salmon (also known as Chinook) is loaded with omega-3s. </p>
+				<p> <?php echo substr($result->description,0,70);?> </p>
 			</div> <!-- info-main.// -->
 		</div> <!-- col.// -->
 		<aside class="col-sm-3">
 			<div class="info-aside">
 				<div class="price-wrap">
-					<span class="price h5"> RM140 </span>	
-					<del class="price-old"> RM198</del>
+					<span class="price h5"> RM<?php echo htmlentities($result->price);?></span>	
+					<del class="price-old"> RM<?php echo htmlentities($result->price);?></del>
 				</div> <!-- info-price-detail // -->
 				<p class="text-success">Free shipping</p>
 				<br>
 				<p>
-					<a href="frozen/salmon.php" class="btn btn-primary btn-block"> Details </a>
+					<a href="product_details.php?vhid=<?php echo htmlentities($result->id);?>" class="btn btn-primary btn-block"> Details </a>
 					<a href="#" class="btn btn-light btn-block"><i class="fa fa-heart"></i> 
 						<span class="text">Add to wishlist</span>
 					</a>
@@ -282,144 +292,7 @@ $(document).ready(function() {
 	</div> <!-- row.// -->
 </article> <!-- card-product .// -->
 
-
-<article class="card card-product-list">
-	<div class="row no-gutters">
-		<aside class="col-md-3">
-			<a href="#" class="img-wrap"><img src="images/items/4.jpg"></a>
-		</aside> <!-- col.// -->
-		<div class="col-md-6">
-			<div class="info-main">
-				<a href="#" class="h5 title"> Great product name goes here  </a>
-				<div class="rating-wrap mb-3">
-					<ul class="rating-stars">
-						<li style="width:80%" class="stars-active"> 
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-							<i class="fa fa-star"></i> 
-						</li>
-						<li>
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-							<i class="fa fa-star"></i> 
-						</li>
-					</ul>
-					<div class="label-rating">7/10</div>
-				</div> <!-- rating-wrap.// -->
-				
-				<p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, Lorem ipsum dolor sit amet, consectetuer adipiscing elit, Ut wisi enim ad minim veniam </p>
-			</div> <!-- info-main.// -->
-		</div> <!-- col.// -->
-		<aside class="col-sm-3">
-			<div class="info-aside">
-				<div class="price-wrap">
-					<span class="price h5"> $56 </span>	
-					<del class="price-old"> $85</del>
-				</div> <!-- info-price-detail // -->
-				<p class="text-success">Free shipping</p>
-				<br>
-				<p>
-					<a href="#" class="btn btn-primary btn-block"> Details </a>
-					<a href="#" class="btn btn-light btn-block"><i class="fa fa-heart"></i> 
-						<span class="text">Add to wishlist</span></a>
-				</p>
-			</div> <!-- info-aside.// -->
-		</aside> <!-- col.// -->
-	</div> <!-- row.// -->
-</article> <!-- card-product .// -->
-
-<article class="card card-product-list">
-	<div class="row no-gutters">
-		<aside class="col-md-3">
-			<a href="#" class="img-wrap"><img src="images/items/5.jpg"></a>
-		</aside> <!-- col.// -->
-		<div class="col-md-6">
-			<div class="info-main">
-				<a href="#" class="h5 title"> Great product name goes here  </a>
-				<div class="rating-wrap mb-3">
-					<ul class="rating-stars">
-						<li style="width:80%" class="stars-active"> 
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-							<i class="fa fa-star"></i> 
-						</li>
-						<li>
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-							<i class="fa fa-star"></i> 
-						</li>
-					</ul>
-					<div class="label-rating">7/10</div>
-				</div> <!-- rating-wrap.// -->
-				
-				<p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, Lorem ipsum dolor sit amet, consectetuer adipiscing elit, Ut wisi enim ad minim veniam </p>
-			</div> <!-- info-main.// -->
-		</div> <!-- col.// -->
-		<aside class="col-sm-3">
-			<div class="info-aside">
-				<div class="price-wrap">
-					<span class="price h5"> $56.00 </span>	
-				</div> <!-- info-price-detail // -->
-				<p class="text-success">Free shipping</p>
-				<br>
-				<p>
-					<a href="#" class="btn btn-primary btn-block"> Details </a>
-					<a href="#" class="btn btn-light btn-block"><i class="fa fa-heart"></i> 
-						<span class="text">Add to wishlist</span>
-					</a>
-				</p>
-			</div> <!-- info-aside.// -->
-		</aside> <!-- col.// -->
-	</div> <!-- row.// -->
-</article> <!-- card-product .// -->
-
-<article class="card card-product-list">
-	<div class="row no-gutters">
-		<aside class="col-md-3">
-			<a href="#" class="img-wrap"><img src="images/items/6.jpg"></a>
-		</aside> <!-- col.// -->
-		<div class="col-md-6">
-			<div class="info-main">
-				<a href="#" class="h5 title"> Product name can be here  </a>
-				<div class="rating-wrap mb-3">
-					<ul class="rating-stars">
-						<li style="width:80%" class="stars-active"> 
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-							<i class="fa fa-star"></i> 
-						</li>
-						<li>
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-							<i class="fa fa-star"></i> <i class="fa fa-star"></i> 
-							<i class="fa fa-star"></i> 
-						</li>
-					</ul>
-					<div class="label-rating">7/10</div>
-				</div> <!-- rating-wrap.// -->
-				
-				<p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, Lorem ipsum dolor sit amet, consectetuer adipiscing elit, Ut wisi enim ad minim veniam </p>
-			</div> <!-- info-main.// -->
-		</div> <!-- col.// -->
-		<aside class="col-sm-3">
-			<div class="info-aside">
-				<div class="price-wrap">
-					<span class="price h5"> $62 </span>	
-				</div> <!-- info-price-detail // -->
-				<p class="text-success">Free shipping</p>
-				<br>
-				<p>
-					<a href="#" class="btn btn-primary btn-block"> Details </a>
-					<a href="#" class="btn btn-light btn-block"><i class="fa fa-heart"></i> 
-						<span class="text">Add to wishlist</span> 
-					</a>
-				</p>
-			</div> <!-- info-aside.// -->
-		</aside> <!-- col.// -->
-	</div> <!-- row.// -->
-</article> <!-- card-product .// -->
-
-
-
+<?php }}?>
 
 <nav aria-label="Page navigation sample">
   <ul class="pagination">
