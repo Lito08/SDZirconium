@@ -57,26 +57,14 @@ $(document).ready(function() {
 <!-- ========================= SECTION PAGETOP ========================= -->
 <section class="section-pagetop bg-primary">
 <div class="container">
-	<h2 class="title-page text-white">About Zirconium</h2>
+	<h2 class="title-page text-white">TERMS & CONDITIONS</h2>
 
 </div> <!-- container //  -->
 </section>
 <!-- ========================= SECTION INTRO END// ========================= -->
 
 <!-- ========================= SECTION CONTENT ========================= -->
-<section class="section-content padding-y">
-<div class="container">
 
-<header class="section-heading">
-<h2 class="section-title">What is Zirconium?</h2>
-</header><!-- sect-heading -->
-
-<p>Welcome to Zirconium. Zirconium is a platform that make basic needs buying among people within all range of age easier. Zirconium is a commitment to producing the easiest, fastest and genuine quality basic needs on everyone why using Zirconium is the best choice</p>
-
-<a href="javascript: history.back()" class="btn btn-light"> &laquo Go back</a>
-
-</div> <!-- container .//  -->
-</section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
 
 <!-- ========================= SECTION  ========================= -->
@@ -84,25 +72,24 @@ $(document).ready(function() {
 <div class="container">
 
 <header class="section-heading">
-<h2 class="section-title">Why choose Zirconium?</h2>
+<h2 class="section-title">Introduction</h2>
 <p class="lead">Life is easy why make it hard?</p>
+<br><br>
+<h2 class="section-title">Voucher</h2>
+<p class="lead">Life is easy why make it hard?</p>
+<br><br>
+<h2 class="section-title">Bills Payment</h2>
+<p class="lead">Life is easy why make it hard?</p>
+<br><br>
+<h2 class="section-title">Zirconium Payment</h2>
+<p class="lead">Life is easy why make it hard?</p>
+<br><br>
+<h2 class="section-title">Return Policy</h2>
+<p class="lead">Life is easy why make it hard?</p>
+
 </header><!-- sect-heading -->
 
-<div class="row">
-	<div class="col-md-4">
 
-	<p>At Zirconium, we believe that there is better way to do basic needs buying. A more valuable, less invasive way where customers are earned rather than bought. We are obssesively passionate about it, and our mission is to help people achieve it. We focus on search engine optimization.</p>
-
-	</article>
-	</div> <!-- col.// -->
-	<div class="col-md-4">
-		<p>
-		It is one of the least understood and least transparent aspects of great marketing. We see that as an opportunity. We are so excited to simplify the easy basic needs buying for everyone through our software, education and community.
-		</p>
-	</div> <!-- col.// -->
-	<div class="col-md-4">
-	</div> <!-- col.// -->
-</div> <!-- row.// -->
 
 </div><!-- container // -->
 </section>

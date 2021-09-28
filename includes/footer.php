@@ -15,11 +15,9 @@
 				<aside class="col-md col-6">
 					<h6 class="title">Company</h6>
 					<ul class="list-unstyled">
-						<li> <a href="#">About us</a></li>
-						<li> <a href="#">Career</a></li>
-						<li> <a href="#">Find a store</a></li>
-						<li> <a href="#">Terms & Conditions</a></li>
-						<li> <a href="#">Sitemap</a></li>
+						<li> <a href="aboutus.php">About us</a></li>
+						<li> <a href="faq.php">FAQ</a></li>
+						<li> <a href="tac.php">Terms & Conditions</a></li>
 					</ul>
 				</aside>
 				<aside class="col-md col-6">
