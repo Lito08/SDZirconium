@@ -61,12 +61,11 @@ $(document).ready(function() {
 <!-- ========================= SECTION PAGETOP ========================= -->
 <section class="section-pagetop bg">
 <div class="container">
-	<h2 class="title-page">Frozen</h2>
+	<h2 class="title-page">Health & Beauty</h2>
 	<nav>
 	<ol class="breadcrumb text-white">
 	    <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
-	    <li class="breadcrumb-item"><a href="../supermarket.php">Supermarket</a></li>
-	    <li class="breadcrumb-item active" aria-current="page">Frozen</li>
+	    <li class="breadcrumb-item active" aria-current="page">Health & Beauty</li>
 	</ol>  
 	</nav>
 </div> <!-- container //  -->
@@ -214,9 +213,17 @@ $(document).ready(function() {
 	</aside> <!-- col.// -->
 	<main class="col-md-9">
 
+<?php
+$sql ="SELECT id from products WHERE ptype='6' ";
+$query = $dbh -> prepare($sql);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$regusers=$query->rowCount();
+?>
+
 <header class="border-bottom mb-4 pb-3">
 		<div class="form-inline">
-			<span class="mr-md-auto">32 Items found </span>
+			<span class="mr-md-auto"><?php echo htmlentities($regusers);?> Items found </span>
 			<select class="mr-2 form-control">
 				<option>Latest items</option>
 				<option>Trending</option>

@@ -214,9 +214,17 @@ $(document).ready(function() {
 	</aside> <!-- col.// -->
 	<main class="col-md-9">
 
+	<?php
+$sql ="SELECT id from products WHERE ptype='5' ";
+$query = $dbh -> prepare($sql);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$regusers=$query->rowCount();
+?>
+
 <header class="border-bottom mb-4 pb-3">
 		<div class="form-inline">
-			<span class="mr-md-auto">32 Items found </span>
+			<span class="mr-md-auto"><?php echo htmlentities($regusers);?> Items found </span>
 			<select class="mr-2 form-control">
 				<option>Latest items</option>
 				<option>Trending</option>
@@ -231,7 +239,6 @@ $(document).ready(function() {
 			</div>
 		</div>
 </header><!-- sect-heading -->
-
 <?php $sql = "SELECT products.title,type.typename,type.id,products.price,products.id,products.description,products.Vimage1 from products join type on type.id=products.ptype WHERE type.id='5'";
 $query = $dbh -> prepare($sql);
 $query->execute();
