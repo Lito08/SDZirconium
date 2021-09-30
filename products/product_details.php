@@ -11,7 +11,7 @@ $userid=$_POST['userid'];
 $useremail=$_SESSION['user_id'];
 $status=0;
 $vhid=$_GET['vhid'];
-$sql="INSERT INTO  cart(cart_id,user_id,userEmail,item_id,Status) VALUES(:cartid,:userid,:useremail,:vhid,:status)";
+$sql="INSERT INTO cart(cart_id,user_id,userEmail,item_id,Status) VALUES(:cartid,:userid,:useremail,:vhid,:status)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':cartid',$cartid,PDO::PARAM_STR);
 $query->bindParam(':userid',$userid,PDO::PARAM_STR);

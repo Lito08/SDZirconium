@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2021 at 11:06 AM
+-- Generation Time: Sep 30, 2021 at 08:23 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -44,6 +44,20 @@ INSERT INTO `admin` (`id`, `UserName`, `Password`, `updationDate`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `cart_id` bigint(20) NOT NULL,
+  `user_id` int(20) NOT NULL,
+  `item_id` int(20) NOT NULL,
+  `userEmail` varchar(120) DEFAULT NULL,
+  `quantity` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `contactusquery`
 --
 
@@ -78,7 +92,8 @@ CREATE TABLE `courier` (
 INSERT INTO `courier` (`id`, `name`, `parcel`, `CreationDate`, `UpdationDate`) VALUES
 (2, 'J&T', 0, '2021-09-27 08:48:17', NULL),
 (3, 'DHL', 0, '2021-09-27 08:50:11', NULL),
-(4, 'Grab', 0, '2021-09-27 08:50:19', NULL);
+(4, 'Grab', 0, '2021-09-27 08:50:19', NULL),
+(5, 'Poslaju', 0, '2021-09-27 13:22:39', NULL);
 
 -- --------------------------------------------------------
 
@@ -110,7 +125,7 @@ CREATE TABLE `products` (
   `id` bigint(20) NOT NULL,
   `ptype` varchar(120) NOT NULL,
   `title` varchar(120) NOT NULL,
-  `price` decimal(10,3) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
   `quantity` int(120) NOT NULL,
   `brand` varchar(120) NOT NULL,
   `description` varchar(255) NOT NULL,
@@ -128,10 +143,11 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `ptype`, `title`, `price`, `quantity`, `brand`, `description`, `ribbon`, `Vimage1`, `Vimage2`, `Vimage3`, `delivery`, `date`, `pid`) VALUES
-(2, '1', 'Oyster', '169.000', 0, '', 'Best oyster that lito loves to eat', '', 'oyster1.jpg', 'oyster2.jpg', 'oyster3.jpeg', '', '2021-09-26 21:06:35', 0),
-(3, '1', 'Salmon King', '140.000', 0, '', 'The best salmon in the world that came from New Zealand.', '', 'salmon.jpg', 'salmon1.jpg', 'salmon2.jpg', '', '2021-09-26 21:58:38', 0),
-(4, '1', 'King Crab', '200.000', 0, '', 'Big juicy tender crab that is very soft when bite into. ', '', 'kc1.jpg', 'kc2.jpg', 'kc3.jpg', '', '2021-09-26 22:01:33', 0),
-(5, '7', 'Iphone 13', '4889.000', 0, '', 'Very expensive and not worth it.', '', 'iphone13.jpg', 'iphone13two.png', 'iphone13three.png', '', '2021-09-27 08:54:04', 0);
+(2, '1', 'Oyster', '169.00', 0, '', 'Best oyster that lito loves to eat', '', 'oyster1.jpg', 'oyster2.jpg', 'oyster3.jpeg', '', '2021-09-26 21:06:35', 0),
+(3, '1', 'Salmon King', '140.00', 0, '', 'The best salmon in the world that came from New Zealand.', '', 'salmon.jpg', 'salmon1.jpg', 'salmon2.jpg', '', '2021-09-26 21:58:38', 0),
+(4, '1', 'King Crab', '200.00', 0, '', 'Big juicy tender crab that is very soft when bite into. ', '', 'kc1.jpg', 'kc2.jpg', 'kc3.jpg', '', '2021-09-26 22:01:33', 0),
+(5, '7', 'Iphone 13', '4889.00', 0, '', 'Very expensive and not worth it.', '', 'iphone13.jpg', 'iphone13two.png', 'iphone13three.png', '', '2021-09-27 08:54:04', 0),
+(6, '4', 'Pig', '99999999.99', 0, '', 'Oink oink', '', 'pp.jpg', 'pp2.jpg', 'pp3.jpg', '', '2021-09-27 13:24:46', 0);
 
 -- --------------------------------------------------------
 
@@ -219,7 +235,8 @@ INSERT INTO `users` (`id`, `user_id`, `user_name`, `email`, `password`, `date`, 
 (10, 4366481086090, 'danielyusoff08', 'danielyusoff08@gmail.com', 'Dy081201', '2021-09-12 06:15:21', 'Daniel Yusoff', 'Malaysia', 'Kuala Lumpur', 'male'),
 (11, 88281811861, 'lit0', 'danielyusoff081201@gmail.com', 'Dy081201', '2021-09-12 07:30:43', 'Daniel Yusoff', 'Malaysia', 'Kuala Lumpur', 'male'),
 (12, 50567253012, 'fareesnazmi', 'fareesnazmi2@gmail.com', 'olive3881', '2021-09-12 17:17:37', 'FAREES NAZMI', 'Malaysia', 'SHAH ALAM', 'male'),
-(13, 9223372036854775807, 'yeens', 'ultrashaheen@gmail.com', 'kosong1234', '2021-09-13 05:13:27', 'ahmad shaheen yazid', 'Indoneisa', 'muar', 'female');
+(13, 9223372036854775807, 'yeens', 'ultrashaheen@gmail.com', 'kosong1234', '2021-09-13 05:13:27', 'ahmad shaheen yazid', 'Indoneisa', 'muar', 'female'),
+(16, 5167606861003116, 'dickson', 'dickson@gmail.com', 'Dy081201', '2021-09-27 13:17:55', 'Dickson', 'Malaysia', 'Kuala Lumpur', 'female');
 
 --
 -- Indexes for dumped tables
@@ -230,6 +247,12 @@ INSERT INTO `users` (`id`, `user_id`, `user_name`, `email`, `password`, `date`, 
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cart_id`);
 
 --
 -- Indexes for table `contactusquery`
@@ -292,6 +315,12 @@ ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `cart_id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `contactusquery`
 --
 ALTER TABLE `contactusquery`
@@ -301,7 +330,7 @@ ALTER TABLE `contactusquery`
 -- AUTO_INCREMENT for table `courier`
 --
 ALTER TABLE `courier`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `membership`
@@ -313,7 +342,7 @@ ALTER TABLE `membership`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `supplier`
@@ -331,7 +360,7 @@ ALTER TABLE `type`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

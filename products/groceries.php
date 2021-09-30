@@ -261,7 +261,7 @@ foreach($results as $result)
 		</aside> <!-- col.// -->
 		<div class="col-md-6">
 			<div class="info-main">
-				<a href="product_details.php?vhid=<?php echo htmlentities($result->id);?>" class="h5 title"><?php echo htmlentities($result->typename);?> , <?php echo htmlentities($result->title);?></a>
+				<a href="product_details.php?vhid=<?php echo htmlentities($result->id);?>" class="h5 title"> <?php echo htmlentities($result->title);?></a>
 				<div class="rating-wrap mb-3">
 					<ul class="rating-stars">
 						<li style="width:100%" class="stars-active"> 
