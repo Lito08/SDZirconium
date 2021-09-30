@@ -1,28 +1,28 @@
 <?php
 session_start();
-include('../includes/connection.php');
+include("includes/config.php");
+include("../functions.php");
+include("../connection.php");
 error_reporting(0);
 if(isset($_POST['submit']))
 {
-$fromdate=$_POST['fromdate'];
-$todate=$_POST['todate'];
-$message=$_POST['message'];
-$useremail=$_SESSION['login'];
+$cartid=$_POST['cartid'];
+$userid=$_POST['userid'];
+$useremail=$_SESSION['user_id'];
 $status=0;
 $vhid=$_GET['vhid'];
-$sql="INSERT INTO  tblbooking(userEmail,VehicleId,FromDate,ToDate,message,Status) VALUES(:useremail,:vhid,:fromdate,:todate,:message,:status)";
+$sql="INSERT INTO  cart(cart_id,user_id,userEmail,item_id,Status) VALUES(:cartid,:userid,:useremail,:vhid,:status)";
 $query = $dbh->prepare($sql);
+$query->bindParam(':cartid',$cartid,PDO::PARAM_STR);
+$query->bindParam(':userid',$userid,PDO::PARAM_STR);
 $query->bindParam(':useremail',$useremail,PDO::PARAM_STR);
 $query->bindParam(':vhid',$vhid,PDO::PARAM_STR);
-$query->bindParam(':fromdate',$fromdate,PDO::PARAM_STR);
-$query->bindParam(':todate',$todate,PDO::PARAM_STR);
-$query->bindParam(':message',$message,PDO::PARAM_STR);
 $query->bindParam(':status',$status,PDO::PARAM_STR);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)
 {
-echo "<script>alert('Booking successfull.');</script>";
+echo "<script>alert('Product has been added to shopping cart.');</script>";
 }
 else
 {
@@ -41,7 +41,7 @@ echo "<script>alert('Something went wrong. Please try again');</script>";
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="Bootstrap-ecommerce by Vosidiy M.">
 
-<title>Zirconium - Salmon King</title>
+<title>Zirconium - Product Details</title>
 
 <!-- jQuery -->
 <script src="../js/jquery-2.0.0.min.js" type="text/javascript"></script>
@@ -92,11 +92,11 @@ $_SESSION['brndid']=$result->bid;
 		<aside class="col-md-6">
 <article class="gallery-wrap"> 
 	<div class="img-big-wrap">
-	   <a href="../images/items/frozen/salmon.jpg"><img src="../images/items/<?php echo htmlentities($result->Vimage1);?>"></a>
+	   <a href="../images/items/frozen/salmon.jpg"><img src="../superadmin/img/<?php echo htmlentities($result->Vimage1);?>"></a>
 	</div> <!-- img-big-wrap.// -->
 	<div class="thumbs-wrap">
-	  <a href="../images/items/frozen/salmon1.jpg" class="item-thumb"> <img src="../images/items/<?php echo htmlentities($result->Vimage2);?>"></a>
-	  <a href="../images/items/frozen/salmon2.jpg" class="item-thumb"> <img src="../images/items/<?php echo htmlentities($result->Vimage3);?>"></a>
+	  <a href="../images/items/frozen/salmon1.jpg" class="item-thumb"> <img src="../superadmin/img/<?php echo htmlentities($result->Vimage2);?>"></a>
+	  <a href="../images/items/frozen/salmon2.jpg" class="item-thumb"> <img src="../superadmin/img/<?php echo htmlentities($result->Vimage3);?>"></a>
 	</div> <!-- thumbs-wrap.// -->
 </article> <!-- gallery-wrap .end// -->
 		</aside>
@@ -120,7 +120,7 @@ $_SESSION['brndid']=$result->bid;
 
 <div class="mb-3"> 
 	<var class="price h4">RM<?php echo htmlentities($result->price);?></var> 
-	<span class="text-muted">/per kg</span> 
+	<span class="text-muted">/per product</span> 
 </div> 
 
 <p> <?php echo htmlentities($result->description);?> </p>
@@ -169,25 +169,28 @@ $_SESSION['brndid']=$result->bid;
 					</label>
 
 				</div>
+				<?php }} ?>
 		</div> <!-- col.// -->
 	</div> <!-- row.// -->
-    <?php if($_SESSION['login'])
+    <?php if($_SESSION['user_id'])
     {?>
 	<a href="#" class="btn  btn-primary"> Buy now </a>
-	<a href="#" class="btn  btn-outline-primary"> <span class="text" name="submit">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
+	<a href="#" class="btn  btn-outline-primary"> <span class="text" type="submit" name="submit">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
     <?php } else { ?>
         <a href="../login.php" class="btn  btn-primary">Login to buy</a>
     <?php } ?>
+	
 </article> <!-- product-info-aside .// -->
 		</main> <!-- col.// -->
 	</div> <!-- row.// -->
 </div> <!-- card.// -->
+</section>
 <!-- ============================ COMPONENT 1 END .// ================================= -->
 
 <!-- ========================= SIMILAR PRODUCTS ========================= -->
+<section class="section-content padding-y bg">
 <div class="container">
-      <h3>Similar Products</h3>
-      <div class="row">
+    <h3>Similar Products</h3>
 <?php
 $bid=$_SESSION['brndid'];
 $sql="SELECT products.title,type.typename,products.price,products.id,products.description,products.Vimage1 from products join type on type.id=products.ptype where products.ptype=:bid";
@@ -200,21 +203,24 @@ if($query->rowCount() > 0)
 {
 foreach($results as $result)
 { ?>
-        <div class="col-md-3 grid_listing">
-          <div class="product-listing-m gray-bg">
-            <div class="product-listing-img"> <a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>"><img src="admin/img/vehicleimages/<?php echo htmlentities($result->Vimage1);?>" class="img-responsive" alt="image" /> </a>
-            </div>
-            <div class="product-listing-content">
-              <h5><a href="product_details.php?vhid=<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->typename);?> , <?php echo htmlentities($result->title);?></a></h5>
-              <p class="list-price">RM<?php echo htmlentities($result->price);?></p>
-            </div>
-          </div>
-        </div>
- <?php }} ?>
 
+<div class="card card-body">
+	<div class="row">
+		<div class="col-md-3">
+			<figure class="itemside mb-4">
+				<div class="aside"><a href="product_details.php?vhid=<?php echo htmlentities($result->id);?>"><img src="../superadmin/img/<?php echo htmlentities($result->Vimage1);?>" class="img-sm"></div>
+				<figcaption class="info align-self-center">
+					<a href="product_details.php?vhid=<?php echo htmlentities($result->id);?>" class="title"><?php echo htmlentities($result->title);?></a>
+					<strong class="price">RM<?php echo htmlentities($result->price);?></strong>
+					<a href="#" class="btn btn-outline-primary btn-sm"> Add to cart 
+						<i class="fa fa-shopping-cart"></i> 
+					</a>
+				</figcaption>
+			</figure>
+		</div> <!-- col.// -->
       </div>
     </div>
-
+<?php }} ?>
 
 </div> <!-- container .//  -->
 </section>

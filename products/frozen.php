@@ -293,9 +293,8 @@ foreach($results as $result)
 				<br>
 				<p>
 					<a href="product_details.php?vhid=<?php echo htmlentities($result->id);?>" class="btn btn-primary btn-block"> Details </a>
-					<a href="#" class="btn btn-light btn-block"><i class="fa fa-heart"></i> 
-						<span class="text">Add to wishlist</span>
-					</a>
+					<br>
+					<button class="btn btn-secondary btn-block" name="submit" type="submit"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i> </button>
 				</p>
 			</div> <!-- info-aside.// -->
 		</aside> <!-- col.// -->
