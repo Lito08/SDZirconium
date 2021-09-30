@@ -136,8 +136,10 @@ foreach($results as $result)
 											<td><?php echo htmlentities($result->city);?></td>
 											<td><?php echo htmlentities($result->gender);?></td>
 											<td><?php echo htmlentities($result->date);?></td>
-<td><a href="edit-users.php?id=<?php echo $result->id;?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
-<a href="reg-users.php?del=<?php echo $result->id;?>" onclick="return confirm('Do you want to delete');"><i class="fa fa-close"></i></a></td>
+
+											<td><a href="edit-users.php?id=<?php echo $result->id;?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+											<a href="reg-users.php?del=<?php echo $result->id;?>" onclick="return confirm('Do you want to delete');"><i class="fa fa-close"></i></a></td>
+											
 										</tr>
 										<?php $cnt=$cnt+1; }} ?>
 									</tbody>
