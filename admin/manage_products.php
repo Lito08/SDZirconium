@@ -1,7 +1,11 @@
 <?php
 session_start();
 error_reporting(0);
-include('includes/connection.php');
+
+include("includes/config.php");
+include("includes/connection.php");
+include("includes/functions.php");
+
 if(strlen($_SESSION['alogin'])==0)
 {
 header('location:dashboard.php');
@@ -10,11 +14,11 @@ else{
 if(isset($_GET['del']))
 {
 $id=$_GET['del'];
-$sql = "DELETE from users WHERE id=:id";
+$sql = "delete from users WHERE id=:id";
 $query = $dbh->prepare($sql);
 $query -> bindParam(':id',$id, PDO::PARAM_STR);
 $query -> execute();
-$msg="Page data updated successfully";
+$msg="Page data updated  successfully";
 }
  ?>
 
@@ -83,7 +87,7 @@ $msg="Page data updated successfully";
 							<div class="panel-heading">List of products</div>
 							<div class="panel-body">
 							<?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php }
-				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
+							else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
 								<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 									<thead>
 										<tr>
@@ -124,8 +128,9 @@ foreach($results as $result)
 											<td><?php echo htmlentities($result->brand);?></td>
 											<td><?php echo htmlentities($result->ribbon);?></td>
 											<td><?php echo htmlentities($result->date);?></td>
-<td><a href="edit_products.php?id=<?php echo $result->id;?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
-<a href="manage_products.php?del=<?php echo $result->id;?>" onclick="return confirm('Do you want to delete');"><i class="fa fa-close"></i></a></td>
+
+											<td><a href="edit_products.php?id=<?php echo $result->id;?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+											<a href="manage_products.php?del=<?php echo $result->id;?>" onclick="return confirm('Do you want to delete');"><i class="fa fa-close"></i></a></td>
 										</tr>
 										<?php $cnt=$cnt+1; }} ?>
 									</tbody>

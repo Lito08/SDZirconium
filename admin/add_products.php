@@ -1,7 +1,9 @@
 <?php
 session_start();
 error_reporting(0);
-include('includes/connection.php');
+include("includes/config.php");
+include("includes/connection.php");
+include("includes/functions.php");
 if(strlen($_SESSION['alogin'])==0)
 	{
 header('location:index.php');
@@ -17,9 +19,9 @@ $price=$_POST['price'];
 $vimage1=$_FILES["img1"]["name"];
 $vimage2=$_FILES["img2"]["name"];
 $vimage3=$_FILES["img3"]["name"];
-move_uploaded_file($_FILES["img1"]["tmp_name"],"img/vehicleimages/".$_FILES["img1"]["name"]);
-move_uploaded_file($_FILES["img2"]["tmp_name"],"img/vehicleimages/".$_FILES["img2"]["name"]);
-move_uploaded_file($_FILES["img3"]["tmp_name"],"img/vehicleimages/".$_FILES["img3"]["name"]);
+move_uploaded_file($_FILES["img1"]["tmp_name"],"img/".$_FILES["img1"]["name"]);
+move_uploaded_file($_FILES["img2"]["tmp_name"],"img/".$_FILES["img2"]["name"]);
+move_uploaded_file($_FILES["img3"]["tmp_name"],"img/".$_FILES["img3"]["name"]);
 
 $sql="INSERT INTO products(title,ptype,description,price,Vimage1,Vimage2,Vimage3) VALUES(:title,:producttype,:description,:price,:vimage1,:vimage2,:vimage3)";
 $query = $dbh->prepare($sql);

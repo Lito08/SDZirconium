@@ -72,22 +72,22 @@ $(document).ready(function() {
 <div class="container">
 
 <header class="section-heading">
-<h2 class="section-title">1. What is zirconium?</h2>
+<h3 class="section-title">1. What is zirconium?</h3>
 <p class="lead">Zirconium is a platform for user to buy basic needs.</p>
-<br><br>
-<h2 class="section-title">2. What payment method can i use?</h2>
+<br>
+<h3 class="section-title">2. What payment method can i use?</h3>
 <p class="lead">You can make your payment using online banking or pay using your credit cards</p>
-<br><br>
-<h2 class="section-title">3. What are delivery charges?</h2>
+<br>
+<h3 class="section-title">3. What are delivery charges?</h3>
 <p class="lead"> Delivery charges are dependent on the shipment requirements. If the products on your order are due to special requirements (for example dry ice) extra fee will be added to the shipment charges. You can see the shipping fees on the checkout process before the payment is made</p>
-<br><br>
-<h2 class="section-title">4. Can I return a product?</h2>
+<br>
+<h3 class="section-title">4. Can I return a product?</h3>
 <p class="lead">Yes you can return product within 7 or 14 days.</p>
-<br><br>
-<h2 class="section-title">5. Do you have the product in stock?</h2>
+<br>
+<h3 class="section-title">5. Do you have the product in stock?</h3>
 <p class="lead">All the products which are shown on our site are available. Order lead time depends on the products and quantities.</p>
-<br><br>
-<h2 class="section-title">6. What should I do if the payment is not accepted?</h2>
+<br>
+<h3 class="section-title">6. What should I do if the payment is not accepted?</h3>
 <p class="lead">Please try again in a little while. If the payment is still not accepted, please verify your account balance. If everything is as it should, but you still can't make the payment, please contact zirconium@gmail.com or call us at +60 13-317-4100 notify us about the problem. We can manage the order manually</p>
 </header><!-- sect-heading -->
 

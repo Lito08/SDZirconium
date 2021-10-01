@@ -8,7 +8,7 @@ session_start();
     {
         //something was posted
         $user_name = $_POST['user_name'];
-        $password = $_POST['password'];
+        $password=md5($_POST['password']);
 		$city = $_POST['city'];
 		$country = $_POST['country'];
 		$gender = $_POST['gender'];
@@ -46,7 +46,7 @@ session_start();
 
 <title>Zirconium - Sign Up</title>
 
-<link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<link href="images/logos/Logo.png" rel="shortcut icon" type="image/x-icon">
 
 <!-- jQuery -->
 <script src="js/jquery-2.0.0.min.js" type="text/javascript"></script>
@@ -85,8 +85,8 @@ $(document).ready(function() {
 	<div class="container">
 <div class="row align-items-center">
 	<div class="col-lg-2 col-4">
-		<a href="http://bootstrap-ecommerce.com" class="brand-wrap">
-			<img class="logo" src="images/logo.png">
+		<a href="index.php" class="brand-wrap">
+			<img class="logo" src="images/logos/Logo.png">
 		</a> <!-- brand-wrap.// -->
 	</div>
 	<div class="col-lg-6 col-sm-12">
@@ -108,12 +108,11 @@ $(document).ready(function() {
 				<span class="badge badge-pill badge-danger notify">0</span>
 			</div>
 			<div class="widget-header icontext">
-				<a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
 				<div class="text">
 					<span class="text-muted">Welcome!</span>
 					<div> 
-						<a href="#">Sign in</a> |  
-						<a href="#"> Register</a>
+						<a href="login.php">Sign in</a> |  
+						<a href="signup.php"> Register</a>
 					</div>
 				</div>
 			</div>
@@ -210,6 +209,9 @@ $(document).ready(function() {
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
 
+<br><br><br><br>
+<br><br><br><br>
+<br>
 
 <!-- ========================= FOOTER ========================= -->
 <footer class="section-footer border-top padding-y">

@@ -30,8 +30,15 @@
 	<div class="col-lg-4 col-sm-6 col-12">
 		<div class="widgets-wrap float-md-right">
 			<div class="widget-header  mr-3">
-				<a href="../shoppingcart.php" class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></a>
-				<span class="badge badge-pill badge-danger notify">0</span>
+      <?php
+        if (isset($_SESSION["user_id"])) {
+				echo "<a href='../shoppingcart.php' class='icon icon-sm rounded-circle border'><i class='fa fa-shopping-cart'></i></a>
+				<span class='badge badge-pill badge-danger notify'>0</span>";
+      }else{
+        echo "<a href='../login.php' class='icon icon-sm rounded-circle border'><i class='fa fa-shopping-cart'></i></a>
+                <span class='badge badge-pill badge-danger notify'>0</span>";
+      }
+      ?>
 			</div>
 			<div class="widget-header icontext">
       <?php
@@ -77,9 +84,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="../aboutus.php">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../memberships.php">Memberships</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Promotions</a>

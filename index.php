@@ -1,6 +1,8 @@
 <?php 
 session_start();
 
+	include('products/includes/config.php');
+	include('includes/config.php');
     include("connection.php");
     include("functions.php");
 
@@ -14,7 +16,7 @@ session_start();
 <meta http-equiv="cache-control" content="max-age=604800" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>Zirconium</title>
+<title>Zirconium - Home</title>
 
 <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
@@ -50,7 +52,7 @@ $(document).ready(function() {
 <body>
 
 <!-- ========================= HEADER  ========================= -->
-	<?php include('includes/header.php') ?>
+<?php include('includes/header.php') ?>
 
 
 <!-- ========================= SECTION MAIN ========================= -->
@@ -61,18 +63,18 @@ $(document).ready(function() {
 	<aside class="col-md-3">
 		<nav class="card">
 			<ul class="menu-category">
-				<li><a href="#">Best Clothes</a></li>
-				<li><a href="supermarket.php">Fresh Groceries</a></li>
-				<li><a href="#">Health & Beauty</a></li>
-				<li><a href="#">Appliances</a></li>
-				<li><a href="#">Promotions</a></li>
-				<li><a href="#">Digital goods</a></li>
-				<li class="has-submenu"><a href="#">Brands</a>
+				<li><a href="products/sports.php">Sports & Lifestyle</a></li>
+				<li><a href="products/hab.php">Health & Beauty</a></li>
+				<li><a href="products/appliances.php">Appliances</a></li>
+				<li><a href="products/electronics">Electronics</a></li>
+				<li><a href="products/babies.php">Babies & Toys</a></li>
+				<li><a href="products/automotive.php">Automotive & Motorcycles</a></li>
+				<li class="has-submenu"><a href="">Others</a>
 					<ul class="submenu">
-						<li><a href="#">Submenu name</a></li>
-						<li><a href="#">Great submenu</a></li>
-						<li><a href="#">Another menu</a></li>
-						<li><a href="#">Some others</a></li>
+						<li><a href="products/groceries.php">Groceries</a></li>
+						<li><a href="products/frozen.php">Frozen</a></li>
+						<li><a href="products/freshproducts.php">Fresh Products</a></li>
+						<li><a href="products/confectioneries.php">Confectioneries</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -93,84 +95,33 @@ $(document).ready(function() {
 <div class="container">
 
 <header class="section-heading">
-	<a href="#" class="btn btn-outline-primary float-right">See all</a>
+	<a href="all_products.php" class="btn btn-outline-primary float-right">See all</a>
 	<h3 class="section-title">Popular products</h3>
 </header><!-- sect-heading -->
 
-	
+
 <div class="row">
+<?php 
+$sql = "SELECT products.title,type.typename,type.id,products.price,products.id,products.description,products.Vimage1 from products join type on type.id=products.ptype";
+$query = $dbh -> prepare($sql);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$cnt=1;
+if($query->rowCount() > 0)
+{
+foreach($results as $result)
+{
+?>	
 	<div class="col-md-3">
-		<div href="#" class="card card-product-grid">
-			<a href="#" class="img-wrap"> <img src="images/items/1.jpg"> </a>
+		<div href="products/product_details.php?vhid=<?php echo htmlentities($result->id);?>" class="card card-product-grid">
+			<a href="products/product_details.php?vhid=<?php echo htmlentities($result->id);?>" class="img-wrap"> <img src="superadmin/img/<?php echo htmlentities($result->Vimage1);?>"> </a>
 			<figcaption class="info-wrap">
-				<a href="#" class="title">Just another product name</a>
-				<div class="price mt-1">RM179.00</div> <!-- price-wrap.// -->
+				<a href="products/product_details.php?vhid=<?php echo htmlentities($result->id);?>" class="title"><?php echo htmlentities($result->title);?></a>
+				<div class="price mt-1">RM<?php echo htmlentities($result->price);?></div> <!-- price-wrap.// -->
 			</figcaption>
 		</div>
 	</div> <!-- col.// -->
-	<div class="col-md-3">
-		<div href="#" class="card card-product-grid">
-			<a href="#" class="img-wrap"> <img src="images/items/2.jpg"> </a>
-			<figcaption class="info-wrap">
-				<a href="#" class="title">Some item name here</a>
-				<div class="price mt-1">RM280.00</div> <!-- price-wrap.// -->
-			</figcaption>
-		</div>
-	</div> <!-- col.// -->
-	<div class="col-md-3">
-		<div href="#" class="card card-product-grid">
-			<a href="#" class="img-wrap"> <img src="images/items/3.jpg"> </a>
-			<figcaption class="info-wrap">
-				<a href="#" class="title">Great product name here</a>
-				<div class="price mt-1">RM56.00</div> <!-- price-wrap.// -->
-			</figcaption>
-		</div>
-	</div> <!-- col.// -->
-	<div class="col-md-3">
-		<div href="#" class="card card-product-grid">
-			<a href="#" class="img-wrap"> <img src="images/items/4.jpg"> </a>
-			<figcaption class="info-wrap">
-				<a href="#" class="title">Just another product name</a>
-				<div class="price mt-1">RM179.00</div> <!-- price-wrap.// -->
-			</figcaption>
-		</div>
-	</div> <!-- col.// -->
-	<div class="col-md-3">
-		<div href="#" class="card card-product-grid">
-			<a href="#" class="img-wrap"> <img src="images/items/5.jpg"> </a>
-			<figcaption class="info-wrap">
-				<a href="#" class="title">Just another product name</a>
-				<div class="price mt-1">RM179.00</div> <!-- price-wrap.// -->
-			</figcaption>
-		</div>
-	</div> <!-- col.// -->
-	<div class="col-md-3">
-		<div href="#" class="card card-product-grid">
-			<a href="#" class="img-wrap"> <img src="images/items/6.jpg"> </a>
-			<figcaption class="info-wrap">
-				<a href="#" class="title">Some item name here</a>
-				<div class="price mt-1">RM280.00</div> <!-- price-wrap.// -->
-			</figcaption>
-		</div>
-	</div> <!-- col.// -->
-	<div class="col-md-3">
-		<div href="#" class="card card-product-grid">
-			<a href="#" class="img-wrap"> <img src="images/items/7.jpg"> </a>
-			<figcaption class="info-wrap">
-				<a href="#" class="title">Great product name here</a>
-				<div class="price mt-1">RM56.00</div> <!-- price-wrap.// -->
-			</figcaption>
-		</div>
-	</div> <!-- col.// -->
-	<div class="col-md-3">
-		<div href="#" class="card card-product-grid">
-			<a href="#" class="img-wrap"> <img src="images/items/9.jpg"> </a>
-			<figcaption class="info-wrap">
-				<a href="#" class="title">Just another product name</a>
-				<div class="price mt-1">RM179.00</div> <!-- price-wrap.// -->
-			</figcaption>
-		</div>
-	</div> <!-- col.// -->
+	<?php }}?>
 </div> <!-- row.// -->
 
 </div><!-- container // -->

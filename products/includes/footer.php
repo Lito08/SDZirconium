@@ -17,13 +17,13 @@
 					<ul class="list-unstyled">
 						<li> <a href="../aboutus.php">About us</a></li>
 						<li> <a href="../faq.php">FAQ</a></li>
-						<li> <a href="../tac.php">Terms & conditions</a></li>
+						<li> <a href="../tac.php">Terms & Conditions</a></li>
 					</ul>
 				</aside>
 				<aside class="col-md col-6">
 					<h6 class="title">Help</h6>
 					<ul class="list-unstyled">
-						<li> <a href="#">Contact us</a></li>
+						<li> <a href="contactus.php">Contact us</a></li>
 						<li> <a href="#">Money refund</a></li>
 						<li> <a href="#">Order status</a></li>
 						<li> <a href="#">Shipping info</a></li>
@@ -37,7 +37,7 @@
 						<li> <a href="signup.php"> Register </a></li>
 						<li> <a href="#"> View Profile </a></li>
 						<li> <a href="#"> My Orders </a></li>
-						<li> <a href="../../admin/index.php"> Admin Login </a></li>
+						<li> <a href="../admin/index.php"> Supplier Login </a></li>
 					</ul>
 				</aside>
 				<aside class="col-md">

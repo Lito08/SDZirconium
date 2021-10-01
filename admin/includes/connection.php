@@ -1,16 +1,18 @@
 <?php 
-// DB credentials.
-define('DB_HOST','localhost');
-define('DB_USER','root');
-define('DB_PASS','');
-define('DB_NAME','sdzirconium');
-// Establish database connection.
-try
+
+$dbhost = "localhost";
+$dbuser = "root";
+$dbpass = "";
+$dbname = "sdzirconium";
+
+if(!$con = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname))
 {
-$dbh = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME,DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+    die("failed to connect!");
 }
-catch (PDOException $e)
-{
-exit("Error: " . $e->getMessage());
-}
-?>
+
+
+
+
+	
+
+	

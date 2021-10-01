@@ -10,7 +10,7 @@ session_start();
 	{
 		//something was posted
 		$user_name = $_POST['user_name'];
-		$password = $_POST['password'];
+		$password = md5($_POST['password']);
 
 		if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
 		{
@@ -29,7 +29,7 @@ session_start();
 					if($user_data['password'] === $password)
 					{
 
-						$_SESSION['user_id'] = $user_data['user_id'];
+						$_SESSION['user_id'] = $user_data['user_name'];
 						header("Location: index.php");
 						die;
 					}
@@ -95,7 +95,7 @@ $(document).ready(function() {
 	<div class="container">
 <div class="row align-items-center">
 	<div class="col-lg-2 col-4">
-		<a href="images/logos/Logo.png" class="brand-wrap">
+		<a href="index.php" class="brand-wrap">
 			<img class="logo" src="images/logos/Logo.png">
 		</a> <!-- brand-wrap.// -->
 	</div>
@@ -118,7 +118,6 @@ $(document).ready(function() {
 				<span class="badge badge-pill badge-danger notify">0</span>
 			</div>
 			<div class="widget-header icontext">
-				<a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
 				<div class="text">
 					<span class="text-muted">Welcome!</span>
 					<div> 

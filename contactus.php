@@ -4,8 +4,6 @@ session_start();
     include("connection.php");
     include("functions.php");
 
-    $user_data = check_login($con);
-
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -90,7 +88,7 @@ session_start();
 
 
 	</aside> 
-	<aside class="col-md-6">
+	<aside class="col-md-5">
 
 <!-- ============================ COMPONENT FEEDBACK  ================================= -->
 <div class="card">
@@ -98,23 +96,16 @@ session_start();
       <h2 class="card-title mb-4">Need Assistance?</h2>
       <form>
         <div class="form-row">
-			<div class="col form-group">
-            <h6 class="card-title mb-4">FAQ</h6>
-			</div> <!-- form-group end.// -->
-			<div class="col form-group">
-				
+			<div class="form-group">
+			<p>Do you have an inquiry about a Zirconium shipments? Our Customer Service Team is happy to help!</p>
+            <h6 class="card-title mb-4">Our Contact:</h6>
+			<p>
+				If you need immediate assistance, please don't hesitate to call one of our technical team.
+				<br><br><strong>Customer Service Number:</strong>
+				<br>+6013-317-4100
+			</p>
 			</div> <!-- form-group end.// -->
 		</div> <!-- form-row.// -->
-		<div class="form-group">
-			
-		</div>
-		<div class="form-group">
-			
-		</div>
-		<div class="form-group">
-			
-		</div>
-
       </form>
       </div> <!-- card-body.// -->
     </div> <!-- card .// -->
@@ -136,7 +127,7 @@ session_start();
       			<input type="text" class="form-control" placeholder="Email" name="">
       			<span class="input-group-append"><button class="btn btn-primary">Subscribe</button></span>
       		</div>
-      		<p class="form-text text-muted">No spam, Only useful offers</p>
+      		<h6 class="form-text text-muted">No spam, Only useful offers</h6>
 		</form>
       </div> <!-- card-body.// -->
     </div> <!-- card .// -->

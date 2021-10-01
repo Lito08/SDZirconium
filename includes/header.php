@@ -8,7 +8,7 @@
 	<div class="container">
 <div class="row align-items-center">
 	<div class="col-lg-2 col-4">
-		<a href="images/logos/Logo.png" class="brand-wrap">
+		<a href="index.php" class="brand-wrap">
 			<img class="logo" src="images/logos/Logo.png">
 		</a> <!-- brand-wrap.// -->
 	</div>
@@ -27,8 +27,14 @@
 	<div class="col-lg-4 col-sm-6 col-12">
 		<div class="widgets-wrap float-md-right">
 			<div class="widget-header  mr-3">
-				<a href="shoppingcart.php" class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></a>
-				<span class="badge badge-pill badge-danger notify">0</span>
+      <?php
+        if (isset($_SESSION["user_id"])) {
+				echo  "<a href='shoppingcart.php' class='icon icon-sm rounded-circle border'><i class='fa fa-shopping-cart'></i></a>
+				      <span class='badge badge-pill badge-danger notify'>0</span>";
+        }else{
+          echo "<a href='login.php' class='icon icon-sm rounded-circle border'><i class='fa fa-shopping-cart'></i></a>
+                <span class='badge badge-pill badge-danger notify'>0</span>";
+        }?>
 			</div>
 			<div class="widget-header icontext">
       <?php
@@ -38,15 +44,15 @@
       }
         ?>
 				<div class="text">
-                <span class='text' style='font-size:16px;color: #3167eb'><strong>Welcome!</strong></span>
+          <span class="text-muted">Welcome!</span>
 					<div> 
           <?php
             if (isset($_SESSION["user_id"])) {
              
               echo "<p class='text' style='font-family: Noto Sans JP '><a href='logout.php'> Log Out</p></a>";
             }else{
-              echo "<p style='font-family: Noto Sans JP '><a href='login.php'> Sign in</p>";
-              echo "<p style='font-family: Noto Sans JP '><a href='signup.php'> Register</p>";
+              echo "<a href='login.php'>Sign in</a> |  
+              <a href='signup.php'> Register</a>"; 
             }
         ?>
 					</div>
@@ -76,9 +82,6 @@
           <a class="nav-link" href="aboutus.php">About Us</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="memberships.php">Memberships</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="#">Promotions</a>
         </li>
         <li class="nav-item dropdown">
@@ -93,13 +96,13 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"> More</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Health & Beauty</a>
-            <a class="dropdown-item" href="#">Electronics</a>
-            <a class="dropdown-item" href="#">Sports & Lifestyle</a>
-            <a class="dropdown-item" href="#">Babies & Toys</a>
-            <a class="dropdown-item" href="#">Books</a>
-            <a class="dropdown-item" href="#">Appliances</a>
-            <a class="dropdown-item" href="#">Automotive & Motocycles</a>
+            <a class="dropdown-item" href="products/hab.php">Health & Beauty</a>
+            <a class="dropdown-item" href="products/electronics.php">Electronics</a>
+            <a class="dropdown-item" href="products/sports.php">Sports & Lifestyle</a>
+            <a class="dropdown-item" href="products/babies.php">Babies & Toys</a>
+            <a class="dropdown-item" href="products/books.php">Books</a>
+            <a class="dropdown-item" href="products/appliances.php">Appliances</a>
+            <a class="dropdown-item" href="products/automotive.php">Automotive & Motocycles</a>
           </div>
         </li>
       </ul>

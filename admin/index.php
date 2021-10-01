@@ -1,26 +1,46 @@
 <?php
 session_start();
-include('includes/connection.php');
-if(isset($_POST['login']))
-{
-$email=$_POST['username'];
-$password=md5($_POST['password']);
-$sql ="SELECT user_name,password FROM supplier WHERE user_name=:email and password=:password";
-$query= $dbh -> prepare($sql);
-$query-> bindParam(':email', $email, PDO::PARAM_STR);
-$query-> bindParam(':password', $password, PDO::PARAM_STR);
-$query-> execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-	if($query->rowCount() > 0)
-	{
-		$_SESSION['alogin']=$_POST['username'];
-		echo "<script type='text/javascript'> document.location = 'dashboard.php'; </script>";
-	} 
-	else{
-		echo "<script>alert('Invalid Details');</script>";
-		}
+include("includes/config.php");
+include("includes/connection.php");
+include("includes/functions.php");
 
+if($_SERVER['REQUEST_METHOD'] == "POST")
+	{
+		//something was posted
+		$user_name = $_POST['username'];
+		$password=md5($_POST['password']);
+
+		if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
+		{
+
+			//read from database
+			$query = "SELECT * FROM supplier WHERE user_name = '$user_name' limit 1";
+			$result = mysqli_query($con, $query);
+
+			if($result)
+			{
+				if($result && mysqli_num_rows($result) > 0)
+				{
+
+					$user_data = mysqli_fetch_assoc($result);
+					
+					if($user_data['password'] === $password)
+					{
+
+						$_SESSION['alogin'] = $user_data['user_id'];
+						header("Location: dashboard.php");
+						die;
+					}
+				}
+			}
+			
+			echo "wrong username or password!";
+		}else
+		{
+			echo "wrong username or password!";
+		}
 	}
+
 
 ?>
 <!DOCTYPE html>
@@ -67,6 +87,8 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 									<button class="btn btn-primary btn-block" name="login" type="submit">LOGIN</button>
 									<br>
 									<a href="register.php">Don't have an account? Sign Up!</a>
+									<br><br>
+									<a href="../superadmin/index.php">Super Admin Login</a>
 									<br><br>
                   					<a href="../index.php">Back to Main Page</a>
 

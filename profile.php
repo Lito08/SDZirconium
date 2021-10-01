@@ -1,15 +1,15 @@
 <?php 
 session_start();
 
+	include("products/includes/config.php");
     include("connection.php");
     include("functions.php");
 
-    $user_data = check_login($con);
 ?>
     
 <?php
 $user_id = $_SESSION['user_id'];
-$sql = "SELECT *FROM users WHERE user_id = '$user_id'; ";
+$sql = "SELECT * FROM users WHERE user_name = '$user_id'; ";
 $result = mysqli_query($con, $sql);
 if(mysqli_num_rows($result) > 0)
 {

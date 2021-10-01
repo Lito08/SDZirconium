@@ -4,17 +4,19 @@ include("includes/config.php");
 include("../functions.php");
 include("../connection.php");
 error_reporting(0);
+
 if(isset($_POST['submit']))
 {
-$cartid=$_POST['cartid'];
-$userid=$_POST['userid'];
+
 $useremail=$_SESSION['user_id'];
 $status=0;
 $vhid=$_GET['vhid'];
+<<<<<<< Updated upstream
 $sql="INSERT INTO cart(cart_id,user_id,userEmail,item_id,Status) VALUES(:cartid,:userid,:useremail,:vhid,:status)";
+=======
+$sql="INSERT INTO cart(userEmail,item_id,Status) VALUES(:useremail,:vhid,:status)";
+>>>>>>> Stashed changes
 $query = $dbh->prepare($sql);
-$query->bindParam(':cartid',$cartid,PDO::PARAM_STR);
-$query->bindParam(':userid',$userid,PDO::PARAM_STR);
 $query->bindParam(':useremail',$useremail,PDO::PARAM_STR);
 $query->bindParam(':vhid',$vhid,PDO::PARAM_STR);
 $query->bindParam(':status',$status,PDO::PARAM_STR);
@@ -70,7 +72,7 @@ echo "<script>alert('Something went wrong. Please try again');</script>";
 
 <?php
 $vhid=intval($_GET['vhid']);
-$sql = "SELECT products.*,type.typename,type.id as bid  from products join type on type.id=products.ptype where products.id=:vhid";
+$sql = "SELECT products.*,type.typename,type.id as bid from products join type on type.id=products.ptype where products.id=:vhid";
 $query = $dbh -> prepare($sql);
 $query->bindParam(':vhid',$vhid, PDO::PARAM_STR);
 $query->execute();
@@ -120,7 +122,7 @@ $_SESSION['brndid']=$result->bid;
 
 <div class="mb-3"> 
 	<var class="price h4">RM<?php echo htmlentities($result->price);?></var> 
-	<span class="text-muted">/per product</span> 
+	<span class="text-muted">/<?php echo htmlentities($result->perm);?></span> 
 </div> 
 
 <p> <?php echo htmlentities($result->description);?> </p>
@@ -151,8 +153,9 @@ $_SESSION['brndid']=$result->bid;
 			</div>
 		</div> <!-- col.// -->
 		<div class="form-group col-md">
-				<label>Select size</label>
+				<label></label>
 				<div class="mt-2">
+					<!-- Size Options .//
 					<label class="custom-control custom-radio custom-control-inline">
 					  <input type="radio" name="select_size" checked="" class="custom-control-input">
 					  <div class="custom-control-label">Small</div>
@@ -166,61 +169,68 @@ $_SESSION['brndid']=$result->bid;
 					<label class="custom-control custom-radio custom-control-inline">
 					  <input type="radio" name="select_size" class="custom-control-input">
 					  <div class="custom-control-label">Large</div>
-					</label>
+					</label> Size Options .// -->
 
 				</div>
-				<?php }} ?>
 		</div> <!-- col.// -->
 	</div> <!-- row.// -->
+
     <?php if($_SESSION['user_id'])
     {?>
-	<a href="#" class="btn  btn-primary"> Buy now </a>
-	<a href="#" class="btn  btn-outline-primary"> <span class="text" type="submit" name="submit">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
+
+	<form method="post">
+	<div class="form-group">
+		<input type="submit" class="btn  btn-primary"  name="submit" value="Buy Now">
+        <input type="submit" class="btn  btn-outline-primary"  name="submit" value="Add to cart">
+    </div>
     <?php } else { ?>
-        <a href="../login.php" class="btn  btn-primary">Login to buy</a>
-    <?php } ?>
+        <a href="../login.php" class="btn  btn-primary">Login to buy!</a>
+		<a href="../signup.php" class="btn  btn-outline-primary">Don't have an account? Sign Up!</a>
 	
+    <?php } ?>
+	</form>
+
 </article> <!-- product-info-aside .// -->
 		</main> <!-- col.// -->
 	</div> <!-- row.// -->
 </div> <!-- card.// -->
 </section>
 <!-- ============================ COMPONENT 1 END .// ================================= -->
-
+<?php }} ?>
 <!-- ========================= SIMILAR PRODUCTS ========================= -->
 <section class="section-content padding-y bg">
 <div class="container">
     <h3>Similar Products</h3>
-<?php
-$bid=$_SESSION['brndid'];
-$sql="SELECT products.title,type.typename,products.price,products.id,products.description,products.Vimage1 from products join type on type.id=products.ptype where products.ptype=:bid";
-$query = $dbh -> prepare($sql);
-$query->bindParam(':bid',$bid, PDO::PARAM_STR);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-$cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $result)
-{ ?>
+
+	
 
 <div class="card card-body">
 	<div class="row">
+		<?php
+			$bid=$_SESSION['brndid'];
+			$sql="SELECT products.title,type.typename,products.price,products.perm,products.id,products.description,products.Vimage1 from products join type on type.id=products.ptype where products.ptype=:bid";
+			$query = $dbh -> prepare($sql);
+			$query->bindParam(':bid',$bid, PDO::PARAM_STR);
+			$query->execute();
+			$results=$query->fetchAll(PDO::FETCH_OBJ);
+			$cnt=1;
+			if($query->rowCount() > 0)
+			{
+			foreach($results as $result)
+			{ 
+		?>
 		<div class="col-md-3">
 			<figure class="itemside mb-4">
-				<div class="aside"><a href="product_details.php?vhid=<?php echo htmlentities($result->id);?>"><img src="../superadmin/img/<?php echo htmlentities($result->Vimage1);?>" class="img-sm"></div>
+				<div class="aside"><a href="product_details.php?vhid=<?php echo htmlentities($result->id);?>"><img src="../superadmin/img/<?php echo htmlentities($result->Vimage1);?>" class="border img-sm"></div>
 				<figcaption class="info align-self-center">
 					<a href="product_details.php?vhid=<?php echo htmlentities($result->id);?>" class="title"><?php echo htmlentities($result->title);?></a>
-					<strong class="price">RM<?php echo htmlentities($result->price);?></strong>
-					<a href="#" class="btn btn-outline-primary btn-sm"> Add to cart 
-						<i class="fa fa-shopping-cart"></i> 
-					</a>
+					<a class="price">RM<?php echo htmlentities($result->price);?>/<?php echo htmlentities($result->perm);?></a>
 				</figcaption>
 			</figure>
 		</div> <!-- col.// -->
+		<?php }} ?>
       </div>
     </div>
-<?php }} ?>
 
 </div> <!-- container .//  -->
 </section>
@@ -228,9 +238,16 @@ foreach($results as $result)
 
 
 <!-- ========================= FOOTER ========================= -->
-<?php include_once('../includes/footer.php') ?>
+<?php include_once('includes/footer.php') ?>
 <!-- ========================= FOOTER END // ========================= -->
 
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/interface.js"></script>
+<script src="assets/switcher/js/switcher.js"></script>
+<script src="assets/js/bootstrap-slider.min.js"></script>
+<script src="assets/js/slick.min.js"></script>
+<script src="assets/js/owl.carousel.min.js"></script>
 
 </body>
 </html>

@@ -1,24 +1,30 @@
-<?php 
-$connect = mysqli_connect("localhost", "root", "", "sdzirconium");
+<?php
 session_start();
+
+include("includes/config.php");
+include("includes/connection.php");
+include("includes/functions.php");
+
 
     if(isset($_POST["register"]))  
     {  
+		$user_id = random_num(20);
          if(empty($_POST["username"]) && empty($_POST["password"]) && empty($_POST["fullname"]) && empty($_POST["email"]))  
          {  
               echo '<script>alert("Please fill in all the details")</script>';  
          }  
          else  
          {  
-            $fullname = mysqli_real_escape_string($connect, $_POST["fullname"]);
-            $email = mysqli_real_escape_string($connect, $_POST["email"]);
-            $username = mysqli_real_escape_string($connect, $_POST["username"]);
-            $password = mysqli_real_escape_string($connect, $_POST["password"]);
+            $fullname = mysqli_real_escape_string($con, $_POST["fullname"]);
+            $email = mysqli_real_escape_string($con, $_POST["email"]);
+            $username = mysqli_real_escape_string($con, $_POST["username"]);
+            $password = mysqli_real_escape_string($con, $_POST["password"]);
             $password = md5($password);  
             $query = "INSERT INTO supplier (user_id,full_name, user_name, email, password) VALUES ('$user_id','$fullname','$username','$email','$password')";  
-            if(mysqli_query($connect, $query))  
+            if(mysqli_query($con, $query))  
             {  
-                echo '<script>alert("Registration Done")</script>';  
+                echo '<script>alert("Registration Done")</script>';
+				header("Location: index.php");  
             }  
          }  
     }  

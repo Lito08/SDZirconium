@@ -14,6 +14,7 @@ $title=$_POST['title'];
 $producttype=$_POST['Producttype'];
 $description=$_POST['description'];
 $price=$_POST['price'];
+$per=$_POST['per'];
 $vimage1=$_FILES["img1"]["name"];
 $vimage2=$_FILES["img2"]["name"];
 $vimage3=$_FILES["img3"]["name"];
@@ -21,12 +22,13 @@ move_uploaded_file($_FILES["img1"]["tmp_name"],"img/".$_FILES["img1"]["name"]);
 move_uploaded_file($_FILES["img2"]["tmp_name"],"img/".$_FILES["img2"]["name"]);
 move_uploaded_file($_FILES["img3"]["tmp_name"],"img/".$_FILES["img3"]["name"]);
 
-$sql="INSERT INTO products(title,ptype,description,price,Vimage1,Vimage2,Vimage3) VALUES(:title,:producttype,:description,:price,:vimage1,:vimage2,:vimage3)";
+$sql="INSERT INTO products(title,ptype,description,price,perm,Vimage1,Vimage2,Vimage3) VALUES(:title,:producttype,:description,:price,:per,:vimage1,:vimage2,:vimage3)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':title',$title,PDO::PARAM_STR);
 $query->bindParam(':producttype',$producttype,PDO::PARAM_STR);
 $query->bindParam(':description',$description,PDO::PARAM_STR);
 $query->bindParam(':price',$price,PDO::PARAM_STR);
+$query->bindParam(':per',$per,PDO::PARAM_STR);
 $query->bindParam(':vimage1',$vimage1,PDO::PARAM_STR);
 $query->bindParam(':vimage2',$vimage2,PDO::PARAM_STR);
 $query->bindParam(':vimage3',$vimage3,PDO::PARAM_STR);
@@ -145,6 +147,30 @@ $error="Something went wrong. Please try again";
 
 						</select>
 						</div>
+
+						<div class="hr-dashed"></div>
+						<div class="hr-dashed"></div>
+						<div class="hr-dashed"></div>
+
+						<label class="col-sm-2 control-label">Select per<span style="color:red">*</span></label>
+						<div class="col-sm-2">
+						<select class="selectpicker" name="per" required>
+						<option value=""> Select </option>
+						<option value="Unit">Unit</option>
+						<option value="Kg">Kg</option>
+						<option value="g">g</option>
+						<option value="ml">ml</option>
+						<option value="Bottle">Bottle</option>
+						<option value="Pcs">Pcs</option>
+						<option value="Sheets">Sheets</option>
+						<option value="Rolls">Rolls</option>
+						<option value="Litre">Litre</option>
+						<option value="Item">Item</option>
+						<option value="Box">Box</option>
+
+						</select>
+						</div>
+
 					</div>
 
 						<div class="hr-dashed"></div>
@@ -166,6 +192,10 @@ $error="Something went wrong. Please try again";
 						</div>
 
 						<div class="hr-dashed"></div>
+
+						
+						
+						
 
 						<div class="form-group">
 							<div class="col-sm-12">

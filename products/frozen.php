@@ -242,7 +242,8 @@ $regusers=$query->rowCount();
 		</div>
 </header><!-- sect-heading -->
 
-<?php $sql = "SELECT products.title,type.typename,type.id,products.price,products.id,products.description,products.Vimage1 from products join type on type.id=products.ptype WHERE type.id='1'";
+<?php 
+$sql = "SELECT products.title,type.typename,type.id,products.price,products.id,products.description,products.Vimage1 from products join type on type.id=products.ptype WHERE type.id='1'";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);

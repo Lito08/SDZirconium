@@ -12,14 +12,16 @@ if(isset($_POST['submit']))
   {
 $title=$_POST['title'];
 $type=$_POST['Type'];
+$per=$_POST['per'];
 $description=$_POST['description'];
 $price=$_POST['price'];
 $id=intval($_GET['id']);
 
-$sql="update products set title=:title,ptype=:Type,description=:description,price=:price where id=:id ";
+$sql="update products set title=:title,ptype=:Type,perm=:per,description=:description,price=:price where id=:id ";
 $query = $dbh->prepare($sql);
 $query->bindParam(':title',$title,PDO::PARAM_STR);
 $query->bindParam(':Type',$type,PDO::PARAM_STR);
+$query->bindParam(':per',$per,PDO::PARAM_STR);
 $query->bindParam(':description',$description,PDO::PARAM_STR);
 $query->bindParam(':price',$price,PDO::PARAM_STR);
 $query->bindParam(':id',$id,PDO::PARAM_STR);
@@ -116,6 +118,7 @@ foreach($results as $result)
 <div class="col-sm-4">
 <input type="text" name="title" class="form-control" value="<?php echo htmlentities($result->title)?>" required>
 </div>
+
 <label class="col-sm-2 control-label">Select Type<span style="color:red">*</span></label>
 <div class="col-sm-4">
 <select class="selectpicker" name="Type" required>
@@ -139,6 +142,30 @@ continue;
 
 </select>
 </div>
+
+<div class="hr-dashed"></div>
+<div class="hr-dashed"></div>
+<div class="hr-dashed"></div>
+
+<label class="col-sm-8 control-label">Select Per<span style="color:red">*</span></label>
+<div class="col-sm-4">
+<select class="selectpicker" name="per" required>
+<option value="">Select</option>
+<option value="Unit">Unit</option>
+<option value="Kg">Kg</option>
+<option value="g">g</option>
+<option value="ml">ml</option>
+<option value="Bottle">Bottle</option>
+<option value="Pcs">Pcs</option>
+<option value="Sheets">Sheets</option>
+<option value="Rolls">Rolls</option>
+<option value="Litre">Litre</option>
+<option value="Item">Item</option>
+<option value="Box">Box</option>
+
+</select>
+</div>
+
 </div>
 											
 <div class="hr-dashed"></div>

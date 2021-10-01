@@ -71,9 +71,7 @@ $(document).ready(function() {
 <h2 class="section-title">What is Zirconium?</h2>
 </header><!-- sect-heading -->
 
-<p>Welcome to Zirconium. Zirconium is a platform that make basic needs buying among people within all range of age easier. Zirconium is a commitment to producing the easiest, fastest and genuine quality basic needs on everyone why using Zirconium is the best choice</p>
-
-<a href="javascript: history.back()" class="btn btn-light"> &laquo Go back</a>
+<p><Strong>Welcome to Zirconium!</Strong> <br> <br>Zirconium is a platform that make basic needs buying among people within all range of age easier. Zirconium also is a commitment to producing the easiest, fastest and genuine quality basic needs on a e-commerce. That is why you should be using Zirconium.</p>
 
 </div> <!-- container .//  -->
 </section>

@@ -1,13 +1,16 @@
 <?php
 session_start();
 error_reporting(0);
-include('includes/connection.php');
+include("includes/config.php");
+include("includes/connection.php");
+include("includes/functions.php");
 if(strlen($_SESSION['alogin'])==0)
 	{
 header('location:index.php');
 }
 else{
-	?>
+?>
+
 <!doctype html>
 <html lang="en" class="no-js">
 
@@ -84,7 +87,7 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 $regusers=$query->rowCount();
 ?>
 													<div class="stat-panel-number h1 "><?php echo htmlentities($regusers);?></div>
-													<div class="stat-panel-title text-uppercase">Total Orders</div>
+													<div class="stat-panel-title text-uppercase">Total Sales</div>
 												</div>
 											</div>
 											<a href="reg-suppliers.php" class="block-anchor panel-footer text-center">Full Detail <i class="fa fa-arrow-right"></i></a>

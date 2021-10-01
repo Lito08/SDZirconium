@@ -1,3 +1,14 @@
+<<<<<<< Updated upstream
+=======
+<?php
+    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+		$useremail=$_SESSION['user_id'];
+        if (isset($_POST['delete-cart-submit'])){
+            
+        }
+    }
+?>
+>>>>>>> Stashed changes
 <section class="section-content padding-y bg">
 <div class="container">
 
@@ -8,18 +19,44 @@
 <div class="card">
 <div class="row no-gutters">
 	<aside class="col-md-9">
+	<?php
+	$useremail=$_SESSION['user_id'];
+	$sql = "SELECT products.Vimage1 as Vimage1,products.price,products.title,products.id as pid,type.typename,cart.cart_id,cart.Status from cart join products on cart.item_id=products.id join type on type.id=products.ptype where cart.userEmail=:useremail";
+	$query = $dbh -> prepare($sql);
+	$query-> bindParam(':useremail', $useremail, PDO::PARAM_STR);
+	$query->execute();
+	$results=$query->fetchAll(PDO::FETCH_OBJ);
+	$cnt=1;
+	if($query->rowCount() > 0)
+	{
+	foreach($results as $result)
+	{  ?>
 			<article class="card-body border-bottom">
 					<div class="row">
 						<div class="col-md-7">
 							<figure class="itemside">
-								<div class="aside"><img src="../images/items/1.jpg" class="border img-sm"></div>
+								<div class="aside"><img src="superadmin/img/<?php echo htmlentities($result->Vimage1);?>" class="border img-sm"></div>
 								<figcaption class="info">
+<<<<<<< Updated upstream
 									<a href="#" name="name" class="title">Baju</a>
 									<strong name="price" class="">$128.00</strong>
 									<div>
 										<a href="#" class="btn-link mr-2">Save for later</a> 
 										<a href="#" class="btn-link text-danger"> Delete</a>
 									</div>
+=======
+									<a href="product_details.php?vhid=<?php echo htmlentities($result->pid);?>" name="name" class="title"><?php echo htmlentities($result->title);?></a>
+									<strong name="price" class="">RM<?php echo htmlentities($result->price);?></strong>
+										<?php if($_SESSION['user_id'])
+    									{?>
+										<form method="post">
+										<div class="form-group">
+											<input type="submit" class="btn-link mr-2"  name="submit" value="Save for later">
+											<input type="submit" class="btn-link text-danger"  name="delete-cart-submit" value="Delete">
+										</div>
+										<?php } ?>
+										</form>
+>>>>>>> Stashed changes
 								</figcaption>
 							</figure> 
 						</div> <!-- col.// -->
@@ -36,6 +73,7 @@
 						</div>
 					</div> <!-- row.// -->
 			</article> <!-- card-group.// -->
+			<?php }} ?>
 	</aside> <!-- col.// -->
 	
 	<aside class="col-md-3 border-left">
@@ -71,4 +109,8 @@
 
 </div> <!-- container .//  -->
 </section>
+<<<<<<< Updated upstream
 <!-- ========================= SECTION CONTENT END// ========================= -->
+=======
+<!-- ========================= SECTION CONTENT END// ========================= -->
+>>>>>>> Stashed changes
