@@ -11,11 +11,9 @@ if(isset($_POST['submit']))
 $useremail=$_SESSION['user_id'];
 $status=0;
 $vhid=$_GET['vhid'];
-<<<<<<< Updated upstream
-$sql="INSERT INTO cart(cart_id,user_id,userEmail,item_id,Status) VALUES(:cartid,:userid,:useremail,:vhid,:status)";
-=======
+
 $sql="INSERT INTO cart(userEmail,item_id,Status) VALUES(:useremail,:vhid,:status)";
->>>>>>> Stashed changes
+
 $query = $dbh->prepare($sql);
 $query->bindParam(':useremail',$useremail,PDO::PARAM_STR);
 $query->bindParam(':vhid',$vhid,PDO::PARAM_STR);

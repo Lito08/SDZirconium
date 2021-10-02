@@ -43,9 +43,6 @@ session_start();
 <?php include('includes/header.php') ?>
 
 <!-- ========================= CART ========================= -->
-<<<<<<< Updated upstream
-<?php include('cart.php') ?>
-=======
 <?php
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$useremail=$_SESSION['user_id'];
@@ -163,8 +160,6 @@ session_start();
 </div> <!-- container .//  -->
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
-
->>>>>>> Stashed changes
 
 
 <!-- ========================= FOOTER ========================= -->

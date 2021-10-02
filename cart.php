@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 <?php
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$useremail=$_SESSION['user_id'];
@@ -8,7 +6,6 @@
         }
     }
 ?>
->>>>>>> Stashed changes
 <section class="section-content padding-y bg">
 <div class="container">
 
@@ -37,14 +34,6 @@
 							<figure class="itemside">
 								<div class="aside"><img src="superadmin/img/<?php echo htmlentities($result->Vimage1);?>" class="border img-sm"></div>
 								<figcaption class="info">
-<<<<<<< Updated upstream
-									<a href="#" name="name" class="title">Baju</a>
-									<strong name="price" class="">$128.00</strong>
-									<div>
-										<a href="#" class="btn-link mr-2">Save for later</a> 
-										<a href="#" class="btn-link text-danger"> Delete</a>
-									</div>
-=======
 									<a href="product_details.php?vhid=<?php echo htmlentities($result->pid);?>" name="name" class="title"><?php echo htmlentities($result->title);?></a>
 									<strong name="price" class="">RM<?php echo htmlentities($result->price);?></strong>
 										<?php if($_SESSION['user_id'])
@@ -56,7 +45,6 @@
 										</div>
 										<?php } ?>
 										</form>
->>>>>>> Stashed changes
 								</figcaption>
 							</figure> 
 						</div> <!-- col.// -->
@@ -109,8 +97,4 @@
 
 </div> <!-- container .//  -->
 </section>
-<<<<<<< Updated upstream
 <!-- ========================= SECTION CONTENT END// ========================= -->
-=======
-<!-- ========================= SECTION CONTENT END// ========================= -->
->>>>>>> Stashed changes
