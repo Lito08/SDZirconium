@@ -1,12 +1,34 @@
-  
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+  $useremail=$_SESSION['user_id'];
+  //delete
+      if (isset($_POST['delete-cart-submit'])){
+    $cart_to_delete = mysqli_real_escape_string($con, $_POST['item_id']);
+    $sql = "DELETE FROM cart WHERE item_id = $cart_to_delete";
 
+    if(mysqli_query($con, $sql))
+    {
+      echo "<script>alert('Product has been deleted.');</script>";
+    }else{
+      echo "<script>alert('Failed to delete item.');</script>";
+    }
+
+      }
+  }
+?>
 
 <header class="section-header">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Roboto&display=swap" rel="stylesheet"> 
-
+<?php
+$sql = "SELECT cart_id FROM cart";
+if($result=mysqli_query($con,$sql))
+{
+  $rowcount=mysqli_num_rows($result);
+}
+?>
 <section class="header-main border-bottom">
 	<div class="container">
 <div class="row align-items-center">
@@ -33,10 +55,10 @@
       <?php
         if (isset($_SESSION["user_id"])) {
 				echo "<a href='../shoppingcart.php' class='icon icon-sm rounded-circle border'><i class='fa fa-shopping-cart'></i></a>
-				<span class='badge badge-pill badge-danger notify'>0</span>";
+				<span class='badge badge-pill badge-danger notify'>$rowcount</span>";
       }else{
         echo "<a href='../login.php' class='icon icon-sm rounded-circle border'><i class='fa fa-shopping-cart'></i></a>
-                <span class='badge badge-pill badge-danger notify'>0</span>";
+                <span class='badge badge-pill badge-danger notify'>$rowcount</span>";
       }
       ?>
 			</div>
@@ -48,16 +70,19 @@
       }
         ?>
 				<div class="text">
-                <span class='text' style='font-size:16px;color: #3167eb'><strong>Welcome!</strong></span>
+          <span class="text-muted">Welcome!</span>
 					<div> 
           <?php
             if (isset($_SESSION["user_id"])) {
              
               echo "<p class='text' style='font-family: Noto Sans JP '><a href='../logout.php'> Log Out</p></a>";
             }else{
-              echo "<p style='font-family: Noto Sans JP '><a href='../login.php'> Sign in</p>";
-              echo "<p style='font-family: Noto Sans JP '><a href='../signup.php'> Register</p>";
+              echo "<a href='../login.php'>Sign in</a> |  
+              <a href='../signup.php'> Register</a>"; 
             }
+        ?>
+        <?php
+        mysqli_close($con);
         ?>
 					</div>
 				</div>
@@ -113,5 +138,4 @@
     </div> <!-- collapse .// -->
   </div> <!-- container .// -->
 </nav>
-
 </header> <!-- section-header.// -->

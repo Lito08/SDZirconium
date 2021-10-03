@@ -62,11 +62,12 @@ echo "<script>alert('Something went wrong. Please try again');</script>";
 <!-- custom javascript -->
 <script src="../js/script.js" type="text/javascript"></script>
 
-
+<!-- section-header.// -->
 <?php
     include_once('includes/header.php')
 ?>
 <!-- section-header.// -->
+
 
 <?php
 $vhid=intval($_GET['vhid']);

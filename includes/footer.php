@@ -6,9 +6,9 @@
 				<aside class="col-md col-6">
 					<h6 class="title">Brands</h6>
 					<ul class="list-unstyled">
+						<li> <a href="#">Iphone</a></li>
+						<li> <a href="#">Samsung</a></li>
 						<li> <a href="#">Adidas</a></li>
-						<li> <a href="#">Puma</a></li>
-						<li> <a href="#">Reebok</a></li>
 						<li> <a href="#">Nike</a></li>
 					</ul>
 				</aside>
@@ -27,7 +27,6 @@
 						<li> <a href="#">Money refund</a></li>
 						<li> <a href="#">Order status</a></li>
 						<li> <a href="#">Shipping info</a></li>
-						<li> <a href="#">Open dispute</a></li>
 					</ul>
 				</aside>
 				<aside class="col-md col-6">
@@ -35,8 +34,12 @@
 					<ul class="list-unstyled">
 						<li> <a href="login.php"> Login </a></li>
 						<li> <a href="signup.php"> Register </a></li>
-						<li> <a href="#"> View Profile </a></li>
-						<li> <a href="#"> My Orders </a></li>
+						<?php
+						if (isset($_SESSION["user_id"])) {
+								echo"
+						<li> <a href='profile.php'> View Profile </a></li>
+						<li> <a href='shoppingcart.php'> My Orders </a></li>";
+						}else{}?>
 						<li> <a href="admin/index.php"> Supplier Login </a></li>
 					</ul>
 				</aside>
@@ -57,8 +60,7 @@
 				<p class="text-muted"> &copy 2021 Zirconium </p>
 			</div>
 			<div class="col-md-8 text-md-center">
-				<span  class="px-2">zirconium@gmail.com</span>
-				<span  class="px-2">+60 13-317-4100</span>
+				<span  class="px-2">Designed by Lito & Group 4</span>
 			</div>
 			<div class="col-md-2 text-md-right text-muted">
 				<i class="fab fa-lg fa-cc-visa"></i>
@@ -69,3 +71,6 @@
 	</div><!-- //container -->
 </footer>
 <!-- ========================= FOOTER END // ========================= -->
+<?php
+mysqli_close($con);
+?>

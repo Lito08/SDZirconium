@@ -96,7 +96,45 @@ $(document).ready(function() {
 
 <header class="section-heading">
 	<a href="all_products.php" class="btn btn-outline-primary float-right">See all</a>
-	<h3 class="section-title">Popular products</h3>
+	<h3 class="section-title">New Products</h3>
+</header><!-- sect-heading -->
+
+
+<div class="row">
+<?php 
+$sql = "SELECT products.title,type.typename,type.id,products.price,products.id,products.description,products.Vimage1 from products join type on type.id=products.ptype";
+$query = $dbh -> prepare($sql);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$cnt=1;
+if($query->rowCount() > 0)
+{
+foreach($results as $result)
+{
+?>	
+	<div class="col-md-3">
+		<div href="products/product_details.php?vhid=<?php echo htmlentities($result->id);?>" class="card card-product-grid">
+			<a href="products/product_details.php?vhid=<?php echo htmlentities($result->id);?>" class="img-wrap"> <img src="superadmin/img/<?php echo htmlentities($result->Vimage1);?>"> </a>
+			<figcaption class="info-wrap">
+				<a href="products/product_details.php?vhid=<?php echo htmlentities($result->id);?>" class="title"><?php echo htmlentities($result->title);?></a>
+				<div class="price mt-1">RM<?php echo htmlentities($result->price);?></div> <!-- price-wrap.// -->
+			</figcaption>
+		</div>
+	</div> <!-- col.// -->
+	<?php }}?>
+</div> <!-- row.// -->
+
+</div><!-- container // -->
+</section>
+<!-- ========================= SECTION  END// ========================= -->
+
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name padding-y-sm">
+<div class="container">
+
+<header class="section-heading">
+	<a href="all_products.php" class="btn btn-outline-primary float-right">See all</a>
+	<h3 class="section-title">On 50% Off Sale!</h3>
 </header><!-- sect-heading -->
 
 

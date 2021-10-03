@@ -54,8 +54,6 @@ $(document).ready(function() {
 
 <?php include("includes/header.php") ?>
 
-
-
 <!-- ========================= SECTION PAGETOP ========================= -->
 <section class="section-pagetop bg">
 <div class="container">
@@ -295,7 +293,7 @@ foreach($results as $result)
 				<p>
 					<a href="product_details.php?vhid=<?php echo htmlentities($result->id);?>" class="btn btn-primary btn-block"> Details </a>
 					<br>
-					<button class="btn btn-secondary btn-block" name="submit" type="submit"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i> </button>
+					<button class="btn btn-light btn-block" name="submit" type="submit"> <span class="text">Add to wishlist</span> <i class="fa fa-heart"></i> </button>
 				</p>
 			</div> <!-- info-aside.// -->
 		</aside> <!-- col.// -->

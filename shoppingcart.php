@@ -5,6 +5,16 @@ session_start();
     include("connection.php");
     include("functions.php");
 
+	$sessid = $_SESSION['user_id'];
+	$query = "SELECT * FROM cart WHERE userEmail = '$sessid'";
+	$results = mysqli_query($con, $query) or die (mysqli_query());
+	if(mysqli_num_rows($results)==0)
+	{
+		echo '<div id="content" class="col-md-7"><div align="center"><h3>Your cart is empty.</h3> You can find our items on our <a href="index.php">product page</a>.</div></div><div class="col-md-7"></div>';
+	}
+	else
+	{
+	
 ?>
 
 <!DOCTYPE HTML>
@@ -44,22 +54,7 @@ session_start();
 
 <!-- ========================= CART ========================= -->
 <?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-		$useremail=$_SESSION['user_id'];
-		//delete
-        if (isset($_POST['delete-cart-submit'])){
-			$cart_to_delete = mysqli_real_escape_string($con, $_POST['item_id']);
-			$sql = "DELETE FROM cart WHERE item_id = $cart_to_delete";
-
-			if(mysqli_query($con, $sql))
-			{
-				
-			}else{
-				echo "Failed to delete cart item";
-			}
-
-        }
-    }
+    
     // save for later
     if (isset($_POST['wishlist-submit'])){
         $Cart->saveForLater($_POST['item_id']);
@@ -76,6 +71,7 @@ session_start();
 <div class="row no-gutters">
 	<aside class="col-md-9">
 	<?php
+	$total = 0;
 	$useremail=$_SESSION['user_id'];
 	$sql = "SELECT products.Vimage1 as Vimage1,products.price,products.title,products.id as pid,type.typename,cart.cart_id,cart.Status from cart join products on cart.item_id=products.id join type on type.id=products.ptype where cart.User_id=:useremail";
 	$query = $dbh -> prepare($sql);
@@ -126,6 +122,9 @@ session_start();
 			<?php }} ?>
 	</aside> <!-- col.// -->
 	
+	<?php
+	?>
+
 	<aside class="col-md-3 border-left">
 		<div class="card-body">
 			<dl class="dlist-align">
@@ -169,3 +168,4 @@ session_start();
 
 </body>
 </html>
+<?php } ?>
