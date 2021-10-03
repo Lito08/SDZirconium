@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
-<<<<<<< Updated upstream
--- Generation Time: Sep 30, 2021 at 08:23 AM
-=======
--- Generation Time: Oct 01, 2021 at 05:45 PM
->>>>>>> Stashed changes
+-- Generation Time: Oct 03, 2021 at 10:31 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -53,18 +49,12 @@ INSERT INTO `admin` (`id`, `UserName`, `Password`, `updationDate`) VALUES
 
 CREATE TABLE `cart` (
   `cart_id` bigint(20) NOT NULL,
-<<<<<<< Updated upstream
-  `user_id` int(20) NOT NULL,
-  `item_id` int(20) NOT NULL,
-  `userEmail` varchar(120) DEFAULT NULL,
-  `quantity` int(20) NOT NULL
-=======
   `User_id` int(20) NOT NULL,
   `item_id` int(20) DEFAULT NULL,
   `userEmail` varchar(120) DEFAULT NULL,
   `quantity` int(20) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
   `Status` int(20) DEFAULT NULL
->>>>>>> Stashed changes
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -138,12 +128,8 @@ CREATE TABLE `products` (
   `ptype` varchar(120) NOT NULL,
   `title` varchar(120) NOT NULL,
   `price` decimal(10,2) NOT NULL,
-<<<<<<< Updated upstream
-  `quantity` int(120) NOT NULL,
-=======
   `perm` varchar(120) NOT NULL,
   `stock` int(120) NOT NULL,
->>>>>>> Stashed changes
   `brand` varchar(120) NOT NULL,
   `description` varchar(255) NOT NULL,
   `ribbon` varchar(120) NOT NULL,
@@ -159,20 +145,11 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-<<<<<<< Updated upstream
-INSERT INTO `products` (`id`, `ptype`, `title`, `price`, `quantity`, `brand`, `description`, `ribbon`, `Vimage1`, `Vimage2`, `Vimage3`, `delivery`, `date`, `pid`) VALUES
-(2, '1', 'Oyster', '169.00', 0, '', 'Best oyster that lito loves to eat', '', 'oyster1.jpg', 'oyster2.jpg', 'oyster3.jpeg', '', '2021-09-26 21:06:35', 0),
-(3, '1', 'Salmon King', '140.00', 0, '', 'The best salmon in the world that came from New Zealand.', '', 'salmon.jpg', 'salmon1.jpg', 'salmon2.jpg', '', '2021-09-26 21:58:38', 0),
-(4, '1', 'King Crab', '200.00', 0, '', 'Big juicy tender crab that is very soft when bite into. ', '', 'kc1.jpg', 'kc2.jpg', 'kc3.jpg', '', '2021-09-26 22:01:33', 0),
-(5, '7', 'Iphone 13', '4889.00', 0, '', 'Very expensive and not worth it.', '', 'iphone13.jpg', 'iphone13two.png', 'iphone13three.png', '', '2021-09-27 08:54:04', 0),
-(6, '4', 'Pig', '99999999.99', 0, '', 'Oink oink', '', 'pp.jpg', 'pp2.jpg', 'pp3.jpg', '', '2021-09-27 13:24:46', 0);
-=======
 INSERT INTO `products` (`id`, `ptype`, `title`, `price`, `perm`, `stock`, `brand`, `description`, `ribbon`, `Vimage1`, `Vimage2`, `Vimage3`, `delivery`, `date`, `pid`) VALUES
 (2, '1', 'Fresh Oyster', '200.00', 'Kg', 0, '', 'Best oyster that dr likes.', '', 'oyster1.jpg', 'oyster2.jpg', 'oyster3.jpeg', '', '2021-09-30 14:38:43', 0),
 (3, '1', 'Salmon King', '140.00', 'Kg', 0, '', 'The best salmon in the world that came from New Zealand.', '', 'salmon.jpg', 'salmon1.jpg', 'salmon2.jpg', '', '2021-09-30 14:38:57', 0),
 (4, '1', 'King Crab', '200.00', 'Kg', 0, '', 'Big juicy tender crab that is very soft when bite into. ', '', 'kc1.jpg', 'kc2.jpg', 'kc3.jpg', '', '2021-09-30 14:39:05', 0),
 (5, '7', 'Iphone 13', '4889.00', 'Unit', 0, '', 'Very expensive and not worth it.', '', 'iphone13.jpg', 'iphone13two.png', 'iphone13three.png', '', '2021-09-30 14:39:24', 0);
->>>>>>> Stashed changes
 
 -- --------------------------------------------------------
 
@@ -254,15 +231,6 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_id`, `user_name`, `email`, `password`, `date`, `full_name`, `country`, `city`, `gender`) VALUES
-<<<<<<< Updated upstream
-(8, 714356712141, 'mhmnal', 'hondsturm@gmail.com', 'asas', '2021-09-11 06:16:56', 'abdul ', 'Malaysia', 'teluk intan', 'male'),
-(9, 4786, 'mhmnal', 'hondsturm@gmail.com', 'asas', '2021-09-11 06:18:38', 'abdul muhaimin bin abdul rahman', 'Malaysia', 'teluk intan', 'male'),
-(10, 4366481086090, 'danielyusoff08', 'danielyusoff08@gmail.com', 'Dy081201', '2021-09-12 06:15:21', 'Daniel Yusoff', 'Malaysia', 'Kuala Lumpur', 'male'),
-(11, 88281811861, 'lit0', 'danielyusoff081201@gmail.com', 'Dy081201', '2021-09-12 07:30:43', 'Daniel Yusoff', 'Malaysia', 'Kuala Lumpur', 'male'),
-(12, 50567253012, 'fareesnazmi', 'fareesnazmi2@gmail.com', 'olive3881', '2021-09-12 17:17:37', 'FAREES NAZMI', 'Malaysia', 'SHAH ALAM', 'male'),
-(13, 9223372036854775807, 'yeens', 'ultrashaheen@gmail.com', 'kosong1234', '2021-09-13 05:13:27', 'ahmad shaheen yazid', 'Indoneisa', 'muar', 'female'),
-(16, 5167606861003116, 'dickson', 'dickson@gmail.com', 'Dy081201', '2021-09-27 13:17:55', 'Dickson', 'Malaysia', 'Kuala Lumpur', 'female');
-=======
 (17, 9223372036854775807, 'lit0', 'danielyusoff08@gmail.com', 'e7ef31af97f4c58006e4a917bffbefd4', '2021-09-30 15:50:24', 'Daniel Yusoff', 'Malaysia', 'Kuala Lumpur', 'male');
 
 -- --------------------------------------------------------
@@ -276,7 +244,6 @@ CREATE TABLE `wishlist` (
   `user_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
->>>>>>> Stashed changes
 
 --
 -- Indexes for dumped tables
@@ -358,11 +325,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-<<<<<<< Updated upstream
-  MODIFY `cart_id` bigint(20) NOT NULL AUTO_INCREMENT;
-=======
-  MODIFY `cart_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
->>>>>>> Stashed changes
+  MODIFY `cart_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `contactusquery`
@@ -386,11 +349,7 @@ ALTER TABLE `membership`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-<<<<<<< Updated upstream
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-=======
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
->>>>>>> Stashed changes
 
 --
 -- AUTO_INCREMENT for table `supplier`
@@ -408,11 +367,7 @@ ALTER TABLE `type`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-<<<<<<< Updated upstream
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-=======
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
->>>>>>> Stashed changes
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

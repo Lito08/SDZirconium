@@ -1,4 +1,14 @@
+<?php 
+session_start();
 
+	include("products/includes/config.php");
+    include("connection.php");
+    include("functions.php");
+
+	$result = mysqli_query($con, 'SELECT SUM(price) As val FROM cart');
+	$row = mysqli_fetch_assoc($result);
+	$sum = $row['val'];
+?>
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -38,40 +48,9 @@
 <section class="section-content padding-y bg">
 <div class="container">
 
-
-
 <!-- ============================ COMPONENT 2 ================================= -->
 <div class="row">
 		<main class="col-md-8">
-
-
-
-<article class="card mb-4">
-<div class="card-body">
-	<h4 class="card-title mb-4">Contact info</h4>
-	<form action="">
-		<div class="row">
-			<div class="form-group col-sm-6">
-				<label>Frst name</label>
-				<input type="text" placeholder="Type here" class="form-control">
-			</div>
-			<div class="form-group col-sm-6">
-				<label>Last name</label>
-				<input type="text" placeholder="Type here" class="form-control">
-			</div>
-			<div class="form-group col-sm-6">
-				<label>Phone</label>
-				<input type="text" value="+998" class="form-control">
-			</div>
-			<div class="form-group col-sm-6">
-				<label>Email</label>
-				<input type="email" placeholder="example@gmail.com" class="form-control">
-			</div>
-		</div> <!-- row.// -->	
-	</form>
-</div> <!-- card-body.// -->
-</article> <!-- card.// -->
-
 
 <article class="card mb-4">
 <div class="card-body">
@@ -137,7 +116,7 @@
 <article class="accordion" id="accordion_pay">
 	<div class="card">
 		<header class="card-header">
-			<img src="../images/misc/payment-paypal.png" class="float-right" height="24"> 
+			<img src="images/misc/payment-paypal.png" class="float-right" height="24"> 
 			<label class="form-check collapsed" data-toggle="collapse" data-target="#pay_paynet">
 				<input class="form-check-input" name="payment-option" checked type="radio" value="option2">
 				<h6 class="form-check-label"> 
@@ -149,7 +128,7 @@
 		<div class="card-body">
 			<p class="text-center text-muted">Connect your PayPal account and use it to pay your bills. You'll be redirected to PayPal to add your billing information.</p>
 			<p class="text-center">
-				<a href="#"><img src="../images/misc/btn-paypal.png" height="32"></a>
+				<a href="#"><img src="images/misc/btn-paypal.png" height="32"></a>
 				<br><br>
 			</p>
 		</div> <!-- card body .// -->
@@ -157,7 +136,7 @@
 	</div> <!-- card.// -->
 	<div class="card">
 	<header class="card-header">
-		<img src="../images/misc/payment-card.png" class="float-right" height="24">  
+		<img src="images/misc/payment-card.png" class="float-right" height="24">  
 		<label class="form-check" data-toggle="collapse" data-target="#pay_payme">
 			<input class="form-check-input" name="payment-option" type="radio" value="option2">
 			<h6 class="form-check-label"> Credit Card  </h6>
@@ -177,7 +156,7 @@
 	</div> <!-- card.// -->
 	<div class="card">
 		<header class="card-header">
-			<img src="../images/misc/payment-bank.png" class="float-right" height="24">  
+			<img src="images/misc/payment-bank.png" class="float-right" height="24">  
 			<label class="form-check" data-toggle="collapse" data-target="#pay_card">
 				<input class="form-check-input" name="payment-option" type="radio" value="option1">
 				<h6 class="form-check-label"> Bank Transfer </h6>
@@ -185,14 +164,32 @@
 		</header>
 		<div id="pay_card" class="collapse" data-parent="#accordion_pay">
 			<div class="card-body">
-				<p class="text-muted">Some instructions about how to pay </p>
+				<p class="text-muted">Instructions about bank transfer payment</p>
 				<p>
-					Bank of America, Account number: 12345678912346 <br>
-					IBAN: 12345, SWIFT: 987654
+					Maybank, <br>
+					Account number: 12345678912346 <br>
 				</p>
 			</div> <!-- card body .// -->
 		</div> <!-- collapse .// -->
 	</div> <!-- card.// -->
+	<div class="card">
+		<header class="card-header">
+			<img src="images/logos/logo.png" class="float-right" height="24">  
+			<label class="form-check" data-toggle="collapse" data-target="#cash">
+				<input class="form-check-input" name="payment-option" type="radio" value="option1">
+				<h6 class="form-check-label"> Cash on delivery </h6>
+			</label>
+		</header>
+		<div id="cash" class="collapse" data-parent="#accordion_pay">
+			<div class="card-body">
+				<p class="text-muted">Pay when received the item from courier.</p>
+				<p>
+					You will be recorded during the transaction.
+				</p>
+			</div> <!-- card body .// -->
+		</div> <!-- collapse .// -->
+	</div> <!-- card.// -->
+	
 </article> 
 <!-- accordion end.// -->
   
@@ -216,7 +213,7 @@
 				<hr>
 				<dl class="dlist-align">
 				  <dt>Total:</dt>
-				  <dd class="h5">$300.50</dd>
+				  <dd class="h5">RM<?php echo $sum;?></dd>
 				</dl>
 				<hr>
 				<p class="small mb-3 text-muted">By clicking you are agree with terms of condition </p>
@@ -236,8 +233,11 @@
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
 
-
+<!-- ========================= HEADER  ========================= -->
+<?php
+include('includes/footer.php');
+?>
 
 
 </body>
-</html> 
+</html>

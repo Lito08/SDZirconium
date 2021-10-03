@@ -58,7 +58,11 @@ if($result=mysqli_query($con,$sql))
 				<span class='badge badge-pill badge-danger notify'>$rowcount</span>";
       }else{
         echo "<a href='../login.php' class='icon icon-sm rounded-circle border'><i class='fa fa-shopping-cart'></i></a>
+<<<<<<< Updated upstream
                 <span class='badge badge-pill badge-danger notify'>$rowcount</span>";
+=======
+        <span class='badge badge-pill badge-danger notify'>$rowcount</span>";
+>>>>>>> Stashed changes
       }
       ?>
 			</div>

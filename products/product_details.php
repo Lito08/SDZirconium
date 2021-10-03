@@ -9,14 +9,20 @@ if(isset($_POST['submit']))
 {
 
 $useremail=$_SESSION['user_id'];
-$status=0;
 $vhid=$_GET['vhid'];
+<<<<<<< Updated upstream
 
 $sql="INSERT INTO cart(userEmail,item_id,Status) VALUES(:useremail,:vhid,:status)";
+=======
+$status = 0;
+$Pprice = 69;
+$sql="INSERT INTO cart(userEmail,item_id,price,Status) VALUES(:useremail,:vhid,:Pprice,:status)";
+>>>>>>> Stashed changes
 
 $query = $dbh->prepare($sql);
 $query->bindParam(':useremail',$useremail,PDO::PARAM_STR);
 $query->bindParam(':vhid',$vhid,PDO::PARAM_STR);
+$query->bindParam(':Pprice',$Pprice,PDO::PARAM_STR);
 $query->bindParam(':status',$status,PDO::PARAM_STR);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
@@ -195,7 +201,11 @@ $_SESSION['brndid']=$result->bid;
 </div> <!-- card.// -->
 </section>
 <!-- ============================ COMPONENT 1 END .// ================================= -->
-<?php }} ?>
+<?php
+}
+$results=$item;
+}
+?>
 <!-- ========================= SIMILAR PRODUCTS ========================= -->
 <section class="section-content padding-y bg">
 <div class="container">

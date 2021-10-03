@@ -5,16 +5,30 @@ session_start();
     include("connection.php");
     include("functions.php");
 
+<<<<<<< Updated upstream
 	$sessid = $_SESSION['user_id'];
 	$query = "SELECT * FROM cart WHERE userEmail = '$sessid'";
 	$results = mysqli_query($con, $query) or die (mysqli_query());
 	if(mysqli_num_rows($results)==0)
+=======
+	$result = mysqli_query($con, 'SELECT SUM(price) As val FROM cart');
+	$row = mysqli_fetch_assoc($result);
+	$sum = $row['val'];
+	
+	$sessid = $_SESSION['user_id'];
+	$query = "SELECT * FROM cart WHERE userEmail = '$sessid'";
+	$results = mysqli_query($con, $query) or die (mysqli_query());
+	if(mysqli_num_rows($results) == 0)
+>>>>>>> Stashed changes
 	{
 		echo '<div id="content" class="col-md-7"><div align="center"><h3>Your cart is empty.</h3> You can find our items on our <a href="index.php">product page</a>.</div></div><div class="col-md-7"></div>';
 	}
 	else
 	{
+<<<<<<< Updated upstream
 	
+=======
+>>>>>>> Stashed changes
 ?>
 
 <!DOCTYPE HTML>
@@ -53,6 +67,7 @@ session_start();
 <?php include('includes/header.php') ?>
 
 <!-- ========================= CART ========================= -->
+<<<<<<< Updated upstream
 <?php
     
     // save for later
@@ -60,6 +75,8 @@ session_start();
         $Cart->saveForLater($_POST['item_id']);
     }
 ?>
+=======
+>>>>>>> Stashed changes
 <section class="section-content padding-y bg">
 <div class="container">
 
@@ -73,7 +90,7 @@ session_start();
 	<?php
 	$total = 0;
 	$useremail=$_SESSION['user_id'];
-	$sql = "SELECT products.Vimage1 as Vimage1,products.price,products.title,products.id as pid,type.typename,cart.cart_id,cart.Status from cart join products on cart.item_id=products.id join type on type.id=products.ptype where cart.User_id=:useremail";
+	$sql = "SELECT products.Vimage1 as Vimage1,products.price,products.title,products.id as pid,type.typename,cart.cart_id,cart.Status,cart.price as rice from cart join products on cart.item_id=products.id join type on type.id=products.ptype where cart.User_id=:useremail";
 	$query = $dbh -> prepare($sql);
 	$query-> bindParam(':useremail', $useremail, PDO::PARAM_STR);
 	$query->execute();
@@ -119,17 +136,20 @@ session_start();
 						</div>
 					</div> <!-- row.// -->
 			</article> <!-- card-group.// -->
-			<?php }} ?>
+			<?php }} ?>		
 	</aside> <!-- col.// -->
 	
+<<<<<<< Updated upstream
 	<?php
 	?>
+=======
+>>>>>>> Stashed changes
 
 	<aside class="col-md-3 border-left">
 		<div class="card-body">
 			<dl class="dlist-align">
 			  <dt>Total price:</dt>
-			  <dd class="text-right">$69.00</dd>
+			  <dd class="text-right">RM<?php echo $sum;?></dd>
 			</dl>
 			<dl class="dlist-align">
 			  <dt>Discount:</dt>
@@ -137,7 +157,7 @@ session_start();
 			</dl>
 			<dl class="dlist-align">
 			  <dt>Total:</dt>
-			  <dd class="text-right text-dark b"><strong>$80.45</strong></dd>
+			  <dd class="text-right text-dark b"><strong>RM<?php echo $sum;?></strong></dd>
 			</dl>
 			<hr>
 			<a href="purchase.php" class="btn btn-primary btn-block"> Make Purchase </a>
@@ -151,7 +171,7 @@ session_start();
 
 	</aside> <!-- col.// -->
 </div> <!-- row.// -->
- 
+
 <br>
 <br>
 
@@ -163,8 +183,6 @@ session_start();
 
 <!-- ========================= FOOTER ========================= -->
 <?php include('includes/footer.php') ?>
-
-
 
 </body>
 </html>
