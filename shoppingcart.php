@@ -67,16 +67,6 @@ session_start();
 <?php include('includes/header.php') ?>
 
 <!-- ========================= CART ========================= -->
-<<<<<<< Updated upstream
-<?php
-    
-    // save for later
-    if (isset($_POST['wishlist-submit'])){
-        $Cart->saveForLater($_POST['item_id']);
-    }
-?>
-=======
->>>>>>> Stashed changes
 <section class="section-content padding-y bg">
 <div class="container">
 
@@ -138,12 +128,6 @@ session_start();
 			</article> <!-- card-group.// -->
 			<?php }} ?>		
 	</aside> <!-- col.// -->
-	
-<<<<<<< Updated upstream
-	<?php
-	?>
-=======
->>>>>>> Stashed changes
 
 	<aside class="col-md-3 border-left">
 		<div class="card-body">
