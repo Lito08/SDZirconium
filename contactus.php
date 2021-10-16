@@ -51,19 +51,20 @@ session_start();
 	<div class="card">
       <div class="card-body">
       <h4 class="card-title mb-4">Contact Us</h4>
-      <form>
+
+	  <form action="https://formsubmit.co/official.zirconium@gmail.com" method="POST">
         <div class="form-row">
 			<div class="col form-group">
 				<label>Name</label>
-			  	<input type="text" class="form-control" placeholder="">
+			  	<input type="text" name="Name" class="form-control" placeholder="" required>
 			</div> <!-- form-group end.// -->
 			<div class="col form-group">
 				<label>Email</label>
-			  	<input type="email" class="form-control" placeholder="">
+			  	<input type="email" name="Email Address" class="form-control" placeholder="" required>
 			</div> <!-- form-group end.// -->
 		</div> <!-- form-row.// -->
 		<div class="form-group">
-			<label>What is message about?</label>
+			<label>What is the message category?</label>
 			<select class="form-control">
 				<option>Select</option>
 				<option>Technical issue</option>
@@ -73,15 +74,14 @@ session_start();
 		</div>
 		<div class="form-group">
 			<label>What is message about?</label>
-			<textarea class="form-control" rows="3"></textarea>
+			<textarea type="text" name="Message" class="form-control" placeholder="" required rows="3"></textarea>
 		</div>
 		<div class="form-group">
 			<label  for="exampleFormControlFile1">
-    			<input type="file" class="form-control-file">
     		</label>
 		</div>
 		<button class="btn btn-primary btn-block">Send</button>
-      </form>
+		</form>
       </div> <!-- card-body.// -->
     </div> <!-- card .// -->
 <!-- ============================ COMPONENT FEEDBACK END.// ================================= -->
@@ -117,20 +117,6 @@ session_start();
 <br><br>
 <div class="row">
 	<aside class="col-md-6">
-
-<!-- ============================ COMPONENT DELIVERY  ================================= -->
-	<div class="card">
-      <div class="card-body">
-      <h4 class="card-title mb-4">Get newsletters</h4>
-      	<form>
-      		<div class="input-group">
-      			<input type="text" class="form-control" placeholder="Email" name="">
-      			<span class="input-group-append"><button class="btn btn-primary">Subscribe</button></span>
-      		</div>
-      		<h6 class="form-text text-muted">No spam, Only useful offers</h6>
-		</form>
-      </div> <!-- card-body.// -->
-    </div> <!-- card .// -->
 <!-- ============================ COMPONENT FEEDBACK END.// ================================= -->
 
 	</aside>
